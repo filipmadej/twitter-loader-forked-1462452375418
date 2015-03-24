@@ -63,7 +63,7 @@ public class TwitterInfoResource {
         TwitterInfoObj.put("name", name);
         TwitterInfoObj.put("host", databaseHost);
         TwitterInfoObj.put("port", port);
-        TwitterInfoObj.put("jdbcurl", jdbcurl);
+        TwitterInfoObj.put("url", jdbcurl);
         
         return TwitterInfoObj.toString();
         

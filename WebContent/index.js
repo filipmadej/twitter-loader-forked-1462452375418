@@ -1,7 +1,8 @@
 // index.js
 
 var REST_DATA = 'api/todolist';
-var REST_ENV = 'api/dbinfo';
+var REST_DBENV = 'api/dbinfo';
+var REST_TWITTERENV = 'api/twittterinfo';
 var KEY_ENTER = 13;
 
 function loadItems(){
@@ -96,7 +97,7 @@ function toggleDatabaseInfo(){
 }
 
 function updateDatabaseInfo(){
-	xhrGet(REST_ENV, function(dbinfo){
+	xhrGet(REST_DBENV, function(dbinfo){
 
 				console.log(dbinfo);
 				document.getElementById('envDbServiceName').innerHTML = dbinfo.name;
@@ -117,13 +118,13 @@ function toggleTwitterInfo(){
 }
 
 function updateTwitterInfo(){
-	xhrGet(REST_ENV, function(twitterinfo){
+	xhrGet(REST_TWITTERENV, function(twitterinfo){
 
-				console.log(dbinfo);
+				console.log(twitterinfo);
 				document.getElementById('envTwitterServiceName').innerHTML = twitterinfo.name;
 				document.getElementById('envTwitterHost').innerHTML = twitterinfo.host;
 				document.getElementById('envTwitterPort').innerHTML = twitterinfo.port;
-				document.getElementById('envTwitterUrl').innerHTML = twitterinfo.jdbcurl;
+				document.getElementById('envTwitterUrl').innerHTML = twitterinfo.url;
 
 
 	}, function(err){
