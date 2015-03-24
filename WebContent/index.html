@@ -12,7 +12,7 @@
 	<div class = "leftHalf">
 <img class = "newappIcon" src="images/newapp-icon.png" />
 				<h1>
-					Welcome to the <span class="blue">Java DB Web Starter</span> on Bluemix!
+					Welcome to the <span class="blue">Tweets Loader</span> on Bluemix!
 				</h1>
 				<p class = "description">Get started by reading our <a href = "https://www.ng.bluemix.net/docs/#starters/liberty/index.html#liberty">Java documentation</a> or use the Start Coding guide under your app in your dashboard.</p>
 	</div>
@@ -20,10 +20,14 @@
 	<div class = "center">
 	<header>
 					<div class='title'>
-						Java DB Web Starter
-						<button class='detailBtn' onclick="toggleServiceInfo()"
-							title='toggle service info'>
-							<img src='images/detail.png' alt='detail' />
+						Tweets Loader
+						<button class='dbDetailBtn' onclick="toggleDatabaseInfo()"
+							title='toggle database info'>
+							<img src='images/database.png' alt='database details' />
+						</button>
+						<button class='twitterDetailBtn' onclick="toggleTwitterInfo()"
+							title='toggle twitter info'>
+							<img src='images/twitter.png' alt='twitter details' />
 						</button>
 					</div>
 				</header>
@@ -32,7 +36,7 @@
 						<tbody>
 							<tr>
 								<td class='fieldname'>Service Name</td>
-								<td id='envServiceName'></td>
+								<td id='envDbServiceName'></td>
 							</tr>
 							<tr>
 								<td class='fieldname'>DB Name</td>
@@ -40,23 +44,53 @@
 							</tr>
 							<tr>
 								<td class='fieldname'>Host</td>
-								<td id='envHost'></td>
+								<td id='envDbHost'></td>
 							</tr>
 							<tr>
 								<td class='fieldname'>Port</td>
-								<td id='envPort'></td>
+								<td id='envDbPort'></td>
 							</tr>
 							<tr>
 								<td class='fieldname'>User Name</td>
-								<td id='envUser'>*****</td>
+								<td id='envDbUser'>*****</td>
 							</tr>
 							<tr>
 								<td class='fieldname'>Password</td>
-								<td id='envPassword'>*****</td>
+								<td id='envDbPassword'>*****</td>
 							</tr>
 							<tr>
 								<td class='fieldname'>URL</td>
-								<td id='envUrl'></td>
+								<td id='envDbUrl'></td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section id='twitterinfo' style='display: none;'>
+					<table class = "todolist">
+						<tbody>
+							<tr>
+								<td class='fieldname'>Service Name</td>
+								<td id='envTwitterServiceName'></td>
+							</tr>
+							<tr>
+								<td class='fieldname'>Host</td>
+								<td id='envTwitterHost'></td>
+							</tr>
+							<tr>
+								<td class='fieldname'>Port</td>
+								<td id='envTwitterPort'></td>
+							</tr>
+							<tr>
+								<td class='fieldname'>User Name</td>
+								<td id='envTwitterUser'>*****</td>
+							</tr>
+							<tr>
+								<td class='fieldname'>Password</td>
+								<td id='envTwitterPassword'>*****</td>
+							</tr>
+							<tr>
+								<td class='fieldname'>URL</td>
+								<td id='envTwitterUrl'></td>
 							</tr>
 						</tbody>
 					</table>

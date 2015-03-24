@@ -10,10 +10,10 @@ import com.ibm.nosql.json.api.BasicDBObject;
 import com.ibm.nosql.json.util.JSON;
 
 
-//This class define the /hello RESTful API to fetch the database service information
+//This class define the /hello RESTful API to fetch the twitter service information
 
-@Path("/dbinfo")
-public class HelloResource {
+@Path("/twitterinfo")
+public class TwitterInfoResource {
 
 	@GET
 	public String getInformation() {
@@ -38,12 +38,12 @@ public class HelloResource {
         System.out.println ("Searching through VCAP keys");
   	  // Look for the VCAP key that holds the SQLDB information
         for (String eachkey : keys) {
-      	  if (eachkey.contains("sqldb")) {
+      	  if (eachkey.contains("twitterinsights")) {
       		  thekey = eachkey;
       	  }
         }
         if (thekey == null) {
-      	  return("Cannot find any SQLDB service in the VCAP_SERVICES");
+      	  return("Cannot find any Twitter service in the VCAP_SERVICES");
       	  
         }
         
@@ -52,22 +52,20 @@ public class HelloResource {
         String name = (String) obj.get("name");
         obj = (BasicDBObject) obj.get ("credentials");
         String databaseHost = (String) obj.get ("host");
-        String databaseName = (String) obj.get ("db");
         Integer port = (Integer) obj.get ("port");
 //        String user = (String) obj.get ("username"); 
 //        String password = (String) obj.get ("password");
-        String jdbcurl = (String) obj.get("jdbcurl");
+        String jdbcurl = (String) obj.get("url");
         
         
-        BasicDBObject DBInfoObj = new BasicDBObject();
+        BasicDBObject TwitterInfoObj = new BasicDBObject();
 
-        DBInfoObj.put("name", name);
-        DBInfoObj.put("host", databaseHost);
-        DBInfoObj.put("db", databaseName);
-        DBInfoObj.put("port", port);
-        DBInfoObj.put("jdbcurl", jdbcurl);
+        TwitterInfoObj.put("name", name);
+        TwitterInfoObj.put("host", databaseHost);
+        TwitterInfoObj.put("port", port);
+        TwitterInfoObj.put("jdbcurl", jdbcurl);
         
-        return DBInfoObj.toString();
+        return TwitterInfoObj.toString();
         
         
         

@@ -90,20 +90,20 @@ function saveChange(contentNode, callback){
 	}
 }
 
-function toggleServiceInfo(){
+function toggleDatabaseInfo(){
 	var node = document.getElementById('dbserviceinfo');
 	node.style.display = node.style.display == 'none' ? '' : 'none';
 }
 
-function updateServiceInfo(){
+function updateDatabaseInfo(){
 	xhrGet(REST_ENV, function(dbinfo){
 
 				console.log(dbinfo);
-				document.getElementById('envServiceName').innerHTML = dbinfo.name;
+				document.getElementById('envDbServiceName').innerHTML = dbinfo.name;
 				document.getElementById('envDbName').innerHTML = dbinfo.db;
-				document.getElementById('envHost').innerHTML = dbinfo.host;
-				document.getElementById('envPort').innerHTML = dbinfo.port;
-				document.getElementById('envUrl').innerHTML = dbinfo.jdbcurl;
+				document.getElementById('envDbHost').innerHTML = dbinfo.host;
+				document.getElementById('envDbPort').innerHTML = dbinfo.port;
+				document.getElementById('envDbUrl').innerHTML = dbinfo.jdbcurl;
 
 
 	}, function(err){
@@ -111,6 +111,26 @@ function updateServiceInfo(){
 	});
 }
 
-updateServiceInfo();
+function toggleTwitterInfo(){
+	var node = document.getElementById('twitterinfo');
+	node.style.display = node.style.display == 'none' ? '' : 'none';
+}
+
+function updateTwitterInfo(){
+	xhrGet(REST_ENV, function(twitterinfo){
+
+				console.log(dbinfo);
+				document.getElementById('envTwitterServiceName').innerHTML = twitterinfo.name;
+				document.getElementById('envTwitterHost').innerHTML = twitterinfo.host;
+				document.getElementById('envTwitterPort').innerHTML = twitterinfo.port;
+				document.getElementById('envTwitterUrl').innerHTML = twitterinfo.jdbcurl;
+
+
+	}, function(err){
+		console.error(err);
+	});
+}
+updateDatabaseInfo();
+updateTwitterInfo();
 loadItems();
 
