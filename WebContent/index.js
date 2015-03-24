@@ -9,12 +9,15 @@ function countTweets(){
 }
 
 
-function toggleCount(contentNode){
-	var node = document.getElementById('counttips');
+function toggleCountTips(contentNode){
+	var tips = document.getElementById('counttips');
+	var button = document.getElementById('countbutton');
 	if (contentnode.toString().length() > 0){
-		node.style.display = '';		
+		tips.style.display = 'none';
+		button.style.display = '';
 	}else{
-		node.style.display = 'none';
+		tips.style.display = '';
+		button.style.display = 'none';
 	}
 }
 

@@ -95,17 +95,18 @@
 				</table>
 			</section>
 			<div id="count">
-				<textarea autofocus='true' defaultValue='Enter your twitter search criteria here...' 
-					placeholder='#IBM (bluemix OR "blue mix") sentiment:positive lang:de posted:2015-01-01T00:00:00,2015-02-02:23:59:59'
-					required='true' onchange='toggleCount(this)'</textarea>
+				<textarea width='80%'
+					placeholder='Enter your twitter search criteria here...' 
+					required='true' onkeydown='toggleCountTips(this)'
+				</textarea>
+				<button id="countbutton" class='addBtn' onclick="countTweets()" title='number of tweets'>
+					<img src='images/count.png' alt='count' />
+				</button>
 			</div>
 			<footer>
 				<div class='tips'>
-					<section id='counttips' style='display: none'>
-						Press the Count button to get the number of tweets...
-						<button class='addBtn' onclick="countTweets()" title='number of tweets'>
-							<img src='images/count.png' alt='count' />
-						</button>
+					<section id='counttips'>
+						e.g. #IBM (bluemix OR "blue mix") sentiment:positive lang:de posted:2015-01-01T00:00:00,2015-02-02:23:59:59
 					</section>
 				</div>
 			</footer>
