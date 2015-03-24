@@ -4,8 +4,22 @@ var REST_DBENV = 'api/dbinfo';
 var REST_TWITTERENV = 'api/twitterinfo';
 var KEY_ENTER = 13;
 
+
+function urlize(query){
+	return query;
+}
+
+
 function countTweets(){
-	// TOD
+	var countURL = document.getElementById('envTwitterUrl').innerHTML;
+	countURL = countURL + '/api/v1/messages/count?';
+	countURL = countURL + document.getElementById('twitterquery').toString();
+	xhrGet(encodeURI(countURL), function(count){
+				console.log(count);
+				document.getElementById('numtweets').innerHTML = count.search.result;
+	}, function(err){
+		console.error(err);
+	});
 }
 
 

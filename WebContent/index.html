@@ -83,7 +83,7 @@
 				<table class = "todolist">
 					<tr width='90%'>
 						<td>
-							<textarea cols='80' rows='1' placeholder='Enter your twitter search criteria here...' onkeydown='toggleCountTips(this)'>
+							<textarea id='twitterquer' cols='80' rows='1' placeholder='Enter your twitter search criteria here...' onkeydown='toggleCountTips(this)'>
 							</textarea>
 						</td>
 					</tr>
@@ -98,6 +98,9 @@
 					<p>See <a href='https://www.ng.bluemix.net/docs/#services/Twitter/index.html#twitter'>https://www.ng.bluemix.net/docs/#services/Twitter/index.html#twitter</a>.</p>
 				</div>
 			</footer>
+			<section id="displaynumtweets">
+				There are <a id='numtweets'>0</a> tweet(s) to be loaded...
+			</section>
 			<script type="text/javascript" src="util.js"></script>
 			<script type="text/javascript" src="index.js"></script>
 				
