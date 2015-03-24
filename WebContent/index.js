@@ -19,8 +19,10 @@ function toggleCountTips(contentnode){
 }
 
 function toggleDatabaseInfo(){
-	var node = document.getElementById('dbinfo');
-	node.style.display = node.style.display == 'none' ? '' : 'none';
+	var dbnode = document.getElementById('dbinfo');
+	dbnode.style.display = dbnode.style.display == 'none' ? '' : 'none';
+	var twitter = document.getElementById('twitterinfo');
+	twitter.style.display = 'none';
 }
 
 function updateDatabaseInfo(){
@@ -40,8 +42,10 @@ function updateDatabaseInfo(){
 }
 
 function toggleTwitterInfo(){
-	var node = document.getElementById('twitterinfo');
-	node.style.display = node.style.display == 'none' ? '' : 'none';
+	var twitter = document.getElementById('twitterinfo');
+	twitter.style.display = twitter.style.display == 'none' ? '' : 'none';
+	var dbnode = document.getElementById('dbinfo');
+	dbnode.style.display = 'none';
 }
 
 function updateTwitterInfo(){

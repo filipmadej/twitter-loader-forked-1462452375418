@@ -32,73 +32,49 @@
 				</div>
 			</header>
 			<section>
-				<table class = "todolist">
+				<table id='dbinfo' class="todolist">
 					<tbody>
 						<tr>
-							<td>
-								<table id='dbinfo'>
-									<tbody>
-										<tr>
-											<td class='fieldname'>Service Name</td>
-											<td id='envDbServiceName'></td>
-										</tr>
-										<tr>
-											<td class='fieldname'>DB Name</td>
-											<td id='envDbName'></td>
-										</tr>
-										<tr>
-											<td class='fieldname'>Host</td>
-											<td id='envDbHost'></td>
-										</tr>
-										<tr>
-											<td class='fieldname'>Port</td>
-											<td id='envDbPort'></td>
-										</tr>
-										<tr>
-											<td class='fieldname'>User Name</td>
-											<td id='envDbUser'>*****</td>
-										</tr>
-										<tr>
-											<td class='fieldname'>Passwod</td>
-											<td id='envDbPassword'>*****</td>
-										</tr>
-										<tr>
-											<td class='fieldname'>URL</td>
-											<td id='envDbUrl'></td>
-										</tr>
-									</tbody>
-								</table>
-							</td>
-							<td>
-								<table id='twitterinfo'>
-									<tbody>
-										<tr>
-											<td class='fieldname'>Service Name</td>
-											<td id='envTwitterServiceName'></td>
-										</tr>
-										<tr>
-											<td class='fieldname'>Host</td>
-											<td id='envTwitterHost'></td>
-										</tr>
-										<tr>
-											<td class='fieldname'>Port</td>
-											<td id='envTwitterPort'></td>
-										</tr>
-										<tr>
-											<td class='fieldname'>User Name</td>
-											<td id='envTwitterUser'>*****</td>
-										</tr>
-										<tr>
-											<td class='fieldname'>Password</td>
-											<td id='envTwitterPassword'>*****</td>
-										</tr>
-										<tr>
-											<td class='fieldname'>URL</td>
-											<td id='envTwitterUrl'></td>
-										</tr>
-									</tbody>
-								</table>
-							</td>
+							<td class='fieldname'>Service</td>
+							<td id='envDbServiceName'></td>
+						</tr>
+						<tr>
+							<td class='fieldname'>Host</td>
+							<td id='envDbHost'></td>
+						</tr>
+						<tr>
+							<td class='fieldname'>Port</td>
+							<td id='envDbPort'></td>
+						</tr>
+						<tr>
+							<td class='fieldname'>Database</td>
+							<td id='envDbName'></td>
+						</tr>
+						<tr>
+							<td class='fieldname'>URL</td>
+							<td id='envDbUrl'></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<section>
+				<table id='twitterinfo' class='todolist'>
+					<tbody>
+						<tr>
+							<td class='fieldname'>Service</td>
+							<td id='envTwitterServiceName'></td>
+						</tr>
+						<tr>
+							<td class='fieldname'>Host</td>
+							<td id='envTwitterHost'></td>
+						</tr>
+						<tr>
+							<td class='fieldname'>Port</td>
+							<td id='envTwitterPort'></td>
+						</tr>
+						<tr>
+							<td class='fieldname'>URL</td>
+							<td id='envTwitterUrl'></td>
 						</tr>
 					</tbody>
 				</table>
@@ -117,9 +93,9 @@
 				</button>
 			</section>
 			<footer>
-				<div class='tips'>
-					Example: #IBM (bluemix OR "blue mix") sentiment:positive lang:de posted:2015-01-01T00:00:00,2015-02-02:23:59:59
-					See <a href='https://www.ng.bluemix.net/docs/#services/Twitter/index.html#twitter'>https://www.ng.bluemix.net/docs/#services/Twitter/index.html#twitter</a>.
+				<div class='tips' style='font-size: 75%;'>
+					<p>Example: #IBM (bluemix OR "blue mix") sentiment:positive lang:de posted:2015-01-01T00:00:00,2015-02-02:23:59:59</p>
+					<p>See <a href='https://www.ng.bluemix.net/docs/#services/Twitter/index.html#twitter'>https://www.ng.bluemix.net/docs/#services/Twitter/index.html#twitter</a>.</p>
 				</div>
 			</footer>
 			<script type="text/javascript" src="util.js"></script>
