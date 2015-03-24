@@ -31,7 +31,7 @@
 					</button>
 				</div>
 			</header>
-			<section id='dbserviceinfo' style='display: none;'>
+			<section id='dbinfo'>
 				<table class = "todolist">
 					<tbody>
 						<tr>
@@ -57,14 +57,15 @@
 						<tr>
 							<td class='fieldname'>Passwod</td>
 							<td id='envDbPassword'>*****/td>
-						</tr>							<tr>
+						</tr>
+						<tr>
 							<td class='fieldname'>URL</td>
 							<td id='envDbUrl'></td>
 						</tr>
 					</tbody>
 				</table>
 			</section>
-			<section id='twitterinfo' style='display: none;'>
+			<section id='twitterinfo'>
 				<table class = "todolist">
 					<tbody>
 						<tr>
@@ -96,24 +97,21 @@
 			</section>
 			<section id="count">
 				<table class = "todolist">
-					<tr>
+					<tr width='90%'>
 						<td>
-							<textarea placeholder='Enter your twitter search criteria here...' onkeydown='toggleCountTips(t)'
+							<textarea cols='80' rows='1' placeholder='Enter your twitter search criteria here...' onkeydown='toggleCountTips(this)'
 							</textarea>
-						</td>
-						<td>
-							<button id="countbutton" class='addBtn' onclick="countTweets()" title='number of tweets'>
-								<img src='images/count.png' alt='count' />
-							</button>
 						</td>
 					</tr>
 				</table>
+				<button id="countbutton" class='addBtn' onclick="countTweets()" title='number of tweets' style=''>
+					<img src='images/count.png' alt='count' />
+				</button>
 			</section>
 			<footer>
 				<div class='tips'>
-					<section id='counttips'>
-						Example: #IBM (bluemix OR "blue mix") sentiment:positive lang:de posted:2015-01-01T00:00:00,2015-02-02:23:59:59
-					</section>
+					Example: #IBM (bluemix OR "blue mix") sentiment:positive lang:de posted:2015-01-01T00:00:00,2015-02-02:23:59:59
+					See <a href='https://www.ng.bluemix.net/docs/#services/Twitter/index.html#twitter'>https://www.ng.bluemix.net/docs/#services/Twitter/index.html#twitter</a>.
 				</div>
 			</footer>
 			<script type="text/javascript" src="util.js"></script>

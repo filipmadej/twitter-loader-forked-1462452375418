@@ -9,20 +9,17 @@ function countTweets(){
 }
 
 
-function toggleCountTips(){
-	var tips = document.getElementById('counttips');
+function toggleCountTips(contentnode){
 	var button = document.getElementById('countbutton');
 	if (contentnode.toString().length() > 0){
-		tips.style.display = 'none';
 		button.style.display = '';
 	}else{
-		tips.style.display = '';
 		button.style.display = 'none';
 	}
 }
 
 function toggleDatabaseInfo(){
-	var node = document.getElementById('dbserviceinfo');
+	var node = document.getElementById('dbinfo');
 	node.style.display = node.style.display == 'none' ? '' : 'none';
 }
 
