@@ -1,0 +1,11 @@
+applications:
+- services:
+  - twitter loader-sqldb
+  - twitter loader-MonitoringAndAnalytics
+  disk_quota: 1024M
+  host: twitter-loader
+  name: twitter loader
+  path: libertyDBApp.war
+  domain: mybluemix.net
+  instances: 1
+  memory: 512M
