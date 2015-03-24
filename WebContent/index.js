@@ -9,7 +9,7 @@ function countTweets(){
 }
 
 
-function toggleCountTips(contentNode){
+function toggleCountTips(){
 	var tips = document.getElementById('counttips');
 	var button = document.getElementById('countbutton');
 	if (contentnode.toString().length() > 0){

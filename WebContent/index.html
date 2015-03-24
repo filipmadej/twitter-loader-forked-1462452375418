@@ -94,19 +94,25 @@
 					</tbody>
 				</table>
 			</section>
-			<div id="count">
-				<textarea width='80%'
-					placeholder='Enter your twitter search criteria here...' 
-					required='true' onkeydown='toggleCountTips(this)'
-				</textarea>
-				<button id="countbutton" class='addBtn' onclick="countTweets()" title='number of tweets'>
-					<img src='images/count.png' alt='count' />
-				</button>
-			</div>
+			<section id="count">
+				<table class = "todolist">
+					<tr>
+						<td>
+							<textarea placeholder='Enter your twitter search criteria here...' onkeydown='toggleCountTips(t)'
+							</textarea>
+						</td>
+						<td>
+							<button id="countbutton" class='addBtn' onclick="countTweets()" title='number of tweets'>
+								<img src='images/count.png' alt='count' />
+							</button>
+						</td>
+					</tr>
+				</table>
+			</section>
 			<footer>
 				<div class='tips'>
 					<section id='counttips'>
-						e.g. #IBM (bluemix OR "blue mix") sentiment:positive lang:de posted:2015-01-01T00:00:00,2015-02-02:23:59:59
+						Example: #IBM (bluemix OR "blue mix") sentiment:positive lang:de posted:2015-01-01T00:00:00,2015-02-02:23:59:59
 					</section>
 				</div>
 			</footer>
