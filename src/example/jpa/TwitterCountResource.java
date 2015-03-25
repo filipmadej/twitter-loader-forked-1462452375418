@@ -70,7 +70,7 @@ public class TwitterCountResource {
 				sb.append(buffer, 0, in);
 			}
 			return "Error " + urlConnection.getResponseCode() + " - "
-                    + countUrl + " - " + sb.toString());
+                    + countUrl + " - " + sb.toString();
 		}
         reader = new InputStreamReader(urlConnection.getInputStream(), UTF8);
 		char[] buffer = new char[4096];
