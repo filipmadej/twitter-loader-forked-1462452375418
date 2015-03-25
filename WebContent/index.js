@@ -22,7 +22,7 @@ function toggleTwitterInfo(){
 
 function toggleCountButton(contentnode){
 	var button = document.getElementById('countbutton');
-	if (contentnode.toString().length() > 0){
+	if (contentnode.value != ''){
 		button.disabled = false;
 	}else{
 		button.disabled = true;
@@ -52,7 +52,7 @@ function countTweets(){
 
 function toggleLoadButton(contentnode){
 	var button = document.getElementById('loadbutton');
-	if (contentnode.toString().length() > 0){
+	if (contentnode.value != ''){
 		button.disabled = false;
 	}else{
 		button.disabled = true;
