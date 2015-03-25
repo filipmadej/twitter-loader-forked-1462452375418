@@ -34,36 +34,36 @@
 							<td id='envTwitterServiceName'></td>
 						</tr>
 						<tr>
-							<td class='fieldname'>Host</td>
+							<td class='fieldname'>Host: </td>
 							<td id='envTwitterHost'></td>
 						</tr>
 						<tr>
-							<td class='fieldname'>Port</td>
+							<td class='fieldname'>Port: </td>
 							<td id='envTwitterPort'></td>
 						</tr>
 						<tr>
-							<td class='fieldname'>URL</td>
+							<td class='fieldname'>URL: </td>
 							<td id='envTwitterUrl'></td>
 						</tr>
 					</tbody>
 				</table>
 			</section>
 			<section id="count">
-				<table class = "todolist" width='90%'>
+				<table width='90%'>
 					<tr>
-						<td>
+						<td width='80%'>
 							<textarea id='twitterquer' cols='50' rows='1' placeholder='Enter your twitter search criteria here...' onkeydown='toggleCountButton(this)'>
 							</textarea>
 						</td>
-						<td>
+						<td width='20%'>
 							<button id="countbutton" onclick="countTweets()" title='count number of tweets' disabled='true'>
-								<img src='images/count.png' alt='count button'/>
+								Count tweets
 							</button>
 						</td>
 					</tr>
 					<tr>
 						<td span="2">
-							<button id="numtweets" title='no tweets available...' class='redBtn' disabled='true'>
+							<button id="numtweets" title='no tweets available...' class='redBtn' disabled='true' width='100%' height='10%'>
 								No tweets available...
 							</button>
 						</td>
@@ -94,44 +94,44 @@
 				<table id='dbinfo' class="todolist" style='display: none;'>
 					<tbody>
 						<tr>
-							<td width='25%' class='fieldname'>Service</td>
+							<td width='25%' class='fieldname'>Service: </td>
 							<td id='envDbServiceName'></td>
 						</tr>
 						<tr>
-							<td class='fieldname'>Host</td>
+							<td class='fieldname'>Host: </td>
 							<td id='envDbHost'></td>
 						</tr>
 						<tr>
-							<td class='fieldname'>Port</td>
+							<td class='fieldname'>Port: </td>
 							<td id='envDbPort'></td>
 						</tr>
 						<tr>
-							<td class='fieldname'>Database</td>
+							<td class='fieldname'>Database: </td>
 							<td id='envDbName'></td>
 						</tr>
 						<tr>
-							<td class='fieldname'>URL</td>
+							<td class='fieldname'>URL: </td>
 							<td id='envDbUrl'></td>
 						</tr>
 					</tbody>
 				</table>
 			</section>
 			<section id="table">
-				<table class = "todolist" width='90%'>
+				<table width='90%'>
 					<tr>
-						<td>
-							<textarea id='tweetquery' cols='50' rows='1' placeholder='Enter your table name here...' onkeydown='toggleLoadButton(this)'>
+						<td width='80%'>
+							<textarea id='tweetquery' placeholder='Enter your table name here...' onkeydown='toggleLoadButton(this)'>
 							</textarea>
 						</td>
-						<td>
+						<td width='20%'>
 							<button id="loadbutton" onclick="loadTweets()" title='load tweets into table' disabled='true'>
-								<img src='images/load.png' alt='load button'/>
+								Load tweets
 							</button>
 						</td>
 					</tr>
 					<tr>
 						<td span="2">
-							<button id="progress" title='Not started' class='redBtn' disabled='true'>
+							<button id="progress" title='Not started' class='redBtn' disabled='true' width='100%' height='10%'>
 								Not started
 							</button>
 						</td>
@@ -140,8 +140,7 @@
 			</section>
 			<footer>
 				<div class='tips' style='font-size: 75%;'>
-					<p>Example: #IBM (bluemix OR "blue mix") sentiment:positive lang:de posted:2015-01-01T00:00:00,2015-02-02:23:59:59</p>
-					<p>See <a href='https://www.ng.bluemix.net/docs/#services/Twitter/index.html#twitter'>https://www.ng.bluemix.net/docs/#services/Twitter/index.html#twitter</a>.</p>
+					<p>Specify a non-existing table name...</p>
 				</div>
 			</footer>
 
