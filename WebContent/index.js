@@ -22,7 +22,7 @@ function toggleTwitterInfo(){
 
 function toggleCountButton(contentnode){
 	var button = document.getElementById('countbutton');
-	if (contentnode.value != ''){
+	if (contentnode.value.length > 0){
 		button.disabled = false;
 	}else{
 		button.disabled = true;
@@ -37,10 +37,10 @@ function countTweets(){
 	xhrGet(encodeURI(countURL), function(count){
 				console.log(count);
 				if (count.search.result > 0){
-					document.getElementById('numtweets').innerHTML = '' + count.search.result + ' tweets available...';
+					document.getElementById('numtweets').innerHTML = '<br/>' + count.search.result + ' tweets available...<br/>';
 					document.getElementById('numtweets').className = 'greenArea';
 				}else{
-					document.getElementById('numtweets').innerHTML = 'No tweets available...';
+					document.getElementById('numtweets').innerHTML = '<br/>No tweets available...<br/>';
 					document.getElementById('numtweets').className = 'redArea';					
 				}
 				
@@ -52,7 +52,7 @@ function countTweets(){
 
 function toggleLoadButton(contentnode){
 	var button = document.getElementById('loadbutton');
-	if (contentnode.value != ''){
+	if (contentnode.value.length > 0){
 		button.disabled = false;
 	}else{
 		button.disabled = true;
@@ -62,7 +62,7 @@ function toggleLoadButton(contentnode){
 
 function loadTweets(){
 	// TODO
-	document.getElementById('progress').innerHTML = '100% Done...';
+	document.getElementById('progress').innerHTML = '<br/>100% Done...<br/>';
 	document.getElementById('progress').className = 'greenArea';
 }
 
