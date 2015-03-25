@@ -10,7 +10,7 @@ import com.ibm.nosql.json.api.BasicDBObject;
 import com.ibm.nosql.json.util.JSON;
 
 
-//This class define the /hello RESTful API to fetch the twitter service information
+//This class define the /twitterinfo RESTful API to fetch the twitter service information
 
 @Path("/twitterinfo")
 public class TwitterInfoResource {
@@ -63,8 +63,8 @@ public class TwitterInfoResource {
         TwitterInfoObj.put("name", name);
         TwitterInfoObj.put("host", databaseHost);
         TwitterInfoObj.put("port", port);
-        TwitterInfoObj.put("user", user);
-        TwitterInfoObj.put("pwd", password);
+//        TwitterInfoObj.put("user", user);
+//        TwitterInfoObj.put("pwd", password);
         TwitterInfoObj.put("url", url);
         
         return TwitterInfoObj.toString();

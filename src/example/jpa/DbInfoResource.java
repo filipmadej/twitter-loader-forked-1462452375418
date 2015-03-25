@@ -10,7 +10,7 @@ import com.ibm.nosql.json.api.BasicDBObject;
 import com.ibm.nosql.json.util.JSON;
 
 
-//This class define the /hello RESTful API to fetch the database service information
+//This class define the /dbinfo RESTful API to fetch the database service information
 
 @Path("/dbinfo")
 public class DbInfoResource {
@@ -65,8 +65,8 @@ public class DbInfoResource {
         DBInfoObj.put("host", databaseHost);
         DBInfoObj.put("db", databaseName);
         DBInfoObj.put("port", port);
-        DBInfoObj.put("user", user);
-        DBInfoObj.put("pwd", password);
+//        DBInfoObj.put("user", user);
+//        DBInfoObj.put("pwd", password);
         DBInfoObj.put("jdbcurl", jdbcurl);
         
         return DBInfoObj.toString();

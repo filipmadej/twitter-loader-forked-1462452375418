@@ -2,6 +2,7 @@
 
 var REST_DBENV = 'api/dbinfo';
 var REST_TWITTERENV = 'api/twitterinfo';
+var REST_COUNT = 'api/twittercount';
 var KEY_ENTER = 13;
 
 
@@ -31,12 +32,7 @@ function toggleCountButton(contentnode){
 
 
 function countTweets(){
-	var countURL = document.getElementById('envTwitterUrl').innerHTML;
-	countURL = countURL + '/api/v1/messages/count?'
-					+ '&client_id=' + encodeURIComponent(document.getElementById('envTwitterUser').innerHTML)
-					+ '&client_secret=' + encodeURIComponent(document.getElementById('envTwitterPwd').innerHTML)
-					+ '&q=' + encodeURIComponent(document.getElementById('tweetquery').value);
-	console.log(countURL);
+	var countURL = REST_COUNT + '?q=' + encodeURIComponent(document.getElementById('tweetquery').value);
 	xhrGet(countURL, function(count){
 				console.log(count);
 				if (count.search.result > 0){
@@ -77,9 +73,6 @@ function updateDatabaseInfo(){
 				document.getElementById('envDbName').innerHTML = dbinfo.db;
 				document.getElementById('envDbHost').innerHTML = dbinfo.host;
 				document.getElementById('envDbPort').innerHTML = dbinfo.port;
-				document.getElementById('envDbUser').innerHTML = dbinfo.user;
-				document.getElementById('envDbPwd').innerHTML = dbinfo.pwd;
-				document.getElementById('envDbUrl').innerHTML = dbinfo.jdbcurl;
 
 	}, function(err){
 		console.error(err);
@@ -94,9 +87,6 @@ function updateTwitterInfo(){
 				document.getElementById('envTwitterServiceName').innerHTML = twitterinfo.name;
 				document.getElementById('envTwitterHost').innerHTML = twitterinfo.host;
 				document.getElementById('envTwitterPort').innerHTML = twitterinfo.port;
-				document.getElementById('envTwitterUser').innerHTML = twitterinfo.user;
-				document.getElementById('envTwitterPwd').innerHTML = twitterinfo.pwd;
-				document.getElementById('envTwitterUrl').innerHTML = twitterinfo.url;
 
 	}, function(err){
 		console.error(err);
