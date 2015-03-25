@@ -74,6 +74,8 @@ function updateDatabaseInfo(){
 				document.getElementById('envDbName').innerHTML = dbinfo.db;
 				document.getElementById('envDbHost').innerHTML = dbinfo.host;
 				document.getElementById('envDbPort').innerHTML = dbinfo.port;
+				document.getElementById('envDbUser').innerHTML = dbinfo.user;
+				document.getElementById('envDbPwd').innerHTML = dbinfo.pwd;
 				document.getElementById('envDbUrl').innerHTML = dbinfo.jdbcurl;
 
 
@@ -100,14 +102,11 @@ function updateTwitterInfo(){
 
 function connectToDB(){
 	con=null;
-	
-	xhrGet(REST_DBENV, function(dbinfo){
-		
+	try {
 		con = DriverManager.getConnection(dbinfo.jdbcurl, dbinfo.user, dbinfo.pwd);
-		
-	}, function(err){
+	} catch (SQLException e) {
 		console.error(err);
-	});
+	};
 
 	return con;
 }
