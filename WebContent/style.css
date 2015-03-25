@@ -20,12 +20,14 @@ a:hover {
 }
 
 .newappIcon {
-	padding-top: 10%;
+	position: absolute;
+	left: 20px;
+	top: 0px;
+
 	display: block;
 	max-width: 200px;
 	max-height: 200px;
 	margin: 0 auto;
-	padding-bottom: 2em;
 }
 
 h1 {
