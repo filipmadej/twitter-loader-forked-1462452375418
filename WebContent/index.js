@@ -32,8 +32,7 @@ function toggleCountButton(contentnode){
 
 function countTweets(){
 	var countURL = document.getElementById('envTwitterUrl').innerHTML;
-	countURL = countURL + '/api/v1/messages/count?q=' + document.getElementById('tweetquery').value;
-	countURL = encodeURI(countURL);
+	countURL = countURL + '/api/v1/messages/count?q=' + encodeURIComponent(document.getElementById('tweetquery').value);
 	console.log(countURL);
 	xhrGet(countURL, function(count){
 				console.log(count);
@@ -98,6 +97,29 @@ function updateTwitterInfo(){
 		console.error(err);
 	});
 }
+
+function connectToDB(){
+	con=null;
+	
+	xhrGet(REST_DBENV, function(dbinfo){
+		
+		con = DriverManager.getConnection(dbinfo.jdbcurl, dbinfo.user, dbinfo.pwd);
+		
+	}, function(err){
+		console.error(err);
+	});
+
+	return con;
+}
+
+
+
+function createTableList(){
+	
+}
+
+
 updateDatabaseInfo();
 updateTwitterInfo();
+createTableList();
 

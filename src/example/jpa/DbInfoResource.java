@@ -54,8 +54,8 @@ public class DbInfoResource {
         String databaseHost = (String) obj.get ("host");
         String databaseName = (String) obj.get ("db");
         Integer port = (Integer) obj.get ("port");
-//        String user = (String) obj.get ("username"); 
-//        String password = (String) obj.get ("password");
+        String user = (String) obj.get ("username"); 
+        String password = (String) obj.get ("password");
         String jdbcurl = (String) obj.get("jdbcurl");
         
         
@@ -65,6 +65,8 @@ public class DbInfoResource {
         DBInfoObj.put("host", databaseHost);
         DBInfoObj.put("db", databaseName);
         DBInfoObj.put("port", port);
+        DBInfoObj.put("user", user);
+        DBInfoObj.put("pwd", password);
         DBInfoObj.put("jdbcurl", jdbcurl);
         
         return DBInfoObj.toString();
