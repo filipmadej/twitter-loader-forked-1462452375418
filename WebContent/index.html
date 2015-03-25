@@ -9,33 +9,92 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body >
+    <header>
+    	<img class = "newappIcon" src="images/newapp-icon.png" />
+		<h1>
+			Welcome to the <span class="blue">Tweets DB Loader</span> on Bluemix!
+		</h1>
+    </header>
 	<div class = "leftHalf">
-		<img class = "newappIcon" src="images/newapp-icon.png" />
-			<h1>
-				Welcome to the <span class="blue">Tweets DB Loader</span> on Bluemix!
-			</h1>
-			<p class = "description">Get started by reading our <a href = "https://www.ng.bluemix.net/docs/#starters/liberty/index.html#liberty">Java documentation</a> or use the Start Coding guide under your app in your dashboard.</p>
-	</div>
-	<div class = "rightHalf">
 		<div class = "center">
 			<header>
 				<div class='title'>
-					Tweets DB Loader
-					<button class='detailBtn' onclick="toggleDatabaseInfo()"
-						title='toggle database info'>
-						<img src='images/database.png' alt='database details' />
-					</button>
-					<button class='addBtn' onclick="toggleTwitterInfo()"
+					Step 1: count number of tweets
+					<button class='detailBtn' onclick="toggleTwitterInfo()"
 						title='toggle twitter info'>
 						<img src='images/twitter.png' alt='twitter details' />
 					</button>
 				</div>
 			</header>
 			<section>
-				<table id='dbinfo' class="todolist">
+				<table id='twitterinfo' class='todolist' style='display: none;'>
 					<tbody>
 						<tr>
-							<td class='fieldname'>Service</td>
+							<td width='25%' class='fieldname'>Service</td>
+							<td id='envTwitterServiceName'></td>
+						</tr>
+						<tr>
+							<td class='fieldname'>Host</td>
+							<td id='envTwitterHost'></td>
+						</tr>
+						<tr>
+							<td class='fieldname'>Port</td>
+							<td id='envTwitterPort'></td>
+						</tr>
+						<tr>
+							<td class='fieldname'>URL</td>
+							<td id='envTwitterUrl'></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<section id="count">
+				<table class = "todolist" width='90%'>
+					<tr>
+						<td>
+							<textarea id='twitterquer' cols='50' rows='1' placeholder='Enter your twitter search criteria here...' onkeydown='toggleCountButton(this)'>
+							</textarea>
+						</td>
+						<td>
+							<button id="countbutton" onclick="countTweets()" title='count number of tweets' disabled='true'>
+								<img src='images/count.png' alt='count button'/>
+							</button>
+						</td>
+					</tr>
+					<tr>
+						<td span="2">
+							<button id="numtweets" title='no tweets available...' class='redBtn' disabled='true'>
+								No tweets available...
+							</button>
+						</td>
+					</tr>
+				</table>
+			</section>
+			<footer>
+				<div class='tips' style='font-size: 75%;'>
+					<p>Example: #IBM (bluemix OR "blue mix") sentiment:positive lang:de posted:2015-01-01T00:00:00,2015-02-02:23:59:59</p>
+					<p>See <a href='https://www.ng.bluemix.net/docs/#services/Twitter/index.html#twitter'>https://www.ng.bluemix.net/docs/#services/Twitter/index.html#twitter</a>.</p>
+				</div>
+			</footer>
+
+		</div>
+	</div>
+	<div class = "rightHalf">
+		<div class = "center">
+			<header>
+				<div class='title'>
+					Step 2: define database table
+					<button class='detailBtn' onclick="toggleDatabaseInfo()"
+						title='toggle database info'>
+						<img src='images/database.png' alt='database details' />
+					</button>
+				</div>
+			</header>
+			<section>
+				<table id='dbinfo' class="todolist" style='display: none;'>
+					<tbody>
+						<tr>
+							<td width='25%' class='fieldname'>Service</td>
 							<td id='envDbServiceName'></td>
 						</tr>
 						<tr>
@@ -57,40 +116,27 @@
 					</tbody>
 				</table>
 			</section>
-			<section>
-				<table id='twitterinfo' class='todolist'>
-					<tbody>
-						<tr>
-							<td class='fieldname'>Service</td>
-							<td id='envTwitterServiceName'></td>
-						</tr>
-						<tr>
-							<td class='fieldname'>Host</td>
-							<td id='envTwitterHost'></td>
-						</tr>
-						<tr>
-							<td class='fieldname'>Port</td>
-							<td id='envTwitterPort'></td>
-						</tr>
-						<tr>
-							<td class='fieldname'>URL</td>
-							<td id='envTwitterUrl'></td>
-						</tr>
-					</tbody>
-				</table>
-			</section>
-			<section id="count">
-				<table class = "todolist">
-					<tr width='90%'>
+			<section id="table">
+				<table class = "todolist" width='90%'>
+					<tr>
 						<td>
-							<textarea id='twitterquer' cols='80' rows='1' placeholder='Enter your twitter search criteria here...' onkeydown='toggleCountTips(this)'>
+							<textarea id='tweetquery' cols='50' rows='1' placeholder='Enter your table name here...' onkeydown='toggleLoadButton(this)'>
 							</textarea>
+						</td>
+						<td>
+							<button id="loadbutton" onclick="loadTweets()" title='load tweets into table' disabled='true'>
+								<img src='images/load.png' alt='load button'/>
+							</button>
+						</td>
+					</tr>
+					<tr>
+						<td span="2">
+							<button id="progress" title='Not started' class='redBtn' disabled='true'>
+								Not started
+							</button>
 						</td>
 					</tr>
 				</table>
-				<button id="countbutton" class='addBtn' onclick="countTweets()" title='count number of tweets' style=''>
-					<img src='images/count.png' alt='count button'/>
-				</button>
 			</section>
 			<footer>
 				<div class='tips' style='font-size: 75%;'>
@@ -98,9 +144,7 @@
 					<p>See <a href='https://www.ng.bluemix.net/docs/#services/Twitter/index.html#twitter'>https://www.ng.bluemix.net/docs/#services/Twitter/index.html#twitter</a>.</p>
 				</div>
 			</footer>
-			<section id="displaynumtweets">
-				There are <a id='numtweets'>0</a> tweet(s) to be loaded...
-			</section>
+
 			<script type="text/javascript" src="util.js"></script>
 			<script type="text/javascript" src="index.js"></script>
 				

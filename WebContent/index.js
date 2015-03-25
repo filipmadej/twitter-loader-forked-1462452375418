@@ -5,8 +5,28 @@ var REST_TWITTERENV = 'api/twitterinfo';
 var KEY_ENTER = 13;
 
 
-function urlize(query){
-	return query;
+function toggleDatabaseInfo(){
+	var dbnode = document.getElementById('dbinfo');
+	dbnode.style.display = dbnode.style.display == 'none' ? '' : 'none';
+	var twitter = document.getElementById('twitterinfo');
+	twitter.style.display = 'none';
+}
+
+
+function toggleTwitterInfo(){
+	var twitter = document.getElementById('twitterinfo');
+	twitter.style.display = twitter.style.display == 'none' ? '' : 'none';
+	var dbnode = document.getElementById('dbinfo');
+	dbnode.style.display = 'none';
+}
+
+function toggleCountButton(contentnode){
+	var button = document.getElementById('countbutton');
+	if (contentnode.toString().length() > 0){
+		button.disabled = 'false';
+	}else{
+		button.disabled = 'true';
+	}
 }
 
 
@@ -16,28 +36,39 @@ function countTweets(){
 	countURL = countURL + document.getElementById('twitterquery').toString();
 	xhrGet(encodeURI(countURL), function(count){
 				console.log(count);
-				document.getElementById('numtweets').innerHTML = count.search.result;
+				if (count.search.result > 0){
+					document.getElementById('numtweets').innerHTML = '' + count.search.result + ' tweets available...';
+					document.getElementById('numtweets').title = '' + count.search.result + ' tweets available...';
+					document.getElementById('numtweets').className = 'greenBtn';
+				}else{
+					document.getElementById('numtweets').innerHTML = 'No tweets available...';
+					document.getElementById('numtweets').title = 'No tweets available...';
+					document.getElementById('numtweets').className = 'redBtn';					
+				}
+				
 	}, function(err){
 		console.error(err);
 	});
 }
 
 
-function toggleCountTips(contentnode){
-	var button = document.getElementById('countbutton');
+function toggleLoadButton(contentnode){
+	var button = document.getElementById('loadbutton');
 	if (contentnode.toString().length() > 0){
-		button.style.display = '';
+		button.disabled = 'false';
 	}else{
-		button.style.display = 'none';
+		button.disabled = 'true';
 	}
 }
 
-function toggleDatabaseInfo(){
-	var dbnode = document.getElementById('dbinfo');
-	dbnode.style.display = dbnode.style.display == 'none' ? '' : 'none';
-	var twitter = document.getElementById('twitterinfo');
-	twitter.style.display = 'none';
+
+function loadTweets(){
+	// TODO
+	document.getElementById('progress').innerHTML = '100% Done...';
+	document.getElementById('progress').title = '100% Done...';
+	document.getElementById('progress').className = 'greenBtn';
 }
+
 
 function updateDatabaseInfo(){
 	xhrGet(REST_DBENV, function(dbinfo){
@@ -55,12 +86,6 @@ function updateDatabaseInfo(){
 	});
 }
 
-function toggleTwitterInfo(){
-	var twitter = document.getElementById('twitterinfo');
-	twitter.style.display = twitter.style.display == 'none' ? '' : 'none';
-	var dbnode = document.getElementById('dbinfo');
-	dbnode.style.display = 'none';
-}
 
 function updateTwitterInfo(){
 	xhrGet(REST_TWITTERENV, function(twitterinfo){

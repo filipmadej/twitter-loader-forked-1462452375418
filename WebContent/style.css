@@ -90,15 +90,15 @@ table {
 .leftHalf {
 	float: left;
 	background-color: #26343f;
-	width: 45%;
-	height: 100%;
+	width: 50%;
+	height: 90%;
 }
 
 .rightHalf {
 	float: right;
-	width: 55%;
+	width: 50%;
 	background-color: #313f4a;
-	height: 100%;
+	height: 90%;
 }
 /* positions */
 header {
@@ -171,6 +171,19 @@ button {
 	top: 0px;
 	background: none;
 	border: none;
+	cursor: pointer;
+}
+
+
+.redBtn {
+	background: #BC0000;
+	border: 2px;
+	cursor: pointer;
+}
+
+.greenBtn {
+	background: #00BC00;
+	border: 2px;
 	cursor: pointer;
 }
 
