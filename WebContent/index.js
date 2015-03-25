@@ -100,18 +100,6 @@ function updateTwitterInfo(){
 	});
 }
 
-function connectToDB(){
-	con=null;
-	try {
-		con = DriverManager.getConnection(dbinfo.jdbcurl, dbinfo.user, dbinfo.pwd);
-	} catch (SQLException e) {
-		console.error(err);
-	};
-
-	return con;
-}
-
-
 
 function createTableList(){
 	
