@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URI;
 import java.util.Set;
 
 import javax.ws.rs.GET;
@@ -58,8 +59,9 @@ public class TwitterCountResource {
 		// ##############################################
 		String retval=null;
 		try {
-			URL countUrl = new URL(url + "/api/v1/messages/count?q=" + query);
-			HttpURLConnection urlConnection = (HttpURLConnection) countUrl.openConnection();
+	        URI countURI = new URI(url + "/api/v1/messages/count?q=" + query).normalize();
+	        URL countURL =  countURI.normalize().toURL();
+	        HttpURLConnection urlConnection = (HttpURLConnection) countUrl.openConnection();
 			urlConnection.setConnectTimeout(20000);
 			urlConnection.setReadTimeout(20000);
 			urlConnection.setRequestMethod("GET");
