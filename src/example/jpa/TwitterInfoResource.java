@@ -53,8 +53,8 @@ public class TwitterInfoResource {
         obj = (BasicDBObject) obj.get ("credentials");
         String databaseHost = (String) obj.get ("host");
         Integer port = Integer.parseInt((String) obj.get ("port"));
-//        String user = (String) obj.get ("username"); 
-//        String password = (String) obj.get ("password");
+        String user = (String) obj.get ("username"); 
+        String password = (String) obj.get ("password");
         String url = (String) obj.get("url");
         
         
@@ -63,6 +63,8 @@ public class TwitterInfoResource {
         TwitterInfoObj.put("name", name);
         TwitterInfoObj.put("host", databaseHost);
         TwitterInfoObj.put("port", port);
+        TwitterInfoObj.put("user", user);
+        TwitterInfoObj.put("pwd", password);
         TwitterInfoObj.put("url", url);
         
         return TwitterInfoObj.toString();

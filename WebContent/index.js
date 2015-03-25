@@ -32,7 +32,10 @@ function toggleCountButton(contentnode){
 
 function countTweets(){
 	var countURL = document.getElementById('envTwitterUrl').innerHTML;
-	countURL = countURL + '/api/v1/messages/count?q=' + encodeURIComponent(document.getElementById('tweetquery').value);
+	countURL = countURL + '/api/v1/messages/count?'
+					+ '&client_id=' + encodeURIComponent(document.getElementById('envTwitterUser').innerHTML)
+					+ '&client_secret=' + encodeURIComponent(document.getElementById('envTwitterPwd').innerHTML)
+					+ '&q=' + encodeURIComponent(document.getElementById('tweetquery').value);
 	console.log(countURL);
 	xhrGet(countURL, function(count){
 				console.log(count);
@@ -78,7 +81,6 @@ function updateDatabaseInfo(){
 				document.getElementById('envDbPwd').innerHTML = dbinfo.pwd;
 				document.getElementById('envDbUrl').innerHTML = dbinfo.jdbcurl;
 
-
 	}, function(err){
 		console.error(err);
 	});
@@ -92,8 +94,9 @@ function updateTwitterInfo(){
 				document.getElementById('envTwitterServiceName').innerHTML = twitterinfo.name;
 				document.getElementById('envTwitterHost').innerHTML = twitterinfo.host;
 				document.getElementById('envTwitterPort').innerHTML = twitterinfo.port;
+				document.getElementById('envTwitterUser').innerHTML = twitterinfo.user;
+				document.getElementById('envTwitterPwd').innerHTML = twitterinfo.pwd;
 				document.getElementById('envTwitterUrl').innerHTML = twitterinfo.url;
-
 
 	}, function(err){
 		console.error(err);
