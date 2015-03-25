@@ -32,13 +32,13 @@ function toggleCountButton(contentnode){
 
 function countTweets(){
 	var countURL = document.getElementById('envTwitterUrl').innerHTML;
-	countURL = countURL + '/api/v1/messages/count?';
-	countURL = countURL + document.getElementById('tweetquery').value;
+	countURL = countURL + '/api/v1/messages/count?q=' + document.getElementById('tweetquery').value;
+	countURL = encodeURI(countURL);
 	console.log(countURL);
-	xhrGet(encodeURI(countURL), function(count){
+	xhrGet(countURL, function(count){
 				console.log(count);
 				if (count.search.result > 0){
-					document.getElementById('numtweets').innerHTML = '<br/>' + count.search.result + ' tweets available...<br/><br/>';
+					document.getElementById('numtweets').innerHTML = '<br/><a id="numtweets">' + count.search.result + '</a> tweets available...<br/><br/>';
 					document.getElementById('numtweets').className = 'greenArea';
 				}else{
 					document.getElementById('numtweets').innerHTML = '<br/>No tweets available...<br/><br/>';
