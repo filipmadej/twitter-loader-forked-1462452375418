@@ -56,6 +56,7 @@ public class TwitterCountResource {
 		// ##############################################
 		// call the URL
 		// ##############################################
+		String retval=null;
 		try {
 			URL countUrl = new URL(url + "/api/v1/messages/count?q=" + query);
 			HttpURLConnection urlConnection = (HttpURLConnection) countUrl.openConnection();
@@ -81,11 +82,12 @@ public class TwitterCountResource {
 			while (0 < (in = reader.read(buffer))) {
 				sb.append(buffer, 0, in);
 			}
+			retval=sb.toString();
 		} catch (Exception e) {
 			return e.toString();
 		}
 
-        return sb.toString();
+        return retval;
 
 	}
 }
