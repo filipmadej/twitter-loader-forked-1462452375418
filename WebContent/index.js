@@ -33,18 +33,18 @@ function toggleCountButton(contentnode){
 function countTweets(){
 	var countURL = document.getElementById('envTwitterUrl').innerHTML;
 	countURL = countURL + '/api/v1/messages/count?';
-	countURL = countURL + document.getElementById('twitterquery').toString();
+	countURL = countURL + document.getElementById('tweetquery').value;
+	console.log(countURL);
 	xhrGet(encodeURI(countURL), function(count){
 				console.log(count);
 				if (count.search.result > 0){
-					document.getElementById('numtweets').innerHTML = '<br/>' + count.search.result + ' tweets available...<br/>';
+					document.getElementById('numtweets').innerHTML = '<br/>' + count.search.result + ' tweets available...<br/><br/>';
 					document.getElementById('numtweets').className = 'greenArea';
 				}else{
-					document.getElementById('numtweets').innerHTML = '<br/>No tweets available...<br/>';
+					document.getElementById('numtweets').innerHTML = '<br/>No tweets available...<br/><br/>';
 					document.getElementById('numtweets').className = 'redArea';					
 				}
-				
-	}, function(err){
+		}, function(err){
 		console.error(err);
 	});
 }
@@ -62,7 +62,7 @@ function toggleLoadButton(contentnode){
 
 function loadTweets(){
 	// TODO
-	document.getElementById('progress').innerHTML = '<br/>100% Done...<br/>';
+	document.getElementById('progress').innerHTML = '<br/>100% Done...<br/><br/>';
 	document.getElementById('progress').className = 'greenArea';
 }
 

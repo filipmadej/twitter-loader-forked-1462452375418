@@ -45,12 +45,12 @@
 					</tbody>
 				</table>
 			</section>
-			<section id="count">
+			<section>
 				<p></p>
 				<table width='90%'>
 					<tr>
 						<td width='80%'>
-							<textarea id='tweetquery' cols='60' rows='1' placeholder='Enter your twitter search criteria here...' onkeydown='toggleCountButton(this)'></textarea>
+							<textarea id='tweetquery' cols='60' rows='1' placeholder='Enter your twitter search criteria here...' onkeyup='toggleCountButton(this)'></textarea>
 						</td>
 						<td width='20%'>
 							<button id="countbutton" onclick="countTweets()" title='count number of tweets' disabled='true'>
@@ -61,7 +61,7 @@
 					<tr><td><br/></td><td><br/></td></tr>
 					<tr>
 						<td colspan='2' class='redArea'>
-							<br/>No tweets available...<br/
+							<br/>No tweets available...<br/><br/>
 						</td>
 					</tr>
 				</table>
@@ -112,12 +112,12 @@
 					</tbody>
 				</table>
 			</section>
-			<section id="table">
+			<section>
 				<p></p>
 				<table width='90%'>
 					<tr>
 						<td width='80%'>
-							<textarea id='tweetquery' cols='60' rows='1' placeholder='Enter your table name here...' onkeydown='toggleLoadButton(this)'></textarea>
+							<textarea id='tablename' cols='60' rows='1' placeholder='Enter your table name here...' onkeyup='toggleLoadButton(this)'></textarea>
 						</td>
 						<td width='20%'>
 							<button id="loadbutton" onclick="loadTweets()" title='load tweets into table' disabled='true'>
@@ -128,7 +128,7 @@
 					<tr><td><br/></td><td><br/></td></tr>
 					<tr>
 						<td colspan='2' class='redArea'>
-							<br/>Not started<br/>
+							<br/>Not started<br/><br/>
 						</td>
 					</tr>
 				</table>
