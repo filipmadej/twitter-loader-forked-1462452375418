@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 
 import com.ibm.nosql.json.api.BasicDBList;
 import com.ibm.nosql.json.api.BasicDBObject;
@@ -62,7 +63,7 @@ public class TwitterCountResource {
 		urlConnection.setRequestMethod("GET");
 		Reader reader = null;
         if (400 <= urlConnection.getResponseCode()) {
-			reader = new InputStreamReader(urlConnection.getErrorStream(), UTF8);
+			reader = new InputStreamReader(urlConnection.getErrorStream(), "UTF-8");
 			char[] buffer = new char[4096];
 			int in;
 			StringBuilder sb = new StringBuilder();
@@ -72,7 +73,7 @@ public class TwitterCountResource {
 			return "Error " + urlConnection.getResponseCode() + " - "
                     + countUrl + " - " + sb.toString();
 		}
-        reader = new InputStreamReader(urlConnection.getInputStream(), UTF8);
+        reader = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
 		char[] buffer = new char[4096];
 		int in;
 		StringBuilder sb = new StringBuilder();
