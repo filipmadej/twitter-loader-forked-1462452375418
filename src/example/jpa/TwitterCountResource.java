@@ -55,7 +55,7 @@ public class TwitterCountResource {
 		// ##############################################
 		// call the URL
 		// ##############################################
-		URL countUrl = new URL(url + '/api/v1/messages/count?q=' + query);
+		URL countUrl = new URL(url + "/api/v1/messages/count?q=" + query);
 		HttpURLConnection urlConnection = (HttpURLConnection) countUrl.openConnection();
 		urlConnection.setConnectTimeout(20000);
 		urlConnection.setReadTimeout(20000);
