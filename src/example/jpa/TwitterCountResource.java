@@ -56,29 +56,33 @@ public class TwitterCountResource {
 		// ##############################################
 		// call the URL
 		// ##############################################
-		URL countUrl = new URL(url + "/api/v1/messages/count?q=" + query);
-		HttpURLConnection urlConnection = (HttpURLConnection) countUrl.openConnection();
-		urlConnection.setConnectTimeout(20000);
-		urlConnection.setReadTimeout(20000);
-		urlConnection.setRequestMethod("GET");
-		Reader reader = null;
-        if (400 <= urlConnection.getResponseCode()) {
-			reader = new InputStreamReader(urlConnection.getErrorStream(), "UTF-8");
+		try {
+			URL countUrl = new URL(url + "/api/v1/messages/count?q=" + query);
+			HttpURLConnection urlConnection = (HttpURLConnection) countUrl.openConnection();
+			urlConnection.setConnectTimeout(20000);
+			urlConnection.setReadTimeout(20000);
+			urlConnection.setRequestMethod("GET");
+			Reader reader = null;
+			if (400 <= urlConnection.getResponseCode()) {
+				reader = new InputStreamReader(urlConnection.getErrorStream(), "UTF-8");
+				char[] buffer = new char[4096];
+				int in;
+				StringBuilder sb = new StringBuilder();
+				while (0 < (in = reader.read(buffer))) {
+					sb.append(buffer, 0, in);
+				}
+				return "Connection Error " + urlConnection.getResponseCode() + " - "
+   	                 + countUrl + " - " + sb.toString();
+			}
+			reader = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
 			char[] buffer = new char[4096];
 			int in;
 			StringBuilder sb = new StringBuilder();
 			while (0 < (in = reader.read(buffer))) {
 				sb.append(buffer, 0, in);
 			}
-			return "Error " + urlConnection.getResponseCode() + " - "
-                    + countUrl + " - " + sb.toString();
-		}
-        reader = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
-		char[] buffer = new char[4096];
-		int in;
-		StringBuilder sb = new StringBuilder();
-		while (0 < (in = reader.read(buffer))) {
-			sb.append(buffer, 0, in);
+		} catch (Exception e) {
+			return e.toString();
 		}
 
         return sb.toString();
