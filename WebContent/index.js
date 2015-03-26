@@ -35,14 +35,17 @@ function toggleCountButton(contentnode){
 function countTweets(){
 	var countURL = REST_COUNT + '?q=' + encodeURIComponent(document.getElementById('tweetquery').value);
 	xhrGet(countURL, function(count){
+		
 				console.log(count);
 				if (count.search.result > 0){
-					document.getElementById('numtweets').innerHTML = '<br/><a id="numtweets">' + count.search.result + '</a> tweets available...<br/><br/>';
+					document.getElementById('numtweets').innerHTML = '<br/>' + count.search.result + ' tweets available...<br/><br/>';
 					document.getElementById('numtweets').className = 'greenArea';
 				}else{
 					document.getElementById('numtweets').innerHTML = '<br/>No tweets available...<br/><br/>';
 					document.getElementById('numtweets').className = 'redArea';					
 				}
+				toggleLoadButton();
+				
 		}, function(err){
 		console.error(err);
 	});
@@ -51,7 +54,8 @@ function countTweets(){
 
 function toggleLoadButton(contentnode){
 	var button = document.getElementById('loadbutton');
-	if (contentnode.value.length > 0){
+	var numtweets = document.getElementById('numtweets');
+	if (contentnode.value.length > 0 && numtweets.className == 'greenArea'){
 		button.disabled = false;
 	}else{
 		button.disabled = true;
