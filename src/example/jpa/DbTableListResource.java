@@ -21,6 +21,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.ibm.ws.rsadapter.jdbc.WsJdbcDataSource;
+
 
 @Path("/tablelist")
 /**
@@ -67,7 +69,7 @@ public class DbTableListResource {
 		InitialContext ic;
 		try {
 			ic = new InitialContext();
-			return (Connection) ic.lookup("java:comp/env/jdbc/mydbdatasource").getConnection();
+			return (Connection) ((WsJdbcDataSource) ic.lookup("java:comp/env/jdbc/mydbdatasource")).getConnection();
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
