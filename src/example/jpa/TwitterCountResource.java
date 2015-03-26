@@ -96,7 +96,7 @@ public class TwitterCountResource {
 			}
 			retval=sb.toString();
 		} catch (Exception e) {
-			return e.toString();
+			return e.toString() + " for " + url + "/api/v1/messages/count?q=" + URLEncoder.encode(query);
 		}
 
         return retval;
