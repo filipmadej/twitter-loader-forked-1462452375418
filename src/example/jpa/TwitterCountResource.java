@@ -53,6 +53,10 @@ public class TwitterCountResource {
         obj = (BasicDBObject) list.get ("0");
         obj = (BasicDBObject) obj.get ("credentials");
         String url = (String) obj.get("url");
+        String credentials = (String) obj.get("user");
+        credentials += ":" + (String) obj.get("password");
+        url=url.replaceAll(credentials + "@", "");
+        credentials = javax.xml.bind.DatatypeConverter.printBase64Binary(credentials.getBytes("UTF-8"));
 
 		// ##############################################
 		// call the URL
@@ -64,6 +68,7 @@ public class TwitterCountResource {
 			urlConnection.setConnectTimeout(20000);
 			urlConnection.setReadTimeout(20000);
 			urlConnection.setRequestMethod("GET");
+			urlConnection.setRequestProperty("Authorization", "Basic " + credentials); 
 			Reader reader = null;
 			if (400 <= urlConnection.getResponseCode()) {
 				reader = new InputStreamReader(urlConnection.getErrorStream(), "UTF-8");
