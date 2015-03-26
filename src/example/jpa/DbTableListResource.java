@@ -1,5 +1,11 @@
 package example.jpa;
 
+import java.sql.Connection;
+import java.sql.DataSource;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+
 import java.util.List;
 
 import javax.naming.Binding;
@@ -16,12 +22,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import javax.sql.Connection;
-import javax.sql.DataSource;
-import javax.sql.SQLException;
-import javax.sql.Statement;
-import javax.sql.ResultSet;
 
 
 @Path("/tablelist")
