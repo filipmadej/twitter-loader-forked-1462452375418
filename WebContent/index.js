@@ -104,7 +104,7 @@ function refreshTableList(){
 				var tidx = 1;
 				// copy table names up to the length of the HTML table
 				while (tidx<=tmax && tidx<=table.rows.length){
-					table.rows[tidx].cell[1].innerHTML=tablelist.body[tidx].name;
+					table.rows[tidx].cells[1].innerHTML=tablelist.body[tidx].name;
 					tidx++;
 				}
 				// delete remaining rows of the HTML table if any
@@ -116,14 +116,14 @@ function refreshTableList(){
 				while (tidx<=tmax){
 					table.insertRow(tidx);
 					table.rows[tidx].createCell(1);
-					table.rows[tidx].cell[1].innerHTML=tablelist.body[tidx].name;
+					table.rows[tidx].cells[1].innerHTML=tablelist.body[tidx].name;
 					tidx++;
 				}
 				// insert empty table names at the end of the HTML table up to 3 rows
 				while (tidx<=3){
 					table.insertRow(tidx);
 					table.rows[tidx].createCell(1);
-					table.rows[tidx].cell[1].innerHTML='<br/>';
+					table.rows[tidx].cells[1].innerHTML='<br/>';
 					tidx++;
 				}
 
