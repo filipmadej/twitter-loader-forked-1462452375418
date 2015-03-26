@@ -37,8 +37,8 @@ function countTweets(){
 	xhrGet(countURL, function(count){
 		
 				console.log(count);
-				if (count.search.result > 0){
-					document.getElementById('numtweets').innerHTML = '<br/>' + count.search.result + ' tweets available...<br/><br/>';
+				if (count.search.results > 0){
+					document.getElementById('numtweets').innerHTML = '<br/>' + count.search.results + ' tweets available...<br/><br/>';
 					document.getElementById('numtweets').className = 'greenArea';
 				}else{
 					document.getElementById('numtweets').innerHTML = '<br/>No tweets available...<br/><br/>';
