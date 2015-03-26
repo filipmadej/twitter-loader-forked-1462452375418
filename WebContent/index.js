@@ -123,7 +123,7 @@ function refreshTableList(){
 				while (tidx<=3){
 					table.insertRow(tidx);
 					table.rows[tidx].createCell(1);
-					table.rows[tidx].cell[1].innerHTML='<br/>;
+					table.rows[tidx].cell[1].innerHTML='<br/>';
 					tidx++;
 				}
 
