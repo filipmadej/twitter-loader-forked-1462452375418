@@ -101,7 +101,7 @@ function refreshTableList(){
 				console.log(tablelist);
 				var tidx = 0;
 				var tmax = tablelist.count;
-				var content = '<select name="Tables" disabled="true" size="4">\n';
+				var content = '<p></p><select name="Tables"  size="4">\n';
 				// copy table names up to the length of the HTML table
 				while (tidx<tmax){
 					content += '<option values="' + tablelist.body[tidx].name + '">' + tablelist.body[tidx].name + '</option>\n';
