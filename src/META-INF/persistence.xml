@@ -13,6 +13,7 @@
 			</dataSource> -->
 		<jta-data-source>java:comp/env/jdbc/mydbdatasource</jta-data-source>
 		<class>example.jpa.TODO</class>
+		<class>example.jpa.DbTable</class>
 		<properties>
 			<!-- allow table definitions/creation on-the-fly jpa-2.0 feature -->
 			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />

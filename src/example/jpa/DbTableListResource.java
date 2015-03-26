@@ -88,7 +88,7 @@ public class DbTableListResource {
 				bd = eb.next();
 				allnames = allnames + "\t" + bd.toString() + "\n";
 			}
-			return (EntityManager) ic.lookup("jdbc");
+			return (EntityManager) ic.lookup("java:comp/env/jdbc/mydbdatasource");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
