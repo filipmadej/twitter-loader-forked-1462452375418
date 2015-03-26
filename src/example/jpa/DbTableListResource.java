@@ -36,7 +36,7 @@ public class DbTableListResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get() {
-		return Response.ok(allnames).build();
+		return Response.ok("em=" + em + "\n" + allnames).build();
 //		List<DbTable> list = em.createQuery("select TABSCHEMA, TABNAME from SYSCAT.TABLES where TABSCHEMA=CURRENT_SCHEMA", DbTable.class).getResultList();
 //		//TODO use JSON util like Gson to render objects and use REST Response Writer
 //		String json = "{\"id\":\"all\", \"body\":" + list.toString() + "}";
@@ -88,7 +88,7 @@ public class DbTableListResource {
 				bd = eb.next();
 				allnames = allnames + "\t" + bd.toString() + "\n";
 			}
-			return (EntityManager) ic.lookup("jdbc:javax.naming.Context");
+			return (EntityManager) ic.lookup("jdbc");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
