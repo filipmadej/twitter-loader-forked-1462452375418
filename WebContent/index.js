@@ -104,7 +104,7 @@ function refreshTableList(){
 				var tidx = 0;
 				// copy table names up to the length of the HTML table
 				while (tidx<tmax && tidx<table.rows.length){
-					table.rows[tidx].cells[].innerHTML=tablelist.body[tidx].name;
+					table.rows[tidx].cells[0].innerHTML=tablelist.body[tidx].name;
 					tidx++;
 				}
 				// delete remaining rows of the HTML table if any
