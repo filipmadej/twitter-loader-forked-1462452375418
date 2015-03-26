@@ -1,5 +1,9 @@
 package example.jpa;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import java.util.List;
 
 import javax.naming.Binding;
@@ -17,6 +21,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+
 @Path("/tablelist")
 /**
  * CRUD service of list tables. It uses REST style.
@@ -24,36 +29,28 @@ import javax.ws.rs.core.Response;
  */
 public class DbTableListResource {
 
-	private UserTransaction utx;
-	private EntityManager em;
-	private String allnames;
+	private Connection con;
 
 	public DbTableListResource() {
-		utx = getUserTransaction();
-		em = getEm();
+		con = getConnection();
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get() {
-		return Response.ok("em=" + em + "\n" + allnames).build();
-//		List<DbTable> list = em.createQuery("select TABSCHEMA, TABNAME from SYSCAT.TABLES where TABSCHEMA=CURRENT_SCHEMA", DbTable.class).getResultList();
-//		//TODO use JSON util like Gson to render objects and use REST Response Writer
-//		String json = "{\"id\":\"all\", \"body\":" + list.toString() + "}";
-//		return Response.ok(json).build();
-	}
-	
-	
-	private UserTransaction getUserTransaction() {
-		InitialContext ic;
-		try {
-			ic = new InitialContext();
-			return (UserTransaction) ic.lookup("java:comp/UserTransaction");
-		} catch (NamingException e) {
-			e.printStackTrace();
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery("select TABSCHEMA, TABNAME from SYSCAT.TABLES where TABSCHEMA=CURRENT_SCHEMA");
+		String json = "{\"id\":\"all\", \"body\":[";
+		while (rs.next()) {
+			if (!rs.isFirst()) {
+				json += ", ";
+			}
+			json += "{\"schema\": \"" + rs.getString(0) + "\", \"" + rs.getString(1) + "\"}";
 		}
-		return null;
+		json += "]}";
+		return Response.ok(json).build();
 	}
+	
 	
 	// There are two ways of obtaining the connection information for some services in Java 
 	
@@ -68,28 +65,11 @@ public class DbTableListResource {
 	// in persistence.xml. In these XML files you'll see the "jdbc/<service name>"
 	// JNDI name used.
 
-	private EntityManager getEm() {
-		InitialContext ic;
-		NamingEnumeration<NameClassPair> en;
-		NamingEnumeration<Binding> eb;
-		NameClassPair pair;
-		Binding bd;
-		try {
-			ic = new InitialContext();
-			en = ic.list("");
-			allnames="List:\n";
-			while (en.hasMore() ) {
-				pair = en.next();
-				allnames = allnames + "\t" + pair.getName() + ":" + pair.getClassName() + "\n";
-			}
-			eb = ic.listBindings("");
-			allnames= allnames + "ListBindings:\n";
-			while (eb.hasMore() ) {
-				bd = eb.next();
-				allnames = allnames + "\t" + bd.toString() + "\n";
-			}
-			return (EntityManager) ic.lookup("java:comp/env/jdbc/mydbdatasource");
+	private Connection getConnection() {
+			return (Connection) ic.lookup("java:comp/env/jdbc/mydbdatasource").getConnection();
 		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
