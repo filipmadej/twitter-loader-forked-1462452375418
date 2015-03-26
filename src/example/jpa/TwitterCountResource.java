@@ -2,6 +2,7 @@ package example.jpa;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -56,7 +57,11 @@ public class TwitterCountResource {
         String credentials = (String) obj.get("user");
         credentials += ":" + (String) obj.get("password");
         url=url.replaceAll(credentials + "@", "");
-        credentials = javax.xml.bind.DatatypeConverter.printBase64Binary(credentials.getBytes("UTF-8"));
+		try {
+			credentials = javax.xml.bind.DatatypeConverter.printBase64Binary(credentials.getBytes("UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			return e.toString();			
+		}
 
 		// ##############################################
 		// call the URL
