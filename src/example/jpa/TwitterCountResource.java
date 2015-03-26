@@ -53,10 +53,11 @@ public class TwitterCountResource {
         BasicDBList list = (BasicDBList) obj.get (thekey);
         obj = (BasicDBObject) list.get ("0");
         obj = (BasicDBObject) obj.get ("credentials");
-        String url = (String) obj.get("url");
+        String host = (String) obj.get("host");
+        String port = (String) obj.get("port");
+        String url = 'https://' + host + ":" + port;
         String credentials = (String) obj.get("user");
         credentials += ":" + (String) obj.get("password");
-        url=url.replaceAll(credentials + "@", "");
 		try {
 			credentials = javax.xml.bind.DatatypeConverter.printBase64Binary(credentials.getBytes("UTF-8"));
 		} catch (UnsupportedEncodingException e) {
