@@ -23,6 +23,7 @@ public class DbTableListResource {
 
 	private UserTransaction utx;
 	private EntityManager em;
+	private String allnames;
 
 	public DbTableListResource() {
 		utx = getUserTransaction();
@@ -32,6 +33,7 @@ public class DbTableListResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get() {
+		return Response.ok(allnames).build();
 		List<DbTable> list = em.createQuery("select TABSCHEMA, TABNAME from SYSCAT.TABLES where TABSCHEMA=CURRENT_SCHEMA", DbTable.class).getResultList();
 		//TODO use JSON util like Gson to render objects and use REST Response Writer
 		String json = "{\"id\":\"all\", \"body\":" + list.toString() + "}";
@@ -67,6 +69,7 @@ public class DbTableListResource {
 		InitialContext ic;
 		try {
 			ic = new InitialContext();
+			allnames=ic.list("").toString();
 			return (EntityManager) ic.lookup("jdbc:twitter loader-sqldb");
 		} catch (NamingException e) {
 			e.printStackTrace();
