@@ -29,6 +29,8 @@ function toggleCountButton(contentnode){
 	}else{
 		button.disabled = true;
 	}
+	document.getElementById('numtweets').innerHTML = '<br/>No tweets selected...<br/><br/>';
+	document.getElementById('numtweets').className = 'redArea';
 }
 
 
@@ -42,7 +44,7 @@ function countTweets(){
 					document.getElementById('numtweets').className = 'greenArea';
 				}else{
 					document.getElementById('numtweets').innerHTML = '<br/>No tweets available...<br/><br/>';
-					document.getElementById('numtweets').className = 'redArea';					
+					document.getElementById('numtweets').className = 'redArea';
 				}
 				toggleLoadButton(document.getElementById('tablename'));
 				
@@ -65,7 +67,7 @@ function toggleLoadButton(contentnode){
 
 function loadTweets(){
 	// TODO
-	document.getElementById('progress').innerHTML = '<br/>100% Done...<br/><br/>';
+	document.getElementById('progress').innerHTML = '<br/>Not yet implemented...<br/><br/>';
 	document.getElementById('progress').className = 'greenArea';
 }
 
