@@ -51,7 +51,7 @@ public class DbTableListResource {
 			e.printStackTrace();
 			json +="{\"error\": \"" + e.toString() + "\"}";
 		}
-		json += "], \"size\": " + numtbls + "}";
+		json += "], \"count\": " + numtbls + "}";
 		return Response.ok(json).build();
 	}
 	

@@ -1,6 +1,7 @@
 // index.js
 
 var REST_DBENV = 'api/dbinfo';
+var REST_TABLELIST = 'api/tablelist';
 var REST_TWITTERENV = 'api/twitterinfo';
 var REST_COUNT = 'api/twittercount';
 var KEY_ENTER = 13;
@@ -94,12 +95,45 @@ function updateTwitterInfo(){
 }
 
 
-function createTableList(){
-	
+function refreshTableList(){
+	xhrGet(REST_TABLELIST, function(tablelist){
+
+				console.log(tablelist);
+				var tmax = tablelist.count;
+				var table = document.getElementById('tablelist');
+				var tidx = 1;
+				// copy table names up to the length of the HTML table
+				while (tidx<=tmax && tidx<=table.rows.length){
+					table.rows[tidx].cell[1].innerHTML=tablelist.body[tidx].name;
+					tidx++;
+				}
+				// delete remaining rows of the HTML table if any
+				while (tidx<=table.rows.length){
+					table.deleteRow(tidx);
+					tidx++;
+				}
+				// insert remaining table names at the end of the HTML table
+				while (tidx<=tmax){
+					table.insertRow(tidx);
+					table.rows[tidx].createCell(1);
+					table.rows[tidx].cell[1].innerHTML=tablelist.body[tidx].name;
+					tidx++;
+				}
+				// insert empty table names at the end of the HTML table up to 3 rows
+				while (tidx<=3){
+					table.insertRow(tidx);
+					table.rows[tidx].createCell(1);
+					table.rows[tidx].cell[1].innerHTML='<br/>;
+					tidx++;
+				}
+
+	}, function(err){
+		console.error(err);
+	});
 }
 
 
 updateDatabaseInfo();
 updateTwitterInfo();
-createTableList();
+refreshTableList();
 
