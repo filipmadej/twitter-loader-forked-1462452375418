@@ -44,7 +44,7 @@ function countTweets(){
 					document.getElementById('numtweets').innerHTML = '<br/>No tweets available...<br/><br/>';
 					document.getElementById('numtweets').className = 'redArea';					
 				}
-				toggleLoadButton();
+				toggleLoadButton(document.getElementById('tablename'));
 				
 		}, function(err){
 		console.error(err);
