@@ -56,11 +56,7 @@ public class TwitterCountResource {
         String url = "https://" + (String) obj.get("host");
         String credentials = (String) obj.get("user");
         credentials += ":" + (String) obj.get("password");
-		try {
-			credentials = javax.xml.bind.DatatypeConverter.printBase64Binary(credentials.getBytes());
-		} catch (UnsupportedEncodingException e) {
-			return e.toString();
-		}
+		credentials = javax.xml.bind.DatatypeConverter.printBase64Binary(credentials.getBytes());
 
 		// ##############################################
 		// call the URL
