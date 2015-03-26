@@ -56,7 +56,7 @@ public class TwitterCountResource {
         String url = "https://" + (String) obj.get("host");
         String credentials = (String) obj.get("user");
         credentials += ":" + (String) obj.get("password");
-		credentials = javax.xml.bind.DatatypeConverter.printBase64Binary(credentials.getBytes());
+		String encCreds = javax.xml.bind.DatatypeConverter.printBase64Binary(credentials.getBytes());
 
 		// ##############################################
 		// call the URL
@@ -68,7 +68,7 @@ public class TwitterCountResource {
 			urlConnection.setConnectTimeout(20000);
 			urlConnection.setReadTimeout(20000);
 			urlConnection.setRequestMethod("GET");
-			urlConnection.setRequestProperty("Authorization", "Basic " + credentials); 
+			urlConnection.setRequestProperty("Authorization", "Basic " + encCreds); 
 			Reader reader = null;
 			if (400 <= urlConnection.getResponseCode()) {
 				reader = new InputStreamReader(urlConnection.getErrorStream(), "UTF-8");
@@ -79,7 +79,7 @@ public class TwitterCountResource {
 					sb.append(buffer, 0, in);
 				}
 				return "Connection Error " + urlConnection.getResponseCode() + " - "
-   	                 + countUrl + " - " + sb.toString();
+   	                 + countUrl + " - " + credentials + "(" + encCred + ") - " + sb.toString();
 			}
 			reader = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
 			char[] buffer = new char[4096];
