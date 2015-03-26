@@ -40,7 +40,7 @@ public class DbTableListResource {
 		String json = "{\"filter\":\"none\", \"body\":[";
 		int numtbls = 0;
 		try {
-			stmt = con.createStatement();
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = stmt.executeQuery("select TABNAME from SYSCAT.TABLES where TABSCHEMA=CURRENT_SCHEMA");
 			while (rs.next()) {
 				if (!rs.isFirst()) { json += ", "; }
