@@ -44,7 +44,7 @@ public class DbTableListResource {
 			rs = stmt.executeQuery("select TABNAME from SYSCAT.TABLES where TABSCHEMA=CURRENT_SCHEMA order by TABNAME");
 			while (rs.next()) {
 				if (!rs.isFirst()) { json += ", "; }
-				json += "{\"name\": \"" + rs.getString(0) + "\"}";
+				json += "{\"name\": \"" + rs.getString(1) + "\"}";
 				numtbls++;
 			}
 		} catch (SQLException e) {
