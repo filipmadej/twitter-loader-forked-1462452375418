@@ -1,9 +1,5 @@
 package example.jpa;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
 import java.util.List;
 
 import javax.naming.Binding;
@@ -21,7 +17,11 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.ibm.ws.rsadapter.jdbc.WsJdbcDataSource;
+import javax.sql.Connection;
+import javax.sql.DataSource;
+import javax.sql.SQLException;
+import javax.sql.Statement;
+import javax.sql.ResultSet;
 
 
 @Path("/tablelist")
@@ -69,7 +69,7 @@ public class DbTableListResource {
 		InitialContext ic;
 		try {
 			ic = new InitialContext();
-			return (Connection) ((WsJdbcDataSource) ic.lookup("java:comp/env/jdbc/mydbdatasource")).getConnection();
+			return (Connection) ((DataSource) ic.lookup("java:comp/env/jdbc/mydbdatasource")).getConnection();
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
