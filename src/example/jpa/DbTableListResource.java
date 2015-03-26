@@ -77,16 +77,16 @@ public class DbTableListResource {
 		try {
 			ic = new InitialContext();
 			en = ic.list("");
-			allnames='List:\n';
+			allnames="List:\n";
 			while (en.hasMore() ) {
 				pair = en.next();
-				allnames = allnames + '\t' + pair.getName() + ':' + pair.getClassName() + '\n';
+				allnames = allnames + "\t" + pair.getName() + ":" + pair.getClassName() + "\n";
 			}
 			eb = ic.listBindings("");
-			allnames= allnames + 'ListBindings:\n';
+			allnames= allnames + "ListBindings:\n";
 			while (eb.hasMore() ) {
 				bd = eb.next();
-				allnames = allnames + '\t' + bd.toString() + '\n';
+				allnames = allnames + "\t" + bd.toString() + "\n";
 			}
 			return (EntityManager) ic.lookup("jdbc:javax.naming.Context");
 		} catch (NamingException e) {
