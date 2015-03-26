@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Base64;
 import java.util.Set;
 
 import javax.ws.rs.GET;
@@ -57,7 +58,7 @@ public class TwitterCountResource {
         String credentials = (String) obj.get("user");
         credentials += ":" + (String) obj.get("password");
 		try {
-			credentials = new String(new java.util.Base64().encode(credentials.getBytes()));
+			credentials = new String(Base64.encodeBase(credentials.getBytes()));
 		} catch (UnsupportedEncodingException e) {
 			return e.toString();
 		}
