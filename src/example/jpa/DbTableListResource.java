@@ -40,8 +40,8 @@ public class DbTableListResource {
 		String json = "{\"filter\":\"none\", \"body\":[";
 		int numtbls = 0;
 		try {
-			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			rs = stmt.executeQuery("select TABNAME from SYSCAT.TABLES where TABSCHEMA=CURRENT_SCHEMA");
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery("select TABNAME from SYSCAT.TABLES where TABSCHEMA=CURRENT_SCHEMA order by TABNAME");
 			while (rs.next()) {
 				if (!rs.isFirst()) { json += ", "; }
 				json += "{\"name\": \"" + rs.getString(0) + "\"}";
