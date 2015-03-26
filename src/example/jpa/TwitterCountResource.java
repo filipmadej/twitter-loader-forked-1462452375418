@@ -53,9 +53,7 @@ public class TwitterCountResource {
         BasicDBList list = (BasicDBList) obj.get (thekey);
         obj = (BasicDBObject) list.get ("0");
         obj = (BasicDBObject) obj.get ("credentials");
-        String host = (String) obj.get("host");
-        String port = (String) obj.get("port");
-        String url = "https://" + host + ":" + port;
+        String url = "https://" + (String) obj.get("host");
         String credentials = (String) obj.get("user");
         credentials += ":" + (String) obj.get("password");
 		try {
