@@ -49,6 +49,7 @@ public class DbTableListResource {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			json +="{\"error\": \"" + e.toString() + "\"}";
 		}
 		json += "], \"size\": " + numtbls + "}";
 		return Response.ok(json).build();
