@@ -15,10 +15,23 @@ import javax.persistence.Table;
  */
 public class DbTable {
 	@Id //primary key
-	@Column(name = "TABLENAME")
+	@Column(name = "TABNAME")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	String name;
 	
+	@Basic
+	@Column(name = "TABSCHEMA")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	String schema;
+	
+	public String getSchema() {
+		return schema;
+	}
+
+	public void setSchema(String schema) {
+		this.schema = schema;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -29,6 +42,6 @@ public class DbTable {
 
 	@Override
 	public String toString() {
-		return String.format("{\"name\": \"%s\"}", name);
+		return String.format("{\"schema\": \"%s\", \"name\": \"%s\"}", schema, name);
 	}
 }

@@ -32,7 +32,7 @@ public class DbTableListResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get() {
-		List<DbTable> list = em.createQuery("LIST TABLES", DbTable.class).getResultList();
+		List<DbTable> list = em.createQuery("select TABSCHEMA, TABNAME from SYSCAT.SYSTABLES where TABSCHEMA=CURRENT_SCHEMA", DbTable.class).getResultList();
 		//TODO use JSON util like Gson to render objects and use REST Response Writer
 		String json = "{\"id\":\"all\", \"body\":" + list.toString() + "}";
 		return Response.ok(json).build();
