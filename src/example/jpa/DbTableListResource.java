@@ -67,11 +67,13 @@ public class DbTableListResource {
 
 	private EntityManager getEm() {
 		InitialContext ic;
+		NamingEnumeration<NameClassPair> en;
+		NameClassPair pair;
 		try {
 			ic = new InitialContext();
-			NamingEnumeration<NameClassPair> en = ic.list("");
+			en = ic.list("");
 			while (en.hasMore() ) {
-				MameClassPair pair = en.next();
+				pair = en.next();
 				allnames = allnames + '\t' + pair.getClassName() + ':' + pair.getName() + '\n';
 			}
 			return (EntityManager) ic.lookup("jdbc:twitter loader-sqldb");
