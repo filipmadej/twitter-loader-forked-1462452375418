@@ -39,13 +39,11 @@ public class DbTableListResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get() {
 		Statement stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery("select TABSCHEMA, TABNAME from SYSCAT.TABLES where TABSCHEMA=CURRENT_SCHEMA");
-		String json = "{\"id\":\"all\", \"body\":[";
+		ResultSet rs = stmt.executeQuery("select TABNAME from SYSCAT.TABLES where TABSCHEMA=CURRENT_SCHEMA");
+		String json = "{\"filter\":\"none\", \"body\":[";
 		while (rs.next()) {
-			if (!rs.isFirst()) {
-				json += ", ";
-			}
-			json += "{\"schema\": \"" + rs.getString(0) + "\", \"" + rs.getString(1) + "\"}";
+			if (!rs.isFirst()) { json += ", "; }
+			json += "{\"name\": \"" + rs.getString(0) + "\"}";
 		}
 		json += "]}";
 		return Response.ok(json).build();
@@ -66,6 +64,9 @@ public class DbTableListResource {
 	// JNDI name used.
 
 	private Connection getConnection() {
+		InitialContext ic;
+		try {
+			ic = new InitialContext();
 			return (Connection) ic.lookup("java:comp/env/jdbc/mydbdatasource").getConnection();
 		} catch (NamingException e) {
 			e.printStackTrace();
