@@ -57,7 +57,7 @@ public class TwitterCountResource {
         String credentials = (String) obj.get("user");
         credentials += ":" + (String) obj.get("password");
 		try {
-			credentials = new String(new java.utl.Base64().encode(userCredentials.getBytes()));
+			credentials = new String(new java.utl.Base64().encode(credentials.getBytes()));
 		} catch (UnsupportedEncodingException e) {
 			return e.toString();
 		}
