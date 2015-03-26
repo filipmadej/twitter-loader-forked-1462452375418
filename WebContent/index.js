@@ -31,6 +31,7 @@ function toggleCountButton(contentnode){
 	}
 	document.getElementById('numtweets').innerHTML = '<br/>No tweets selected...<br/><br/>';
 	document.getElementById('numtweets').className = 'redArea';
+	
 }
 
 
