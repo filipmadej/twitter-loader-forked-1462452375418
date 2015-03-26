@@ -2,6 +2,7 @@ package example.jpa;
 
 import java.util.List;
 
+import javax.naming.Binding;
 import javax.naming.InitialContext;
 import javax.naming.NameClassPair;
 import javax.naming.NamingEnumeration;
@@ -70,15 +71,24 @@ public class DbTableListResource {
 	private EntityManager getEm() {
 		InitialContext ic;
 		NamingEnumeration<NameClassPair> en;
+		NamingEnumeration<Binding> eb;
 		NameClassPair pair;
+		Binding bd;
 		try {
 			ic = new InitialContext();
 			en = ic.list("");
+			allnames='List:\n';
 			while (en.hasMore() ) {
 				pair = en.next();
-				allnames = allnames + '\t' + pair.getClassName() + ':' + pair.getName() + '\n';
+				allnames = allnames + '\t' + pair.getName() + ':' + pair.getClassName() + '\n';
 			}
-			return (EntityManager) ic.lookup("jdbc:twitter loader-sqldb");
+			eb = ic.listBindings("");
+			allnames= allnames + 'ListBindings:\n';
+			while (eb.hasMore() ) {
+				bd = eb.next();
+				allnames = allnames + '\t' + bd.toString() + '\n';
+			}
+			return (EntityManager) ic.lookup("jdbc:javax.naming.Context");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
