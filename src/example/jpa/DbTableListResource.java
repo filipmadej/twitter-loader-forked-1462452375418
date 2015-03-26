@@ -72,7 +72,7 @@ public class DbTableListResource {
 			NamingEnumeration<NameClassPair> en = ic.list("");
 			while (en.hasMore() ) {
 				MameClassPair pair = en.next();
-				allnames = allnames + '\t' +pair.getClassName() + ':' + pair.getName() + ';\n';
+				allnames = allnames + '\t' + pair.getClassName() + ':' + pair.getName() + '\n';
 			}
 			return (EntityManager) ic.lookup("jdbc:twitter loader-sqldb");
 		} catch (NamingException e) {
