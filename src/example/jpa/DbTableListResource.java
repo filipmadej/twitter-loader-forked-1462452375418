@@ -67,7 +67,7 @@ public class DbTableListResource {
 		InitialContext ic;
 		try {
 			ic = new InitialContext();
-			return (EntityManager) ic.lookup("java:comp/env/openjpa-todo/entitymanager");
+			return (EntityManager) ic.lookup("jdbc:twitter loader-sqldb");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
