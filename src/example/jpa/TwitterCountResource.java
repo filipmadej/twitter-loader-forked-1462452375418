@@ -54,7 +54,7 @@ public class TwitterCountResource {
         obj = (BasicDBObject) list.get ("0");
         obj = (BasicDBObject) obj.get ("credentials");
         String url = "https://" + (String) obj.get("host");
-        String credentials = (String) obj.get("user");
+        String credentials = (String) obj.get("username");
         credentials += ":" + (String) obj.get("password");
 		String encCreds = javax.xml.bind.DatatypeConverter.printBase64Binary(credentials.getBytes());
 
