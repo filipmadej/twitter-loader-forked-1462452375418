@@ -79,7 +79,7 @@ public class TwitterCountResource {
 					sb.append(buffer, 0, in);
 				}
 				return "Connection Error " + urlConnection.getResponseCode() + " - "
-   	                 + countUrl + " - " + credentials + "(" + encCred + ") - " + sb.toString();
+   	                 + countUrl + " - " + credentials + "(" + encCreds + ") - " + sb.toString();
 			}
 			reader = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
 			char[] buffer = new char[4096];
