@@ -99,34 +99,17 @@ function refreshTableList(){
 	xhrGet(REST_TABLELIST, function(tablelist){
 
 				console.log(tablelist);
-				var tmax = tablelist.count;
-				var table = document.getElementById('tablelist');
 				var tidx = 0;
+				var tmax = tablelist.count;
+				var content = '<select name="Tables" disabled="true" size="4">\n';
 				// copy table names up to the length of the HTML table
-				while (tidx<tmax && tidx<table.rows.length){
-					table.rows[tidx].cells[0].innerHTML=tablelist.body[tidx].name;
-					tidx++;
-				}
-				// delete remaining rows of the HTML table if any
-				while (tidx<table.rows.length){
-					table.deleteRow(tidx);
-					tidx++;
-				}
-				// insert remaining table names at the end of the HTML table
 				while (tidx<tmax){
-					table.insertRow(tidx);
-					table.rows[tidx].createCell(0);
-					table.rows[tidx].cells[0].innerHTML=tablelist.body[tidx].name;
+					content += '<option values="' + tablelist.body[tidx].name + '">' + tablelist.body[tidx].name + '</option>\n';
 					tidx++;
 				}
-				// insert empty table names at the end of the HTML table up to 3 rows
-				while (tidx<3){
-					table.insertRow(tidx);
-					table.rows[tidx].createCell(0);
-					table.rows[tidx].cells[0].innerHTML='<br/>';
-					tidx++;
-				}
-
+				content += '</select>';
+				document.getElementById('tablelist').innerHTML = content;
+				
 	}, function(err){
 		console.error(err);
 	});
