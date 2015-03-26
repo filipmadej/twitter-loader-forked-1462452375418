@@ -3,6 +3,8 @@ package example.jpa;
 import java.util.List;
 
 import javax.naming.InitialContext;
+import javax.naming.NameClassPair;
+import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.transaction.UserTransaction;
