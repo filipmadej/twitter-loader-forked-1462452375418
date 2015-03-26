@@ -1,24 +1,18 @@
 package example.jpa;
 
 import java.sql.Connection;
-import java.sql.DataSource;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
 import java.util.List;
 
-import javax.naming.Binding;
 import javax.naming.InitialContext;
-import javax.naming.NameClassPair;
-import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
-import javax.persistence.EntityManager;
-import javax.transaction.UserTransaction;
+import javax.sql.DataSource;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
