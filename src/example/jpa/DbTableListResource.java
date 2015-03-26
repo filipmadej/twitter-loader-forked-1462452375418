@@ -35,14 +35,22 @@ public class DbTableListResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get() {
-		Statement stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery("select TABNAME from SYSCAT.TABLES where TABSCHEMA=CURRENT_SCHEMA");
+		Statement stmt;
+		ResultSet rs;
 		String json = "{\"filter\":\"none\", \"body\":[";
-		while (rs.next()) {
-			if (!rs.isFirst()) { json += ", "; }
-			json += "{\"name\": \"" + rs.getString(0) + "\"}";
+		int numtbls = 0;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery("select TABNAME from SYSCAT.TABLES where TABSCHEMA=CURRENT_SCHEMA");
+			while (rs.next()) {
+				if (!rs.isFirst()) { json += ", "; }
+				json += "{\"name\": \"" + rs.getString(0) + "\"}";
+				numtbls++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		json += "]}";
+		json += "], \"size\": " + numtbls + "}";
 		return Response.ok(json).build();
 	}
 	
