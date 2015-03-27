@@ -2,7 +2,7 @@ applications:
 - services:
   - twitter loader-sqldb
   - twitter loader-MonitoringAndAnalytics
-  - IBM Insights for Twitter-6j
+  - IBM Insights for Twitter-6k
   disk_quota: 1024M
   host: twitter-loader
   name: twitter loader
