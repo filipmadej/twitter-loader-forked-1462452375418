@@ -6,6 +6,10 @@ var REST_TWITTERENV = 'api/twitterinfo';
 var REST_COUNT = 'api/twittercount';
 var KEY_ENTER = 13;
 
+var numtweets = 0;
+var tablenames = [];
+var tablename = '';
+
 
 function toggleDatabaseInfo(){
 	var dbnode = document.getElementById('dbinfo');
@@ -40,8 +44,9 @@ function countTweets(){
 	xhrGet(countURL, function(count){
 		
 				console.log(count);
-				if (count.search.results > 0){
-					document.getElementById('numtweets').innerHTML = '<br/>' + count.search.results + ' tweets available...<br/><br/>';
+				numtweets = count.search.results;
+				if (numtweets > 0){
+					document.getElementById('numtweets').innerHTML = '<br/>' + numtweets + ' tweets available...<br/><br/>';
 					document.getElementById('numtweets').className = 'greenArea';
 				}else{
 					document.getElementById('numtweets').innerHTML = '<br/>No tweets available...<br/><br/>';
@@ -57,19 +62,77 @@ function countTweets(){
 
 function toggleLoadButton(contentnode){
 	var button = document.getElementById('loadbutton');
-	var numtweets = document.getElementById('numtweets');
-	if (contentnode.value.length > 0 && numtweets.className == 'greenArea'){
-		button.disabled = false;
+	var tableok = document.getElementById('tableok');
+	if (contentnode.value.length > 0){
+		tablename = contentnode.value;
+		if (tablenames.indexOf(tablename) >= 0){
+			button.disabled = true;
+			tableok.innerHTML = '<br/>Existing table name is not allowed...<br/><br/>';
+			tableok.className = 'redArea';
+		} else {
+			tableok.innerHTML = '<br/>New table name indicated...<br/><br/>';
+			tableok.className = 'greenArea';
+			if (document.getElementById('numtweets').className == 'greenArea'){
+				button.disabled = false;
+			} else {
+				button.disabled = true;				
+			}
+			
+		}
 	}else{
 		button.disabled = true;
+		tableok.innerHTML = '<br/>No table name...<br/><br/>';
+		tableok.className = 'redArea';
 	}
 }
 
 
 function loadTweets(){
-	// TODO
-	document.getElementById('progress').innerHTML = '<br/>Not yet implemented...<br/><br/>';
-	document.getElementById('progress').className = 'greenArea';
+	var progressarea = document.getElementById('progress');
+	var phase = progressarea.getElementsByTagName('p')[0];
+	var progress = progressarea.getElementsByTagName('progress')[0];
+
+	// deactivate all clickable form elements
+	document.getElementById('tweetquery').disabled = true;
+	document.getElementById('countbutton').disabled = true;
+	document.getElementById('tablelist').disabled = true;
+	document.getElementById('tablename').disabled = true;
+	document.getElementById('loadbutton').disabled = true;
+	
+	// create the table
+	phase.innerHTML = 'Creating the table...';
+	progress.max = 1.0;
+	progress.value = 0.0;
+	progress.getElementsByName('span')[0].innerHTML=0;
+	progress.getElementsByName('span')[1].innerHTML=1;
+	progressarea.style.display = '';
+	sleep(3000);
+	
+	// load the table
+	phase.innerHTML = 'Loading the tweets...';
+	progress.max = numtweets;
+	progress.value = 0.0;
+	progress.getElementsByName('span')[0].innerHTML=0;
+	progress.getElementsByName('span')[1].innerHTML=numtweets;
+	progressarea.style.display = '';
+	sleep(3000);
+
+	// end of loading
+	phase.innerHTML = 'Load completed successfully...';
+	progress.max = numtweets;
+	progress.value = numtweets;
+	progress.getElementsByName('span')[0].innerHTML=numtweets;
+	progress.getElementsByName('span')[1].innerHTML=numtweets;
+	sleep(3000);
+	
+	// activate the form for the next load
+	progressarea.style.display = 'none';
+	document.getElementById('tweetquery').disabled = false;
+	document.getElementById('countbutton').disabled = false;
+	document.getElementById('tablelist').disabled = false;
+	document.getElementById('tablename').disabled = false;
+	document.getElementById('loadbutton').disabled = true;
+	refreshTableList();
 }
 
 
@@ -108,9 +171,11 @@ function refreshTableList(){
 				console.log(tablelist);
 				var tidx = 0;
 				var tmax = tablelist.count;
+				tablenames = [];
 				var content = '<p></p><select name="Tables"  size="4">\n';
 				// copy table names up to the length of the HTML table
 				while (tidx<tmax){
+					tablenames.push(tablelist.body[tidx].name);
 					content += '<option values="' + tablelist.body[tidx].name + '">' + tablelist.body[tidx].name + '</option>\n';
 					tidx++;
 				}

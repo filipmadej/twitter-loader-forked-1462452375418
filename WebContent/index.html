@@ -75,7 +75,7 @@
 		<div class = "center">
 			<header>
 				<div class='title'>
-					Step 2: select table name
+					Step 2: select new table name
 					<button class='detailBtn' onclick="toggleDatabaseInfo()"
 						title='toggle database info'>
 						<img src='images/database.png' alt='database details' />
@@ -124,11 +124,15 @@
 					</tr>
 					<tr><td><br/></td><td><br/></td></tr>
 					<tr>
-						<td id='progress' colspan='2' class='redArea'>
-							<br/>Not loaded...<br/><br/>
+						<td id='table' colspan='2' class='redArea'>
+							<br/>No table name...<br/><br/>
 						</td>
 					</tr>
 				</table>
+			</section>
+			<section id='progress' style='display: none;'>
+				<p id='phase'>No load in progress...</p>
+				<progress id='progress' max='1.0' value='0.0'><span>0</span>/<span>0</span></progress>
 			</section>
 			<footer>
 				<div class='tips' style='font-size: 75%;'>
