@@ -106,7 +106,7 @@ public class LoadResource {
 		String[] coldefs = columns.split(',');
 		for (int i=0; i<coldefs.length; i++) {
 			String[] colparts = coldefs[i].split(' ');
-			create += "\"colparts[0] + "\" " + colparts[1] + ",";
+			create += "\"" + colparts[0] + "\" " + colparts[1] + ",";
 		}
 		return create.substr(0, create.length()-1) + ")";
 	}
