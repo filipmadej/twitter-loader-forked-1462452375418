@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -109,9 +110,9 @@ public class LoadResource {
 
 	private String getCreateStatement(String tablename, String columns) {
 		String create="CREATE TABLE \"" + tablename + "\"(";
-		String[] coldefs = columns.split(',');
+		String[] coldefs = columns.split(",");
 		for (int i=0; i<coldefs.length; i++) {
-			String[] colparts = coldefs[i].split(' ');
+			String[] colparts = coldefs[i].split("");
 			create += "\"" + colparts[0] + "\" " + colparts[1] + ",";
 		}
 		return create.substr(0, create.length()-1) + ")";
