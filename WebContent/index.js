@@ -79,10 +79,16 @@ function selectTablename(tablelist){
 
 function tablenameModified(contentnode){
 	tablename=contentnode.value;
-	document.getElementById('tables').selectedIndex = 0;
+	document.getElementById('tables').selectedIndex =;
 	toggleLoadButton();
 }
+
+
+function checkColumns(){
+	var columns=document.getElementById('columns');
+
 	
+}
 	
 function toggleLoadButton(){
 	var button = document.getElementById('loadbutton');
