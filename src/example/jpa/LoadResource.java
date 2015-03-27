@@ -115,7 +115,7 @@ public class LoadResource {
 			String[] colparts = coldefs[i].split("");
 			create += "\"" + colparts[0] + "\" " + colparts[1] + ",";
 		}
-		return create.substr(0, create.length()-1) + ")";
+		return create.substring(0, create.length()-1) + ")";
 	}
 
 }
