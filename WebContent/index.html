@@ -114,8 +114,7 @@
 				<table width='90%'>
 					<tr>
 						<td width='10%'>
-							<button class='detailBtn' onclick="toggleColumns()"
-								title='toggle column details'>&gt;</button>
+							<button id='togglecolumns' onclick="toggleColumns(this)" title='toggle column details' style='background-color: #000000; color: #FFFFFF;'>&gt;</button>
 						</td>
 						<td width='70%'>
 							<textarea id='tablename' cols='60' rows='1' placeholder='Enter your table name here...' onkeyup='tablenameModified(this)'></textarea>
@@ -134,10 +133,10 @@
 					</tr>
 				</table>
 			</section>
-			<section id='columns'>
+			<section id='columns' style='display: none;'>
 				<table width='90%'>
-					<thead><tr><td></td><td>column</td><td>type</td><td>twitter tag</td></tr></thead>
-					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>msgId</textarea></td><td>VARCHAR(128)</td><td>message.id</td></tr>
+					<thead><tr><td width='10%'></td><td width='30%'>column</td><td width='20%'>type</td><td width='40%'>twitter tag</td></tr></thead>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea rows='1'>msgId</textarea></td><td>VARCHAR(128)</td><td>message.id</td></tr>
 					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>msgType</textarea></td><td>VARCHAR(128)</td><td>message.verb</td></tr>
 					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>msgPostedTime</textarea></td><td>TIMESTAMP</td><td>message.postedTime</td></tr>
 					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>msgBody</textarea></td><td>VARCHAR(2048)</td><td>message.body</td></tr>

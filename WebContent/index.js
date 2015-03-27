@@ -61,9 +61,10 @@ function countTweets(){
 }
 
 
-function toggleColumns(){
+function toggleColumns(contentnode){
 	var columns = document.getElementById('columns');
 	columns.style.display = columns.style.display == 'none' ? '' : 'none';
+	contentnode.innerHTML = columns.style.display == 'none' ? '>' : '';
 }
 
 
