@@ -127,42 +127,43 @@
 					</tr>
 					<tr><td><br/></td><td><br/></td><td><br/></td></tr>
 					<tr>
-						<td id='tableok' colspan='2' class='redArea'>
+						<td colspan='3'>
+							<table id='columns' width='90%' style='font-size: 75%; border: 1'>
+								<thead><tr><td width='10%'></td><td width='30%'>column</td><td width='20%'>type</td><td width='40%'>twitter tag</td></tr></thead>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='msgId'></td><td>VARCHAR(128)</td><td>message.id</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='msgType'></td><td>VARCHAR(128)</td><td>message.verb</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='msgPostedTime'></td><td>TIMESTAMP</td><td>message.postedTime</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='msgBody'></td><td>VARCHAR(2048)</td><td>message.body</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='msgHashtags'></td><td>VARCHAR(2048)</td><td>message.twitter_entities.hashtags</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='msgCoordType'></td><td>VARCHAR(128)</td><td>message.gnip.profileLocations.geo.type</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='msgCoordinates'></td><td>VARCHAR(128)</td><td>message.gnip.profileLocations.geo.coordinates</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='smaAuthorCountry'></td><td>VARCHAR(128)</td><td>cde.author.location.country</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='smaAuthorState'></td><td>VARCHAR(128)</td><td>cde.author.location.state</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='smaAuthorCity'></td><td>VARCHAR(128)</td><td>cde.author.location.city</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='smaAuthorGender'></td><td>VARCHAR(128)</td><td>cde.author.gender</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='smaSentiment'></td><td>VARCHAR(128)</td><td>cde.content.sentiment.polarity</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='generatorDisplayName'></td><td>VARCHAR(128)</td><td>message.generator.displayName</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='userId'></td><td>VARCHAR(128)</td><td>message.actor.id</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='userDisplayName'></td><td>VARCHAR(128)</td><td>message.actor.displayName</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='userPreferredUsername'></td><td>VARCHAR(128)</td><td>message.actor.preferredUsername</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='userLink'></td><td>VARCHAR(128)</td><td>message.actor.links.href</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='userLocation'></td><td>VARCHAR(128)</td><td>message.actor.location.displayName</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='userUtcOffset'></td><td>VARCHAR(128)</td><td>message.actor.utcOffset</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='userLanguage'></td><td>VARCHAR(128)</td><td>message.actor.languages</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='userFollowersCount'></td><td>INTEGER</td><td>message.actor.followersCount</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='userFriendsCount'></td><td>INTEGER</td><td>message.actor.friendsCount</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='userListedCount'></td><td>INTEGER</td><td>message.actor.listedCount</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='userStatusesCount'></td><td>INTEGER</td><td>message.actor.statusesCount</td></tr>
+								<tr><td><input type='checkbox' checked></input></td><td><input type='text' value='userVerified'></td><td>VARCHAR(5)</td><td>message.actor.verified</td></tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td id='tableok' colspan='3' class='redArea'>
 							<br/>No table name...<br/><br/>
 						</td>
 					</tr>
 				</table>
-			</section>
-			<section id='columns' style='display: none;'>
-				<table width='90%' style='font-size: 75%;'>
-					<thead><tr><td width='10%'></td><td width='30%'>column</td><td width='20%'>type</td><td width='40%'>twitter tag</td></tr></thead>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>msgId</input></td><td>VARCHAR(128)</td><td>message.id</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>msgType</input></td><td>VARCHAR(128)</td><td>message.verb</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>msgPostedTime</input></td><td>TIMESTAMP</td><td>message.postedTime</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>msgBody</input></td><td>VARCHAR(2048)</td><td>message.body</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>msgHashtags</input></td><td>VARCHAR(2048)</td><td>message.twitter_entities.hashtags</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>msgCoordType</input></td><td>VARCHAR(128)</td><td>message.gnip.profileLocations.geo.type</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>msgCoordinates</input></td><td>VARCHAR(128)</td><td>message.gnip.profileLocations.geo.coordinates</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>smaAuthorCountry</input></td><td>VARCHAR(128)</td><td>cde.author.location.country</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>smaAuthorState</input></td><td>VARCHAR(128)</td><td>cde.author.location.state</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>smaAuthorCity</input></td><td>VARCHAR(128)</td><td>cde.author.location.city</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>smaAuthorGender</input></td><td>VARCHAR(128)</td><td>cde.author.gender</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>smaSentiment</input></td><td>VARCHAR(128)</td><td>cde.content.sentiment.polarity</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>generatorDisplayName</input></td><td>VARCHAR(128)</td><td>message.generator.displayName</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>userId</input></td><td>VARCHAR(128)</td><td>message.actor.id</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>userDisplayName</input></td><td>VARCHAR(128)</td><td>message.actor.displayName</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>userPreferredUsername</input></td><td>VARCHAR(128)</td><td>message.actor.preferredUsername</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>userLink</input></td><td>VARCHAR(128)</td><td>message.actor.links.href</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>userLocation</input></td><td>VARCHAR(128)</td><td>message.actor.location.displayName</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>userUtcOffset</input></td><td>VARCHAR(128)</td><td>message.actor.utcOffset</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>userLanguage</input></td><td>VARCHAR(128)</td><td>message.actor.languages</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>userFollowersCount</input></td><td>INTEGER</td><td>message.actor.followersCount</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>userFriendsCount</input></td><td>INTEGER</td><td>message.actor.friendsCount</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>userListedCount</input></td><td>INTEGER</td><td>message.actor.listedCount</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>userStatusesCount</input></td><td>INTEGER</td><td>message.actor.statusesCount</td></tr>
-					<tr><td><input type='checkbox' checked></input></td><td><input type='text'>userVerified</textarea></td><td>VARCHAR(5)</td><td>message.actor.verified</td></tr>
-				</table>
-			</section>
 			</section>
 			<section id='progress' style='display: none;'>
 				<p id='phase'>Not loaded...</p>
