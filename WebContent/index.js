@@ -66,7 +66,7 @@ function countTweets(){
 }
 
 
-function selectTableName(tablelist){
+function selectTablename(tablelist){
 	if(tablelist.selectedIndex > 0){
 		tablename=tablenames[tablelist.selectedIndex-1];
 	}else{
