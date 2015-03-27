@@ -6,9 +6,11 @@ var REST_TWITTERENV = 'api/twitterinfo';
 var REST_COUNT = 'api/twittercount';
 var KEY_ENTER = 13;
 
+var query = '';
 var numtweets = 0;
 var tablenames = [];
 var tablename = '';
+var typed_tablename = '';
 
 
 function toggleDatabaseInfo(){
@@ -26,16 +28,20 @@ function toggleTwitterInfo(){
 	dbnode.style.display = 'none';
 }
 
-function toggleCountButton(contentnode){
+function tweetqueryModified(contentnode){
+	query = contentnode.value;
+	document.getElementById('numtweets').innerHTML = '<br/>No tweets selected...<br/><br/>';
+	document.getElementById('numtweets').className = 'redArea';
+	toggleCountButton();	
+}
+
+function toggleCountButton(){
 	var button = document.getElementById('countbutton');
-	if (contentnode.value.length > 0){
+	if (query.length > 0){
 		button.disabled = false;
 	}else{
 		button.disabled = true;
 	}
-	document.getElementById('numtweets').innerHTML = '<br/>No tweets selected...<br/><br/>';
-	document.getElementById('numtweets').className = 'redArea';
-	
 }
 
 
@@ -60,11 +66,28 @@ function countTweets(){
 }
 
 
-function toggleLoadButton(contentnode){
+function selectTableName(tablelist){
+	if(tablelist.selectedIndex > 0){
+		tablename=tablenames[tablelist.selectedIndex-1];
+	}else{
+		tablename=typed_tablename;
+	}
+	document.getElementById('tablename').value = tablename;
+	toggleLoadButton(document.getElementById('tablename'));
+}
+
+
+function tablenameModified(contentnode){
+	tablename=contentnode.value;
+	typed_tablename=contentnode.value;
+	toggleLoadButton();
+}
+	
+	
+function toggleLoadButton(){
 	var button = document.getElementById('loadbutton');
 	var tableok = document.getElementById('tableok');
-	if (contentnode.value.length > 0){
-		tablename = contentnode.value;
+	if (tablename.length > 0){
 		if (tablenames.indexOf(tablename) >= 0){
 			button.disabled = true;
 			tableok.innerHTML = '<br/>Existing table name is not allowed...<br/><br/>';
@@ -76,8 +99,7 @@ function toggleLoadButton(contentnode){
 				button.disabled = false;
 			} else {
 				button.disabled = true;				
-			}
-			
+			}			
 		}
 	}else{
 		button.disabled = true;
@@ -106,7 +128,7 @@ function loadTweets(){
 	progress.children[0].innerHTML=0;
 	progress.children[1].innerHTML=1;
 	progressarea.style.display = '';
-	sleep(3000);
+
 	
 	// load the table
 	phase.innerHTML = 'Loading the tweets...';
@@ -115,7 +137,6 @@ function loadTweets(){
 	progress.children[0].innerHTML=0;
 	progress.children[1].innerHTML=numtweets;
 	progressarea.style.display = '';
-	sleep(3000);
 
 	// end of loading
 	phase.innerHTML = 'Load completed successfully...';
@@ -123,7 +144,6 @@ function loadTweets(){
 	progress.value = numtweets;
 	progress.children[0].innerHTML=numtweets;
 	progress.children[1].innerHTML=numtweets;
-	sleep(3000);
 	
 	// activate the form for the next load
 	progressarea.style.display = 'none';
@@ -162,16 +182,6 @@ function updateTwitterInfo(){
 	}, function(err){
 		console.error(err);
 	});
-}
-
-
-function selectTableName(tablelist){
-	if(tablelist.selectedIndex > 0)
-	{
-		tablename=tablenames[tablelist.selectedIndex-1];
-		document.getElementById('tablename').value = tablename;
-		toggleLoadButton(document.getElementById('tablename'));
-	}
 }
 
 

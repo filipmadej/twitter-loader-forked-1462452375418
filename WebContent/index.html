@@ -46,7 +46,7 @@
 				<table width='90%'>
 					<tr>
 						<td width='80%'>
-							<textarea id='tweetquery' cols='60' rows='1' placeholder='Enter your twitter search criteria here...' onkeyup='toggleCountButton(this)'></textarea>
+							<textarea id='tweetquery' cols='60' rows='1' placeholder='Enter your twitter search criteria here...' onkeyup='tweetqueryModified(this)'></textarea>
 						</td>
 						<td width='20%'>
 							<button id="countbutton" onclick="countTweets()" title='count number of tweets' disabled='true'>
@@ -114,7 +114,7 @@
 				<table width='90%'>
 					<tr>
 						<td width='80%'>
-							<textarea id='tablename' cols='60' rows='1' placeholder='Enter your table name here...' onkeyup='toggleLoadButton(this)'></textarea>
+							<textarea id='tablename' cols='60' rows='1' placeholder='Enter your table name here...' onkeyup='tablenameModified(this)'></textarea>
 						</td>
 						<td width='20%'>
 							<button id="loadbutton" onclick="loadTweets()" title='load tweets into table' disabled='true'>
@@ -132,7 +132,7 @@
 			</section>
 			<section id='progress' style='display: none;'>
 				<p id='phase'>No load in progress...</p>
-				<progress id='progress' max='1.0' value='0.0'><span>0</span>/<span>0</span></progress>
+				<progress id='progress' max='1.0' value='0.0' width='100%'><span>0</span>/<span>0</span></progress>
 			</section>
 			<footer>
 				<div class='tips' style='font-size: 75%;'>
