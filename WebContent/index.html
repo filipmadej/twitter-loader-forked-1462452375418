@@ -113,7 +113,11 @@
 				<p></p>
 				<table width='90%'>
 					<tr>
-						<td width='80%'>
+						<td width='10%'>
+							<button class='detailBtn' onclick="toggleColumns()"
+								title='toggle column details'>&gt;</button>
+						</td>
+						<td width='70%'>
 							<textarea id='tablename' cols='60' rows='1' placeholder='Enter your table name here...' onkeyup='tablenameModified(this)'></textarea>
 						</td>
 						<td width='20%'>
@@ -122,13 +126,44 @@
 							</button>
 						</td>
 					</tr>
-					<tr><td><br/></td><td><br/></td></tr>
+					<tr><td><br/></td><td><br/></td><td><br/></td></tr>
 					<tr>
 						<td id='tableok' colspan='2' class='redArea'>
 							<br/>No table name...<br/><br/>
 						</td>
 					</tr>
 				</table>
+			</section>
+			<section id='columns'>
+				<table width='90%'>
+					<thead><tr><td></td><td>column</td><td>type</td><td>twitter tag</td></tr></thead>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>msgId</textarea></td><td>VARCHAR(128)</td><td>message.id</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>msgType</textarea></td><td>VARCHAR(128)</td><td>message.verb</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>msgPostedTime</textarea></td><td>TIMESTAMP</td><td>message.postedTime</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>msgBody</textarea></td><td>VARCHAR(2048)</td><td>message.body</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>msgHashtags</textarea></td><td>VARCHAR(2048)</td><td>message.twitter_entities.hashtags</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>msgCoordType</textarea></td><td>VARCHAR(128)</td><td>message.gnip.profileLocations.geo.type</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>msgCoordinates</textarea></td><td>VARCHAR(128)</td><td>message.gnip.profileLocations.geo.coordinates</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>smaAuthorCountry</textarea></td><td>VARCHAR(128)</td><td>cde.author.location.country</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>smaAuthorState</textarea></td><td>VARCHAR(128)</td><td>cde.author.location.state</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>smaAuthorCity</textarea></td><td>VARCHAR(128)</td><td>cde.author.location.city</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>smaAuthorGender</textarea></td><td>VARCHAR(128)</td><td>cde.author.gender</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>smaSentiment</textarea></td><td>VARCHAR(128)</td><td>cde.content.sentiment.polarity</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>generatorDisplayName</textarea></td><td>VARCHAR(128)</td><td>message.generator.displayName</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>userId</textarea></td><td>VARCHAR(128)</td><td>message.actor.id</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>userDisplayName</textarea></td><td>VARCHAR(128)</td><td>message.actor.displayName</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>userPreferredUsername</textarea></td><td>VARCHAR(128)</td><td>message.actor.preferredUsername</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>userLink</textarea></td><td>VARCHAR(128)</td><td>message.actor.links.href</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>userLocation</textarea></td><td>VARCHAR(128)</td><td>message.actor.location.displayName</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>userUtcOffset</textarea></td><td>VARCHAR(128)</td><td>message.actor.utcOffset</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>userLanguage</textarea></td><td>VARCHAR(128)</td><td>message.actor.languages</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>userFollowersCount</textarea></td><td>INTEGER</td><td>message.actor.followersCount</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>userFriendsCount</textarea></td><td>INTEGER</td><td>message.actor.friendsCount</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>userListedCount</textarea></td><td>INTEGER</td><td>message.actor.listedCount</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>userStatusesCount</textarea></td><td>INTEGER</td><td>message.actor.statusesCount</td></tr>
+					<tr><td><input type='checkbox' checked></input></td><td><textarea cols='20' rows='1'>userVerified</textarea></td><td>VARCHAR(5)</td><td>message.actor.verified</td></tr>
+				</table>
+			</section>
 			</section>
 			<section id='progress' style='display: none;'>
 				<p id='phase'>Not loaded...</p>

@@ -10,22 +10,17 @@ var query = '';
 var numtweets = 0;
 var tablenames = [];
 var tablename = '';
-var typed_tablename = '';
 
 
 function toggleDatabaseInfo(){
 	var dbnode = document.getElementById('dbinfo');
 	dbnode.style.display = dbnode.style.display == 'none' ? '' : 'none';
-	var twitter = document.getElementById('twitterinfo');
-	twitter.style.display = 'none';
 }
 
 
 function toggleTwitterInfo(){
 	var twitter = document.getElementById('twitterinfo');
 	twitter.style.display = twitter.style.display == 'none' ? '' : 'none';
-	var dbnode = document.getElementById('dbinfo');
-	dbnode.style.display = 'none';
 }
 
 function tweetqueryModified(contentnode){
@@ -66,11 +61,15 @@ function countTweets(){
 }
 
 
+function toggleColumns(){
+	var columns = document.getElementById('columns');
+	columns.style.display = columns.style.display == 'none' ? '' : 'none';
+}
+
+
 function selectTablename(tablelist){
 	if(tablelist.selectedIndex > 0){
-		tablename=tablenames[tablelist.selectedIndex-1];
-	}else{
-		tablename=typed_tablename;
+		tablename=tablenames[tablelist.selectedIndex];
 	}
 	document.getElementById('tablename').value = tablename;
 	toggleLoadButton(document.getElementById('tablename'));
@@ -79,7 +78,7 @@ function selectTablename(tablelist){
 
 function tablenameModified(contentnode){
 	tablename=contentnode.value;
-	typed_tablename=contentnode.value;
+	document.getElementById('tables').selectedIndex = 0;
 	toggleLoadButton();
 }
 	
@@ -192,7 +191,7 @@ function refreshTableList(){
 				var tidx = 0;
 				var tmax = tablelist.count;
 				tablenames = [];
-				var content = '<p></p><select name="Tables"  size="4" onchange="selectTablename(this)">\n';
+				var content = '<p></p><select id="tables" name="Tables"  size="4" onchange="selectTablename(this)">\n';
 				// copy table names up to the length of the HTML table
 				while (tidx<tmax){
 					tablenames.push(tablelist.body[tidx].name);
