@@ -79,14 +79,14 @@ function selectTablename(tablelist){
 
 function tablenameModified(contentnode){
 	tablename=contentnode.value;
-	document.getElementById('tables').selectedIndex =;
+	document.getElementById('tables').selectedIndex = -1;
 	toggleLoadButton();
 }
 
 
 function checkColumns(){
 	var columns=document.getElementById('columns');
-
+	
 	
 }
 	
