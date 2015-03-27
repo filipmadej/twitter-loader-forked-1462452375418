@@ -165,6 +165,15 @@ function updateTwitterInfo(){
 }
 
 
+function selectTableName(tablelist){
+	if(tablelist.selectedIndex > 0)
+	{
+		document.getElementById('tablename').value = tablenames[tablelist.selectedIndex-1];
+		toggleLoadButton(document.getElementById('tablename'));
+	}
+}
+
+
 function refreshTableList(){
 	xhrGet(REST_TABLELIST, function(tablelist){
 
@@ -172,7 +181,7 @@ function refreshTableList(){
 				var tidx = 0;
 				var tmax = tablelist.count;
 				tablenames = [];
-				var content = '<p></p><select name="Tables"  size="4">\n';
+				var content = '<p></p><select name="Tables"  size="4" onchange="selectTablename(this)">\n';
 				// copy table names up to the length of the HTML table
 				while (tidx<tmax){
 					tablenames.push(tablelist.body[tidx].name);
@@ -191,4 +200,5 @@ function refreshTableList(){
 updateDatabaseInfo();
 updateTwitterInfo();
 refreshTableList();
+toggleLoadButton(document.getElementById('tablename'));
 
