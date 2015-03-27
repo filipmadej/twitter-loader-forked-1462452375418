@@ -103,8 +103,8 @@ function loadTweets(){
 	phase.innerHTML = 'Creating the table...';
 	progress.max = 1.0;
 	progress.value = 0.0;
-	progress.getElementsByName('span')[0].innerHTML=0;
-	progress.getElementsByName('span')[1].innerHTML=1;
+	progress.children[0].innerHTML=0;
+	progress.children[1].innerHTML=1;
 	progressarea.style.display = '';
 	sleep(3000);
 	
@@ -112,8 +112,8 @@ function loadTweets(){
 	phase.innerHTML = 'Loading the tweets...';
 	progress.max = numtweets;
 	progress.value = 0.0;
-	progress.getElementsByName('span')[0].innerHTML=0;
-	progress.getElementsByName('span')[1].innerHTML=numtweets;
+	progress.children[0].innerHTML=0;
+	progress.children[1].innerHTML=numtweets;
 	progressarea.style.display = '';
 	sleep(3000);
 
@@ -121,8 +121,8 @@ function loadTweets(){
 	phase.innerHTML = 'Load completed successfully...';
 	progress.max = numtweets;
 	progress.value = numtweets;
-	progress.getElementsByName('span')[0].innerHTML=numtweets;
-	progress.getElementsByName('span')[1].innerHTML=numtweets;
+	progress.children[0].innerHTML=numtweets;
+	progress.children[1].innerHTML=numtweets;
 	sleep(3000);
 	
 	// activate the form for the next load
@@ -168,7 +168,8 @@ function updateTwitterInfo(){
 function selectTableName(tablelist){
 	if(tablelist.selectedIndex > 0)
 	{
-		document.getElementById('tablename').value = tablenames[tablelist.selectedIndex-1];
+		tablename=tablenames[tablelist.selectedIndex-1];
+		document.getElementById('tablename').value = tablename;
 		toggleLoadButton(document.getElementById('tablename'));
 	}
 }
@@ -190,6 +191,7 @@ function refreshTableList(){
 				}
 				content += '</select>';
 				document.getElementById('tablelist').innerHTML = content;
+				toggleLoadButton(document.getElementById('tablename'));
 				
 	}, function(err){
 		console.error(err);
@@ -200,5 +202,4 @@ function refreshTableList(){
 updateDatabaseInfo();
 updateTwitterInfo();
 refreshTableList();
-toggleLoadButton(document.getElementById('tablename'));
 
