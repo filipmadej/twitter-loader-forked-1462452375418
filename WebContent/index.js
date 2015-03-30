@@ -41,6 +41,11 @@ function toggleCountButton(){
 
 
 function countTweets(){
+	document.getElementById('numtweets').innerHTML = '<br/>Please wait...<br/><br/>';
+	document.getElementById('numtweets').className = 'greyArea';
+	document.getElementById('tweetquery').disabled = true;
+	document.getElementById('countbutton').disabled = true;
+	
 	var countURL = REST_COUNT + '?q=' + encodeURIComponent(document.getElementById('tweetquery').value);
 	xhrGet(countURL, function(count){
 		
@@ -56,8 +61,13 @@ function countTweets(){
 				toggleLoadButton(document.getElementById('tablename'));
 				
 		}, function(err){
-		console.error(err);
+			document.getElementById('numtweets').innerHTML = '<br/>No tweets available...<br/><br/>';
+			document.getElementById('numtweets').className = 'redArea';
+			console.error(err);
 	});
+
+	document.getElementById('tweetquery').disabled = false;
+	document.getElementById('countbutton').disabled = false;
 }
 
 
@@ -69,7 +79,7 @@ function toggleColumns(contentnode){
 
 
 function selectTablename(tablelist){
-	if(tablelist.selectedIndex > 0){
+	if(tablelist.selectedIndex >= 0){
 		tablename=tablenames[tablelist.selectedIndex];
 	}
 	document.getElementById('tablename').value = tablename;
