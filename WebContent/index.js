@@ -186,6 +186,9 @@ function loadTweets(){
 	var progress = progressarea.getElementsByTagName('progress')[0];
 	var columns = document.getElementById('columns');
 	var togglecolumns = document.getElementById('togglecolumns');
+	var query = document.getElementById('tweetquery').value;
+	var tablename = document.getElementById('tablename').value;
+	var formstr = 'q=' + query + ',table=' + tablename + ',columns=' + getColumns();
 
 	// deactivate all clickable form elements
 	document.getElementById('tweetquery').disabled = true;
