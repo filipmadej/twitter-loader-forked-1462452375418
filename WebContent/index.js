@@ -96,8 +96,35 @@ function tablenameModified(contentnode){
 
 
 function checkColumns(){
-	var columns=document.getElementById('columns');
+	var coltable=document.getElementById('columns');
+	var colrows=coltable.children[1].children;
+	var colnames = [];
+	var colidx = 0;
+	while (colidx < colrows.count) {
+		var colchecked = colrows[idx].children[0].children[0].checked;
+		if (colchecked == true) {
+			var colname = colrows[idx].children[0].children[0].value;
+			if ( colname.length == 0 ) {
+				if (colerr.length == 0) {
+					colerr = 'A column is specified without a name...';
+				}
+			} else if (colnames.indexOf(colname)>= 0) {
+				if (colerr.length == 0) {
+					colerr = 'Two columns have the same name ' + colname + '...';
+				}
+			} else {
+				colnames.push(colname);
+			}
+		}
+		colidx = colidx + 1;		
+	}
+	if (colnames.count == 0) {
+		if (colerr.length == 0) {
+			colerr = 'No column is selected...';
+		}
+	}
 }
+
 	
 function toggleLoadButton(){
 	var button = document.getElementById('loadbutton');
@@ -231,4 +258,4 @@ function refreshTableList(){
 updateDatabaseInfo();
 updateTwitterInfo();
 refreshTableList();
-
+window.onresize = function(){ location.reload(); }
