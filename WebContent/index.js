@@ -186,9 +186,9 @@ function loadTweets(){
 	var progress = progressarea.getElementsByTagName('progress')[0];
 	var columns = document.getElementById('columns');
 	var togglecolumns = document.getElementById('togglecolumns');
-	var query = document.getElementById('tweetquery').value;
-	var tablename = document.getElementById('tablename').value;
-	var formstr = 'q=' + query + ',table=' + tablename + ',columns=' + getColumns();
+	var q = document.getElementById('tweetquery').value;
+	var tname = document.getElementById('tablename').value;
+	var formstr = 'q=' + q + ',table=' + tname + ',columns=' + getColumns();
 
 	// deactivate all clickable form elements
 	document.getElementById('tweetquery').disabled = true;
@@ -207,7 +207,7 @@ function loadTweets(){
 	progress.children[0].innerHTML=0;
 	progress.children[1].innerHTML=1;
 	progressarea.style.display = '';
-	xhrPost(REST_LOAD, getColumns(), function(loadresult){
+	xhrPost(REST_LOAD, formstr, function(loadresult){
 
 				console.log(loadresult);
 
