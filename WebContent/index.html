@@ -42,16 +42,17 @@
 				</table>
 			</section>
 			<section>
-				<p></p>
-				<input id='tweetquery' type='text' size='30' placeholder='Enter your twitter search criteria here...' oninput='tweetqueryModified(this)'></input>
+				<p><br/></p>
+				<input id='tweetquery' type='text' size='30' placeholder='Enter your twitter search criteria here...' onkeyup='tweetqueryModified(this)'></input>
 				<button id="countbutton" onclick="countTweets()" title='count number of tweets' disabled='true'>
 					Count tweets
 				</button>
 			</section>
 			<section>
+				<p><br/></p>
 				<table id='twitterinfo' width='100%' class='todolist'>
 					<tr>
-						<td id='numtweets' colspan='2' class='redArea'>
+						<td id='numtweets' class='redArea'>
 							<br/>No tweets selected...<br/><br/>
 						</td>
 					</tr>
@@ -122,9 +123,15 @@
 				</table>
 			</section>
 			<section>
-				<p></p>
+				<p><br/></p>
+				<div id='tablelist' width='70%' height='20%' >
+				Loading existing table names...
+				</div>
+			</section>
+			<section>
+				<p><br/></p>
 				<button id='togglecolumns' onclick="toggleColumns(this)" title='toggle column details' style='background-color: #000000; color: #FFFFFF;'>&gt;</button>
-				<input id='tablename' type='text' size='30' placeholder='Enter your table name here...' oninput='tablenameModified(this)'></input>
+				<input id='tablename' type='text' size='30' placeholder='Enter your table name here...' onkeyup='tablenameModified(this)'></input>
 				<button id="loadbutton" onclick="loadTweets()" title='load tweets into table' disabled='true'>
 					Load tweets
 				</button>
@@ -160,20 +167,16 @@
 				</table>
 			</section>
 			<section>
+				<p><br/></p>
 				<table width='100%' class='todolist'>
 					<tr>
-						<td id='tableok' colspan='3' class='redArea'>
+						<td id='tableok' class='redArea'>
 							<br/>No table name...<br/><br/>
 						</td>
 					</tr>
 				</table>
 			</section>
 <!--			<section>
-				<div id='tablelist' width='70%' height='20%' >
-				Loading existing table names...
-				</div>
-			</section>
-			<section>
 				<p></p>
 				<table width='90%'>
 					<tr>

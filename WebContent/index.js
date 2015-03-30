@@ -267,7 +267,7 @@ function refreshTableList(){
 				var tidx = 0;
 				var tmax = tablelist.count;
 				tablenames = [];
-				var content = '<p></p><select id="tables" name="Tables"  size="4" onchange="selectTablename(this)">\n';
+				var content = '<p><br/>Existing tables:</p><select id="tables" name="Tables"  size="4" onchange="selectTablename(this)">\n';
 				// copy table names up to the length of the HTML table
 				while (tidx<tmax){
 					tablenames.push(tablelist.body[tidx].name);
