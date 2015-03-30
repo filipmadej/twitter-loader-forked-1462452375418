@@ -44,7 +44,7 @@ public class LoadResource {
 	}
 
 	@POST
-	public Response create(@ForParam("q") String query, @FormParam("table") String tablename, @FormParam("columns") String columns) {
+	public Response create(@FormParam("q") String query, @FormParam("table") String tablename, @FormParam("columns") String columns) {
 		String json = "{\"table\": \"" + tablename + "\", \"status\": ";
 		// create the table as indicated
 		Statement stmt;
