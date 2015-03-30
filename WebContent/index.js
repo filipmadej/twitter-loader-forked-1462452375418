@@ -208,7 +208,7 @@ function loadTweets(){
 	progress.children[0].innerHTML=0;
 	progress.children[1].innerHTML=1;
 	progressarea.style.display = '';
-	xhrPost(REST_LOAD, form, function(loadresult){
+	xhrPost(REST_LOAD, formmap, function(loadresult){
 
 				console.log(loadresult);
 
