@@ -138,8 +138,8 @@ function getColumns(){
 		var colchecked = coltable.children[colidx].children[0].children[0].checked;
 		if (colchecked == true) {
 			var colname = coltable.children[colidx].children[1].children[0].value;
-			var coltype = coltable.children[colidx].children[2].children[0].value;
-			var colloc = coltable.children[colidx].children[3].children[0].value;
+			var coltype = coltable.children[colidx].children[2].innerHTML;
+			var colloc = coltable.children[colidx].children[3].innerHTML;
 			if (colnames.length > 0 ) {
 				colnames = colnames + "|";
 			}
@@ -267,14 +267,14 @@ function refreshTableList(){
 				var tidx = 0;
 				var tmax = tablelist.count;
 				tablenames = [];
-				var content = '<p><br/>Existing tables:</p><select id="tables" name="Tables"  size="4" onchange="selectTablename(this)">\n';
+				var content = '<p>Existing tables: <select id="tables" name="Tables"  size="4" onchange="selectTablename(this)">\n';
 				// copy table names up to the length of the HTML table
 				while (tidx<tmax){
 					tablenames.push(tablelist.body[tidx].name);
 					content += '<option values="' + tablelist.body[tidx].name + '">' + tablelist.body[tidx].name + '</option>\n';
 					tidx++;
 				}
-				content += '</select>';
+				content += '</select></p>';
 				document.getElementById('tablelist').innerHTML = content;
 				toggleLoadButton(document.getElementById('tablename'));
 				
