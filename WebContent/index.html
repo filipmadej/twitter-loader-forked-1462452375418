@@ -46,7 +46,7 @@
 				<table width='90%'>
 					<tr>
 						<td width='80%'>
-							<textarea id='tweetquery' cols='60' rows='1' placeholder='Enter your twitter search criteria here...' onkeyup='tweetqueryModified(this)'></textarea>
+							<input id='tweetquery' type='text' placeholder='Enter your twitter search criteria here...' onkeyup='tweetqueryModified(this)'>
 						</td>
 						<td width='20%'>
 							<button id="countbutton" onclick="countTweets()" title='count number of tweets' disabled='true'>
@@ -117,7 +117,7 @@
 							<button id='togglecolumns' onclick="toggleColumns(this)" title='toggle column details' style='background-color: #000000; color: #FFFFFF;'>&gt;</button>
 						</td>
 						<td width='70%'>
-							<textarea id='tablename' cols='50' rows='1' placeholder='Enter your table name here...' onkeyup='tablenameModified(this)'></textarea>
+							<input id='tablename' type='text' placeholder='Enter your table name here...' onkeyup='tablenameModified(this)'>
 						</td>
 						<td width='20%'>
 							<button id="loadbutton" onclick="loadTweets()" title='load tweets into table' disabled='true'>
@@ -129,31 +129,31 @@
 						<td colspan='3'>
 							<table id='columns' width='90%' style='font-size: 75%; border: 1; display: none'>
 								<thead><tr><td width='10%'></td><td width='30%'>column</td><td width='20%'>type</td><td width='40%'>twitter tag</td></tr></thead>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='msgId'></td><td>VARCHAR(128)</td><td>message.id</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='msgType'></td><td>VARCHAR(128)</td><td>message.verb</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='msgPostedTime'></td><td>TIMESTAMP</td><td>message.postedTime</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='msgBody'></td><td>VARCHAR(2048)</td><td>message.body</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='msgHashtags'></td><td>VARCHAR(2048)</td><td>message.twitter_entities.hashtags</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='msgCoordType'></td><td>VARCHAR(128)</td><td>message.gnip.profileLocations.geo.type</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='msgCoordinates'></td><td>VARCHAR(128)</td><td>message.gnip.profileLocations.geo.coordinates</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='smaAuthorCountry'></td><td>VARCHAR(128)</td><td>cde.author.location.country</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='smaAuthorState'></td><td>VARCHAR(128)</td><td>cde.author.location.state</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='smaAuthorCity'></td><td>VARCHAR(128)</td><td>cde.author.location.city</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='smaAuthorGender'></td><td>VARCHAR(128)</td><td>cde.author.gender</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='smaSentiment'></td><td>VARCHAR(128)</td><td>cde.content.sentiment.polarity</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='generatorDisplayName'></td><td>VARCHAR(128)</td><td>message.generator.displayName</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='userId'></td><td>VARCHAR(128)</td><td>message.actor.id</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='userDisplayName'></td><td>VARCHAR(128)</td><td>message.actor.displayName</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='userPreferredUsername'></td><td>VARCHAR(128)</td><td>message.actor.preferredUsername</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='userLink'></td><td>VARCHAR(128)</td><td>message.actor.links.href</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='userLocation'></td><td>VARCHAR(128)</td><td>message.actor.location.displayName</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='userUtcOffset'></td><td>VARCHAR(128)</td><td>message.actor.utcOffset</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='userLanguage'></td><td>VARCHAR(128)</td><td>message.actor.languages</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='userFollowersCount'></td><td>INTEGER</td><td>message.actor.followersCount</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='userFriendsCount'></td><td>INTEGER</td><td>message.actor.friendsCount</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='userListedCount'></td><td>INTEGER</td><td>message.actor.listedCount</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='userStatusesCount'></td><td>INTEGER</td><td>message.actor.statusesCount</td></tr>
-								<tr><td><input type='checkbox' checked></input></td><td><input type='text' style='font-size: 75%' value='userVerified'></td><td>VARCHAR(5)</td><td>message.actor.verified</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='msgId'></td><td>VARCHAR(128)</td><td>message.id</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='msgType'></td><td>VARCHAR(128)</td><td>message.verb</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='msgPostedTime'></td><td>TIMESTAMP</td><td>message.postedTime</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='msgBody'></td><td>VARCHAR(2048)</td><td>message.body</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='msgHashtags'></td><td>VARCHAR(2048)</td><td>message.twitter_entities.hashtags</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='msgCoordType'></td><td>VARCHAR(128)</td><td>message.gnip.profileLocations.geo.type</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='msgCoordinates'></td><td>VARCHAR(128)</td><td>message.gnip.profileLocations.geo.coordinates</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='smaAuthorCountry'></td><td>VARCHAR(128)</td><td>cde.author.location.country</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='smaAuthorState'></td><td>VARCHAR(128)</td><td>cde.author.location.state</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='smaAuthorCity'></td><td>VARCHAR(128)</td><td>cde.author.location.city</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='smaAuthorGender'></td><td>VARCHAR(128)</td><td>cde.author.gender</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='smaSentiment'></td><td>VARCHAR(128)</td><td>cde.content.sentiment.polarity</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='generatorDisplayName'></td><td>VARCHAR(128)</td><td>message.generator.displayName</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='userId'></td><td>VARCHAR(128)</td><td>message.actor.id</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='userDisplayName'></td><td>VARCHAR(128)</td><td>message.actor.displayName</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='userPreferredUsername'></td><td>VARCHAR(128)</td><td>message.actor.preferredUsername</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='userLink'></td><td>VARCHAR(128)</td><td>message.actor.links.href</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='userLocation'></td><td>VARCHAR(128)</td><td>message.actor.location.displayName</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='userUtcOffset'></td><td>VARCHAR(128)</td><td>message.actor.utcOffset</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='userLanguage'></td><td>VARCHAR(128)</td><td>message.actor.languages</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='userFollowersCount'></td><td>INTEGER</td><td>message.actor.followersCount</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='userFriendsCount'></td><td>INTEGER</td><td>message.actor.friendsCount</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='userListedCount'></td><td>INTEGER</td><td>message.actor.listedCount</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='userStatusesCount'></td><td>INTEGER</td><td>message.actor.statusesCount</td></tr>
+								<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onchange='checkColumns()' value='userVerified'></td><td>VARCHAR(5)</td><td>message.actor.verified</td></tr>
 							</table>
 						</td>
 					</tr>

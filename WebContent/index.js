@@ -10,6 +10,7 @@ var query = '';
 var numtweets = 0;
 var tablenames = [];
 var tablename = '';
+var colerr = '';
 
 
 function toggleDatabaseInfo(){
@@ -96,8 +97,6 @@ function tablenameModified(contentnode){
 
 function checkColumns(){
 	var columns=document.getElementById('columns');
-	
-	
 }
 	
 function toggleLoadButton(){
@@ -107,6 +106,10 @@ function toggleLoadButton(){
 		if (tablenames.indexOf(tablename) >= 0){
 			button.disabled = true;
 			tableok.innerHTML = '<br/>Existing table name is not allowed...<br/><br/>';
+			tableok.className = 'redArea';
+		} else if (colerr.length > 0){
+			button.disabled = true;
+			tableok.innerHTML = '<br/>'+colerr+'<br/><br/>';
 			tableok.className = 'redArea';
 		} else {
 			tableok.innerHTML = '<br/>New table name indicated...<br/><br/>';
