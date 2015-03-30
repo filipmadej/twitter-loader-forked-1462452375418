@@ -43,10 +43,26 @@
 			</section>
 			<section>
 				<p></p>
+				<input id='tweetquery' type='text' size='30' placeholder='Enter your twitter search criteria here...' oninput='tweetqueryModified(this)'></input>
+				<button id="countbutton" onclick="countTweets()" title='count number of tweets' disabled='true'>
+					Count tweets
+				</button>
+			</section>
+			<section>
+				<table id='twitterinfo' class='todolist' style='display: none;'>
+					<tr>
+						<td id='numtweets' colspan='2' class='redArea'>
+							<br/>No tweets selected...<br/><br/>
+						</td>
+					</tr>
+				</table>
+			</section>
+<!--			<section>
+				<p></p>
 				<table width='90%'>
 					<tr>
 						<td width='80%'>
-							<input id='tweetquery' type='text' width='100%' placeholder='Enter your twitter search criteria here...' oninput='tweetqueryModified(this)'></input>
+							<input id='tweetquery' type='text' size='30' placeholder='Enter your twitter search criteria here...' oninput='tweetqueryModified(this)'></input>
 						</td>
 						<td width='20%'>
 							<button id="countbutton" onclick="countTweets()" title='count number of tweets' disabled='true'>
@@ -62,6 +78,7 @@
 					</tr>
 				</table>
 			</section>
+-->
 			<footer>
 				<div class='tips' style='font-size: 75%;'>
 					<p>Example: #IBM (bluemix OR "blue mix") sentiment:positive lang:de posted:2015-01-01T00:00:00,2015-02-02:23:59:59</p>
@@ -117,7 +134,7 @@
 							<button id='togglecolumns' onclick="toggleColumns(this)" title='toggle column details' style='background-color: #000000; color: #FFFFFF;'>&gt;</button>
 						</td>
 						<td width='70%'>
-							<input id='tablename' type='text' width='100%' placeholder='Enter your table name here...' oninput='tablenameModified(this)'></input>
+							<input id='tablename' type='text' size='30' placeholder='Enter your table name here...' oninput='tablenameModified(this)'></input>
 						</td>
 						<td width='20%'>
 							<button id="loadbutton" onclick="loadTweets()" title='load tweets into table' disabled='true'>

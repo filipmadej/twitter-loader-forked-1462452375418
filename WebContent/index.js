@@ -4,6 +4,7 @@ var REST_DBENV = 'api/dbinfo';
 var REST_TABLELIST = 'api/tablelist';
 var REST_TWITTERENV = 'api/twitterinfo';
 var REST_COUNT = 'api/twittercount';
+var REST_LOAD = 'api/load';
 var KEY_ENTER = 13;
 
 var query = '';
@@ -100,6 +101,7 @@ function checkColumns(){
 	var colnames = [];
 	var colidx = 0;
 	var colmax=coltable.childElementCount;
+	colerr='';
 	while (colidx < colmax) {
 		var colchecked = coltable.children[colidx].children[0].children[0].checked;
 		if (colchecked == true) {
@@ -125,7 +127,29 @@ function checkColumns(){
 	}
 }
 
-	
+
+function getColumns(){
+	var coltable=document.getElementById('columns').children[1];
+	var colnames = '';
+	var colidx = 0;
+	var colmax=coltable.childElementCount;
+	while (colidx < colmax) {
+		var colchecked = coltable.children[colidx].children[0].children[0].checked;
+		if (colchecked == true) {
+			var colname = coltable.children[colidx].children[1].children[0].value;
+			var coltype = coltable.children[colidx].children[2].children[0].value;
+			var colloc = coltable.children[colidx].children[3].children[0].value;
+			if (colnames.length > 0 ) {
+				colnames = colnames + "|";
+			}
+			colnames = colnames + colname + "|" + coltype + "|" + colloc;
+		}
+		colidx = colidx + 1;
+	}
+	return colnames;
+}
+
+
 function toggleLoadButton(){
 	var button = document.getElementById('loadbutton');
 	var tableok = document.getElementById('tableok');
@@ -159,6 +183,8 @@ function loadTweets(){
 	var progressarea = document.getElementById('progress');
 	var phase = progressarea.getElementsByTagName('p')[0];
 	var progress = progressarea.getElementsByTagName('progress')[0];
+	var columns = document.getElementById('columns');
+	var togglecolumns = document.getElementById('togglecolumns');
 
 	// deactivate all clickable form elements
 	document.getElementById('tweetquery').disabled = true;
@@ -166,24 +192,25 @@ function loadTweets(){
 	document.getElementById('tablelist').disabled = true;
 	document.getElementById('tablename').disabled = true;
 	document.getElementById('loadbutton').disabled = true;
+	columns.style.display = 'none';
+	togglecolumns.innerHTML = '>';
+	togglecolumns.disabled = true;
 	
-	// create the table
+	// create the table and load the table
 	phase.innerHTML = 'Creating the table...';
 	progress.max = 1.0;
 	progress.value = 0.0;
 	progress.children[0].innerHTML=0;
 	progress.children[1].innerHTML=1;
 	progressarea.style.display = '';
+	xhrPost(REST_LOAD, getColumns(), function(loadresult){
 
+				console.log(loadresult);
+
+	}, function(err){
+		console.error(err);
+	});
 	
-	// load the table
-	phase.innerHTML = 'Loading the tweets...';
-	progress.max = numtweets;
-	progress.value = 0.0;
-	progress.children[0].innerHTML=0;
-	progress.children[1].innerHTML=numtweets;
-	progressarea.style.display = '';
-
 	// end of loading
 	phase.innerHTML = 'Load completed successfully...';
 	progress.max = numtweets;
@@ -198,6 +225,7 @@ function loadTweets(){
 	document.getElementById('tablelist').disabled = false;
 	document.getElementById('tablename').disabled = false;
 	document.getElementById('loadbutton').disabled = true;
+	togglecolumns.disabled = true;
 	refreshTableList();
 }
 

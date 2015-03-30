@@ -45,7 +45,7 @@ public class LoadResource {
 
 	@POST
 	public Response create(@QueryParam("q") String query, @QueryParam("table") String tablename, @FormParam("columns") String columns) {
-		String json = "{\"table\":";
+		String json = "{\"table\": \"" + tablename + "\", \"status\": ";
 		// create the table as indicated
 		Statement stmt;
 		int numtbls = 0;
@@ -110,10 +110,9 @@ public class LoadResource {
 
 	private String getCreateStatement(String tablename, String columns) {
 		String create="CREATE TABLE \"" + tablename + "\"(";
-		String[] coldefs = columns.split(",");
-		for (int i=0; i<coldefs.length; i++) {
-			String[] colparts = coldefs[i].split("");
-			create += "\"" + colparts[0] + "\" " + colparts[1] + ",";
+		String[] coldefs = columns.split("|");
+		for (int i=0; i<coldefs.length; i = i + 3) {
+			create += "\"" + coldefs[i] + "\" " + coldefs[i+1] + ",";
 		}
 		return create.substring(0, create.length()-1) + ")";
 	}
