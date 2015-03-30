@@ -96,14 +96,14 @@ function tablenameModified(contentnode){
 
 
 function checkColumns(){
-	var coltable=document.getElementById('columns');
-	var colrows=coltable.children[1].children;
+	var coltable=document.getElementById('columns').children[1];
 	var colnames = [];
 	var colidx = 0;
-	while (colidx < colrows.count) {
-		var colchecked = colrows[idx].children[0].children[0].checked;
+	var colmax=coltable.childElementCount;
+	while (colidx < colmax) {
+		var colchecked = coltable.children[colidx].children[0].children[0].checked;
 		if (colchecked == true) {
-			var colname = colrows[idx].children[0].children[0].value;
+			var colname = coltable.children[colidx].children[1].children[0].value;
 			if ( colname.length == 0 ) {
 				if (colerr.length == 0) {
 					colerr = 'A column is specified without a name...';
