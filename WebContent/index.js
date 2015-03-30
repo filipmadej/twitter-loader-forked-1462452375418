@@ -120,11 +120,12 @@ function checkColumns(){
 		}
 		colidx = colidx + 1;		
 	}
-	if (colnames.count == 0) {
+	if (colnames.length == 0) {
 		if (colerr.length == 0) {
 			colerr = 'No column is selected...';
 		}
 	}
+	toggleLoadButton()
 }
 
 
