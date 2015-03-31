@@ -97,7 +97,7 @@ public class LoadResource {
 		maxtweets = ((Long) getObject(nextTweets, "search.results")).intValue();
 		while ( nextTweets != null ) {
 			JSONArray tweets = getJSONArray(nextTweets, "tweets");
-			if (tweets == null || tweets.length() == 0) {
+			if (tweets == null || tweets.size() == 0) {
 				break;
 			}
 			if (!insertTweets(tablename, coltypes, colpaths, tweets)) {
@@ -317,7 +317,7 @@ public class LoadResource {
 			if (valobj == null) {
 				insert = insert + "null,";
 			} else if (coltypes[i].toLowerCase() == "integer") {
-				insert = insert + (String) valObj + ",";
+				insert = insert + (String) valobj + ",";
 			} else if (coltypes[i].toLowerCase() == "timestamp") {
 				insert = insert + "'" + ((String) valobj).substring(0, 10) + " " + ((String) valobj).substring(11, 19) + "',";
 			} else {
