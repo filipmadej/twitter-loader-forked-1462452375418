@@ -186,10 +186,11 @@ function loadTweets(){
 	var progress = progressarea.getElementsByTagName('progress')[0];
 	var columns = document.getElementById('columns');
 	var togglecolumns = document.getElementById('togglecolumns');
-	var formmap = {};
-	formmap["q"] = document.getElementById('tweetquery').value;
-	formmap["table"] = document.getElementById('tablename').value;
-	formmap["columns"] = getColumns();
+	var formmap = {
+		q: document.getElementById('tweetquery').value,
+		table: document.getElementById('tablename').value,
+		columns: getColumns();
+	};
 
 	// deactivate all clickable form elements
 	document.getElementById('tweetquery').disabled = true;

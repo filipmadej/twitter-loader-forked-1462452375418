@@ -32,12 +32,14 @@ import javax.ws.rs.core.Response;
 public class LoadResource {
 
 	private Connection con;
+	private String status;
 	private String phase;
 	private int numtweets;
 	private int maxtweets;
 
 	public LoadResource() {
 		con = getConnection();
+		status = "idle";
 		phase = "Not started...";
 		numtweets = 0;
 		maxtweets = 0;
@@ -55,7 +57,7 @@ public class LoadResource {
 			json += "\"created\"}";
 		} catch (SQLException e) {
 			e.printStackTrace();
-			json +="\"not created\", \"error\": \"" + e.toString() + "\"}";
+			json +="\"not created\", \"error\": \"" + e.toString().replaceAll("\"", "\'") + "\"}";
 			return Response.ok(json).build();
 		}
 		
@@ -68,8 +70,14 @@ public class LoadResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get() {
-		String status = "{\"phase\":\"" + phase + "\", \"actual\":" + numtweets + ", \"expected\":" + maxtweets + "}";
-		return Response.ok(status).build();
+		String retstr = "{\"status\":\"" + status + ", \"phase\":\"" + phase + "\", \"actual\":" + numtweets + ", \"expected\":" + maxtweets + "}";
+		if (status == "error" || status = "loaded") {
+			status="idle";
+			phase="Not started...";
+			numtweets = 0;
+			maxtweets = 0;	
+		}
+		return Response.ok(retstr).build();
 	}
 	
 	
