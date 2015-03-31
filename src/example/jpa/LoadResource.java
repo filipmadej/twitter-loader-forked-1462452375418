@@ -360,3 +360,5 @@ public class LoadResource {
 		return true;
 	}
 
+}
+
