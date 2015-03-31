@@ -28,6 +28,9 @@ import com.ibm.nosql.json.api.BasicDBList;
 import com.ibm.nosql.json.api.BasicDBObject;
 import com.ibm.nosql.json.util.JSON;
 
+import com.ibm.json.java.JSONArray;
+import com.ibm.json.java.JSONObject;
+
 
 @Path("/load")
 /**
@@ -50,7 +53,6 @@ public class LoadResource {
 		numtweets = 0;
 		maxtweets = 0;
 		con = getConnection();
-		retrieveURL();
 	}
 
 	@POST
@@ -61,13 +63,17 @@ public class LoadResource {
 		int numtbls = 0;
 		
 		// first check initialization errors
-		if (searchURL == null || credentials == null) {
-			retstr = "{\"status\":\"error\", \"phase\":\"REST API not configured correctly...\"}";
-			return Response.ok(retstr).build();
-		} else if (status != "idle") {
+		retrieveURL();
+		if (status != "idle") {			
 			retstr = "{\"status\":\"error\", \"phase\":\"REST API already in used...\"}";			
 			return Response.ok(retstr).build();
+		} else if (searchURL == null || credentials == null) {
+			status = "error";
+			phase = "REST API not configured correctly...";
+			retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
+			return Response.ok(retstr).build();
 		}
+		url = url + "?q=" + URLEncoder.encode(query);
 		
 		// create the table as indicated
 		try {
@@ -82,12 +88,33 @@ public class LoadResource {
 			retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
 			return Response.ok(retstr).build();
 		}
-		
+
 		// load the tweets into the table
 		phase = "Loading " + maxtweets + " into table " + tablename + "...";
-		
-		status = "loaded";
-		phase = "Table " + tablename + "created and " + maxtweets + " tweets loaded successfully.";
+		String[] coltypes = getColumnTypes(columns);
+		String[] colpaths = getJSONPaths(columns);		
+		JSONObject nextTweets = getNextTweets(url);
+		while ( nextTweets != null ) {
+			if (maxtweets == 0) {
+				maxtweets = ((Long) getObject(nextTweets, "search.results")).intValue();
+			}
+			JSONArray tweets = getJSONArray(nextTweets, "tweets");
+			if (tweets == null || tweets.length() == 0) {
+				break;
+			}
+			if (!insertTweets(tablename, coltypes, colpaths, tweets)) {
+				nextTweets = null;
+				break;
+			}
+			// search next bunch of tweets
+			String nextURL = (String) getObject(nextTweets, "related.next.href");
+			nextTweets = getNextTweets(nextURL);
+		}
+
+		if (nextTweets != null) {
+			status = "loaded";
+			phase = "Table " + tablename + " created and " + maxtweets + " tweets loaded successfully.";			
+		} // else error already set
 		retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
 		
 		return Response.ok(retstr).build();
@@ -97,10 +124,6 @@ public class LoadResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get() {
 		String retstr = "";
-		if (searchURL == null || credentials == null) {
-			retstr = "{\"status\":\"error\", \"phase\":\"REST API not configured correctly...\"}";
-			return Response.ok(retstr).build();
-		}
 		retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\", \"actual\":" + numtweets + ", \"expected\":" + maxtweets + "}";
 		if (status == "error" || status == "loaded") {
 			status="idle";
@@ -181,4 +204,159 @@ public class LoadResource {
 		return create.substring(0, create.length()-1) + ")";
 	}
 
-}
+
+	private String[] getColumnTypes(String columns) {
+		String[] coldefs = columns.split("\\|");
+		String[] coltypes = new String[coldefs.length/3];
+		for (int i=0; i<coldefs.length; i = i + 3) {
+			coltypes[i/3] = coldefs[i+1];
+		}
+		return coltypes;
+	}
+
+
+	private String[] getJSONPaths(String columns) {
+		String[] coldefs = columns.split("\\|");
+		String[] colpaths = new String[coldefs.length/3];
+		for (int i=0; i<coldefs.length; i = i + 3) {
+			colpaths[i/3] = coldefs[i+2];
+		}
+		return colpaths;
+	}
+
+
+	private JSONObject getNextTweets(String nexturl) {
+		JSONObject retval = null;
+		try {
+	        URL searchUrl = new URL(nexturl);
+	        HttpURLConnection urlConnection = (HttpURLConnection) searchUrl.openConnection();
+			urlConnection.setConnectTimeout(20000);
+			urlConnection.setReadTimeout(20000);
+			urlConnection.setRequestMethod("GET");
+			urlConnection.setRequestProperty("Authorization", "Basic " + encCreds); 
+			Reader reader = null;
+			if (400 <= urlConnection.getResponseCode()) {
+				reader = new InputStreamReader(urlConnection.getErrorStream(), "UTF-8");
+				char[] buffer = new char[4096];
+				int in;
+				StringBuilder sb = new StringBuilder();
+				while (0 < (in = reader.read(buffer))) {
+					sb.append(buffer, 0, in);
+				}
+				status = "error";
+				phase = sb.toString().replaceAll("\"", "\'");
+				return null;
+			}
+			reader = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
+			char[] buffer = new char[4096];
+			int in;
+			StringBuilder sb = new StringBuilder();
+			while (0 < (in = reader.read(buffer))) {
+				sb.append(buffer, 0, in);
+			}
+			retval = JSONObject.parse(sb.toString());
+		} catch (Exception e) {
+			status = "error";
+			phase = e.toString().replaceAll("\"", "\'");
+		}
+		
+		return retval;
+	}
+	
+
+	private Object getObject(JSONObject root, String path) {
+		String restpath = path;
+		JSONObject curobj = root;
+		Object object = null;
+		try {
+			while ( restpath.length() > 0 ) {
+				String next = restpath;
+				int idx = restpath.indexOf('.');
+				if ( idx >= 0 ) {
+					next = restpath.substring(0, idx);
+					restpath = restpath.substring(idx+1);
+					if (curobj.get(next).getClass().getSimpleName().equals("JSONArray")) {
+						curobj = (JSONObject) ((JSONArray) curobj.get(next)).get(0);
+					} else {
+						curobj = (JSONObject) curobj.get(next);
+					}
+				} else {
+					restpath = "";
+					value = (JSONObject) curobj.get(next);
+				}
+			}
+		} catch (NullPointerException e) {
+			// do nothing, null value returned when path not found
+		}
+		return object;
+	}
+
+
+	private JSONArray getJSONArray(JSONObject root, String path) {
+		String restpath = path;
+		JSONObject curobj = root;
+		JSONArray value = null;
+		while ( restpath.length() > 0 ) {
+			String next = restpath;
+			int idx = restpath.indexOf('.');
+			if ( idx >= 0 ) {
+				next = restpath.substring(0, idx);
+				restpath = restpath.substring(idx+1);
+				curobj = (JSONObject) curobj.get(next);
+			} else {
+				restpath = "";
+				value = (JSonArray) curobj.get(next);
+			}
+		}
+		return value;
+	}
+
+
+	private String getInsertStatement(String tablename, String[] coltypes, String [] colpaths, JSONObject tweet) {
+		String insert="INSERT INTO \"" + tablename + "\" VALUES(";
+		for (int i=0; i<colpaths.length; i++) {
+			Object valobj = getObject(tweet, colpaths[i])
+			if (valobj == null) {
+				insert = insert + "null,";
+			} else if (coltypes[i].tolower() == 'integer') {
+				insert = insert + (String) valObj + ",";
+			} else if (coltypes[i].tolower() == 'timestamp') {
+				insert = insert + "'" + ((String) valobj).substring(0, 10)) + " " + ((String) valobj).substring(11, 19) + "',";
+			} else {
+				insert = insert + "'" + valobj.toString().replaceAll("\'", "\'\'") + "',";
+			}
+		}
+		return insert.substring(0, insert.length()-1) + ")";
+	}
+	
+	
+	private boolean insertTweets(String tablename, String[] coltypes, String [] colpaths, JSONArray tweets) {
+		Statement stmt;
+		// insert all tweets
+		for (int i = 0; i < tweets.length(); i++) {
+			try {
+				stmt = con.createStatement();
+				stmt.executeUpdate(getInsertStatement(tablename, coltypes, colpaths, tweets.get(i)));
+				numtweets++;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				status = "error";
+				phase = "Could not insert tweet #" + numtweets + " into table " + tablename + ": " + e.toString().replaceAll("\"", "\'");
+				retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
+				return false;
+			}
+		}
+		// commit
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate("COMMIT");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			status = "error";
+			phase = "Could not commit after " + numtweets + " INSERTs into table " + tablename + ": " + e.toString().replaceAll("\"", "\'");
+			retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
+			return false;
+		}
+		return true;
+	}
+
