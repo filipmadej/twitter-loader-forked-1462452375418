@@ -69,7 +69,7 @@ public class LoadResource {
 		phase = "Loading " + maxtweets + " into table " + tablename + "...";
 		
 		status = "loaded";
-		phase = "Table " + tablename + "created and loaded successfully."
+		phase = "Table " + tablename + "created and loaded successfully.";
 		
 		return Response.ok(json).build();
 	}
