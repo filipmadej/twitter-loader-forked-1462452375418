@@ -189,7 +189,7 @@ function loadTweets(){
 	var formmap = {
 		q: document.getElementById('tweetquery').value,
 		table: document.getElementById('tablename').value,
-		columns: getColumns();
+		columns: getColumns()
 	};
 
 	// deactivate all clickable form elements
