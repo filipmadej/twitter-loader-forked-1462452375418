@@ -209,13 +209,21 @@ function loadTweets(){
 	progress.children[0].innerHTML=0;
 	progress.children[1].innerHTML=1;
 	progressarea.style.display = '';
-	xhrPost(REST_LOAD, formmap, function(loadresult){
+	xhrGet(REST_LOAD, function(loadstatus){
 
-				console.log(loadresult);
+				console.log(loadstatus);
+				phase.innerHTML = loadstatus.phase;
 
 	}, function(err){
 		console.error(err);
 	});
+//	xhrPost(REST_LOAD, formmap, function(loadresult){
+//
+//				console.log(loadresult);
+//
+//	}, function(err){
+//		console.error(err);
+//	});
 	
 	// end of loading
 	phase.innerHTML = 'Load completed successfully...';

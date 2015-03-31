@@ -46,6 +46,7 @@ public class LoadResource {
 	}
 
 	@POST
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response create(@FormParam("q") String query, @FormParam("table") String tablename, @FormParam("columns") String columns) {
 		status = "running";
 		String json = "{\"table\": \"" + tablename + "\", \"status\": ";
