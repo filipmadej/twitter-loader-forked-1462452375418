@@ -56,7 +56,8 @@ public class LoadResource {
 			status = "running";
 			phase = "Creating table " + tablename + "...";
 			stmt = con.createStatement();
-			stmt.executeUpdate(getCreateStatement(tablename, columns));
+//			stmt.executeUpdate(getCreateStatement(tablename, columns));
+			phase=getCreateStatement(tablename, columns);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			status = "error";
