@@ -23,6 +23,10 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.ibm.nosql.json.api.BasicDBList;
+import com.ibm.nosql.json.api.BasicDBObject;
+import com.ibm.nosql.json.util.JSON;
+
 
 @Path("/load")
 /**
@@ -91,11 +95,12 @@ public class LoadResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get() {
+		String retstr = "";
 		if (searchURL == null || credentials == null) {
 			retstr = "{\"status\":\"error\", \"phase\":\"REST API not configured correctly...\"}";
 			return Response.ok(retstr).build();
 		}
-		String retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\", \"actual\":" + numtweets + ", \"expected\":" + maxtweets + "}";
+		retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\", \"actual\":" + numtweets + ", \"expected\":" + maxtweets + "}";
 		if (status == "error" || status == "loaded") {
 			status="idle";
 			phase="Not started...";
@@ -144,7 +149,7 @@ public class LoadResource {
 
 	private void retrieveURL() {
 		String envServices = System.getenv("VCAP_SERVICES");
-        if (envServices == null) { return null; }
+        if (envServices == null) { searchURL = null; credentials = null; return; }
         BasicDBObject obj = (BasicDBObject) JSON.parse (envServices);
         String thekey = null;
         Set<String> keys = obj.keySet();
@@ -155,7 +160,7 @@ public class LoadResource {
       		  thekey = eachkey;
       	  }
         }
-        if (thekey == null) { return null; }        
+        if (thekey == null) { searchURL = null; credentials = null; return; }        
         BasicDBList list = (BasicDBList) obj.get (thekey);
         obj = (BasicDBObject) list.get ("0");
         obj = (BasicDBObject) obj.get ("credentials");
