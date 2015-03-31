@@ -231,7 +231,7 @@ function loadTweets(){
 	document.getElementById('tablelist').disabled = false;
 	document.getElementById('tablename').disabled = false;
 	document.getElementById('loadbutton').disabled = true;
-	togglecolumns.disabled = true;
+	togglecolumns.disabled = false;
 	refreshTableList();
 }
 
