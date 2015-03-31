@@ -184,8 +184,10 @@ function loadTweets(){
 	var progressarea = document.getElementById('progress');
 	var phase = progressarea.getElementsByTagName('p')[0];
 	var progress = progressarea.getElementsByTagName('progress')[0];
+	var tableok = document.getElementById('tableok');
 	var columns = document.getElementById('columns');
 	var togglecolumns = document.getElementById('togglecolumns');
+	var finished = false;
 	var formmap = {
 		q: document.getElementById('tweetquery').value,
 		table: document.getElementById('tablename').value,
@@ -198,6 +200,7 @@ function loadTweets(){
 	document.getElementById('tablelist').disabled = true;
 	document.getElementById('tablename').disabled = true;
 	document.getElementById('loadbutton').disabled = true;
+	tableok.style.display = 'none';
 	columns.style.display = 'none';
 	togglecolumns.innerHTML = '>';
 	togglecolumns.disabled = true;
@@ -209,21 +212,18 @@ function loadTweets(){
 	progress.children[0].innerHTML=0;
 	progress.children[1].innerHTML=1;
 	progressarea.style.display = '';
-	xhrGet(REST_LOAD, function(loadstatus){
+	xhrPost(REST_LOAD, formmap, function(loadresult){
 
-				console.log(loadstatus);
-				phase.innerHTML = loadstatus.phase;
+				console.log(loadresult);
+				finished = true;
 
 	}, function(err){
 		console.error(err);
+		finished = true;
 	});
-//	xhrPost(REST_LOAD, formmap, function(loadresult){
-//
-//				console.log(loadresult);
-//
-//	}, function(err){
-//		console.error(err);
-//	});
+	
+	// waiting for the REST service to finish
+	while (!finished) {}
 	
 	// end of loading
 	phase.innerHTML = 'Load completed successfully...';
@@ -233,6 +233,7 @@ function loadTweets(){
 	progress.children[1].innerHTML=numtweets;
 	
 	// activate the form for the next load
+	tableok.style.display = '';
 	progressarea.style.display = 'none';
 	document.getElementById('tweetquery').disabled = false;
 	document.getElementById('countbutton').disabled = false;
