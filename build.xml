@@ -13,6 +13,7 @@
         <pathelement location="bin"/>
         <pathelement location="WebContent/WEB-INF/lib/db2jcc.jar"/>
     	<pathelement location="WebContent/WEB-INF/lib/nosqljson.jar"/>
+    	<pathelement location="WebContent/WEB-INF/lib/JSON4J.jar"/>
 	<fileset dir="dep-jar"> 
         	<include name="*.jar"/> 
     	</fileset>
