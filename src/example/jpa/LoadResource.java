@@ -62,7 +62,7 @@ public class LoadResource {
 			json +="\"not created\", \"error\": \"" + e.toString().replaceAll("\"", "\'") + "\"}";
 			status = "error";
 			phase = "Could not create table " + tablename + ": " + e.toString().replaceAll("\"", "\'");
-			return Response.status(json).build();
+			return Response.ok(json).build();
 		}
 		
 		// load the tweets into the table
