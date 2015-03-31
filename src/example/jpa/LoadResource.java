@@ -67,10 +67,10 @@ public class LoadResource {
 		}
 		
 		// load the tweets into the table
-		phase = "Loading " + maxtweets + " into table " + tablename + "...";
+//		phase = "Loading " + maxtweets + " into table " + tablename + "...";
 		
-		status = "loaded";
-		phase = "Table " + tablename + "created and " + maxtweets + " tweets loaded successfully.";
+//		status = "loaded";
+//		phase = "Table " + tablename + "created and " + maxtweets + " tweets loaded successfully.";
 		retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
 		
 		return Response.ok(retstr).build();
