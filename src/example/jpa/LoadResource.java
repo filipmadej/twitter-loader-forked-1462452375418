@@ -48,37 +48,37 @@ public class LoadResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response create(@FormParam("q") String query, @FormParam("table") String tablename, @FormParam("columns") String columns) {
-		status = "running";
-		String json = "{\"table\": \"" + tablename + "\", \"status\": ";
 		// create the table as indicated
 		Statement stmt;
+		String retstr = "";
 		int numtbls = 0;
 		try {
+			status = "running";
 			phase = "Creating table " + tablename + "...";
 			stmt = con.createStatement();
 			stmt.executeUpdate(getCreateStatement(tablename, columns));
-			json += "\"created\"}";
 		} catch (SQLException e) {
 			e.printStackTrace();
-			json +="\"not created\", \"error\": \"" + e.toString().replaceAll("\"", "\'") + "\"}";
 			status = "error";
 			phase = "Could not create table " + tablename + ": " + e.toString().replaceAll("\"", "\'");
-			return Response.ok(json).build();
+			retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
+			return Response.ok(retstr).build();
 		}
 		
 		// load the tweets into the table
 		phase = "Loading " + maxtweets + " into table " + tablename + "...";
 		
 		status = "loaded";
-		phase = "Table " + tablename + "created and loaded successfully.";
+		phase = "Table " + tablename + "created and " + maxtweets + " tweets loaded successfully.";
+		retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
 		
-		return Response.ok(json).build();
+		return Response.ok(retstr).build();
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get() {
-		String retstr = "{\"status\":\"" + status + ", \"phase\":\"" + phase + "\", \"actual\":" + numtweets + ", \"expected\":" + maxtweets + "}";
+		String retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\", \"actual\":" + numtweets + ", \"expected\":" + maxtweets + "}";
 		if (status == "error" || status == "loaded") {
 			status="idle";
 			phase="Not started...";
