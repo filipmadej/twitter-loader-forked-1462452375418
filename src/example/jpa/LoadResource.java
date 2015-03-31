@@ -168,7 +168,7 @@ public class LoadResource {
         searchURL = "https://" + (String) obj.get("host") + "/api/v1/messages/search";
         String creds = (String) obj.get("username");
         creds += ":" + (String) obj.get("password");
-		credentials = javax.xml.bind.DatatypeConverter.printBase64Binary(credentials.getBytes());
+		credentials = javax.xml.bind.DatatypeConverter.printBase64Binary(creds.getBytes());
 	}
 
 
