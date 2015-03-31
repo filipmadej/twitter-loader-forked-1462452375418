@@ -73,7 +73,7 @@ public class LoadResource {
 			retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
 			return Response.ok(retstr).build();
 		}
-		url = url + "?q=" + URLEncoder.encode(query);
+		searchURL = searchURL + "?q=" + URLEncoder.encode(query);
 		
 		// create the table as indicated
 		try {
@@ -93,11 +93,9 @@ public class LoadResource {
 		phase = "Loading " + maxtweets + " into table " + tablename + "...";
 		String[] coltypes = getColumnTypes(columns);
 		String[] colpaths = getJSONPaths(columns);		
-		JSONObject nextTweets = getNextTweets(url);
+		JSONObject nextTweets = getNextTweets(searchURL);
+		maxtweets = ((Long) getObject(nextTweets, "search.results")).intValue();
 		while ( nextTweets != null ) {
-			if (maxtweets == 0) {
-				maxtweets = ((Long) getObject(nextTweets, "search.results")).intValue();
-			}
 			JSONArray tweets = getJSONArray(nextTweets, "tweets");
 			if (tweets == null || tweets.length() == 0) {
 				break;
@@ -228,12 +226,12 @@ public class LoadResource {
 	private JSONObject getNextTweets(String nexturl) {
 		JSONObject retval = null;
 		try {
-	        URL searchUrl = new URL(nexturl);
-	        HttpURLConnection urlConnection = (HttpURLConnection) searchUrl.openConnection();
+	        URL thisUrl = new URL(nexturl);
+	        HttpURLConnection urlConnection = (HttpURLConnection) thisUrl.openConnection();
 			urlConnection.setConnectTimeout(20000);
 			urlConnection.setReadTimeout(20000);
 			urlConnection.setRequestMethod("GET");
-			urlConnection.setRequestProperty("Authorization", "Basic " + encCreds); 
+			urlConnection.setRequestProperty("Authorization", "Basic " + credentials); 
 			Reader reader = null;
 			if (400 <= urlConnection.getResponseCode()) {
 				reader = new InputStreamReader(urlConnection.getErrorStream(), "UTF-8");
@@ -282,7 +280,7 @@ public class LoadResource {
 					}
 				} else {
 					restpath = "";
-					value = (JSONObject) curobj.get(next);
+					object = (Object) curobj.get(next);
 				}
 			}
 		} catch (NullPointerException e) {
@@ -305,22 +303,22 @@ public class LoadResource {
 				curobj = (JSONObject) curobj.get(next);
 			} else {
 				restpath = "";
-				value = (JSonArray) curobj.get(next);
+				value = (JSONArray) curobj.get(next);
 			}
 		}
 		return value;
 	}
 
 
-	private String getInsertStatement(String tablename, String[] coltypes, String [] colpaths, JSONObject tweet) {
+	private String getInsertStatement(String tablename, String[] coltypes, String[] colpaths, JSONObject tweet) {
 		String insert="INSERT INTO \"" + tablename + "\" VALUES(";
 		for (int i=0; i<colpaths.length; i++) {
 			Object valobj = getObject(tweet, colpaths[i]);
 			if (valobj == null) {
 				insert = insert + "null,";
-			} else if (coltypes[i].tolower() == "integer") {
+			} else if (coltypes[i].toLowerCase() == "integer") {
 				insert = insert + (String) valObj + ",";
-			} else if (coltypes[i].tolower() == "timestamp") {
+			} else if (coltypes[i].toLowerCase() == "timestamp") {
 				insert = insert + "'" + ((String) valobj).substring(0, 10) + " " + ((String) valobj).substring(11, 19) + "',";
 			} else {
 				insert = insert + "'" + valobj.toString().replaceAll("\'", "\'\'") + "',";
@@ -330,19 +328,18 @@ public class LoadResource {
 	}
 	
 	
-	private boolean insertTweets(String tablename, String[] coltypes, String [] colpaths, JSONArray tweets) {
+	private boolean insertTweets(String tablename, String[] coltypes, String[] colpaths, JSONArray tweets) {
 		Statement stmt;
 		// insert all tweets
-		for (int i = 0; i < tweets.length(); i++) {
+		for (int i = 0; i < tweets.size(); i++) {
 			try {
 				stmt = con.createStatement();
-				stmt.executeUpdate(getInsertStatement(tablename, coltypes, colpaths, tweets.get(i)));
+				stmt.executeUpdate(getInsertStatement(tablename, coltypes, colpaths, (JSONObject) tweets.get(i)));
 				numtweets++;
 			} catch (SQLException e) {
 				e.printStackTrace();
 				status = "error";
 				phase = "Could not insert tweet #" + numtweets + " into table " + tablename + ": " + e.toString().replaceAll("\"", "\'");
-				retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
 				return false;
 			}
 		}
@@ -354,7 +351,6 @@ public class LoadResource {
 			e.printStackTrace();
 			status = "error";
 			phase = "Could not commit after " + numtweets + " INSERTs into table " + tablename + ": " + e.toString().replaceAll("\"", "\'");
-			retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
 			return false;
 		}
 		return true;
