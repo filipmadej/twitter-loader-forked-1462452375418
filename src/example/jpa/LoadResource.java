@@ -32,32 +32,44 @@ import javax.ws.rs.core.Response;
 public class LoadResource {
 
 	private Connection con;
+	private String searchURL;
+	private String credentials;
 	private String status;
 	private String phase;
 	private int numtweets;
 	private int maxtweets;
 
 	public LoadResource() {
-		con = getConnection();
 		status = "idle";
 		phase = "Not started...";
 		numtweets = 0;
 		maxtweets = 0;
+		con = getConnection();
+		retrieveURL();
 	}
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response create(@FormParam("q") String query, @FormParam("table") String tablename, @FormParam("columns") String columns) {
-		// create the table as indicated
 		Statement stmt;
 		String retstr = "";
 		int numtbls = 0;
+		
+		// first check initialization errors
+		if (searchURL == null || credentials == null) {
+			retstr = "{\"status\":\"error\", \"phase\":\"REST API not configured correctly...\"}";
+			return Response.ok(retstr).build();
+		} else if (status != "idle") {
+			retstr = "{\"status\":\"error\", \"phase\":\"REST API already in used...\"}";			
+			return Response.ok(retstr).build();
+		}
+		
+		// create the table as indicated
 		try {
 			status = "running";
 			phase = "Creating table " + tablename + "...";
 			stmt = con.createStatement();
-//			stmt.executeUpdate(getCreateStatement(tablename, columns));
-			phase=getCreateStatement(tablename, columns);
+			stmt.executeUpdate(getCreateStatement(tablename, columns));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			status = "error";
@@ -67,10 +79,10 @@ public class LoadResource {
 		}
 		
 		// load the tweets into the table
-//		phase = "Loading " + maxtweets + " into table " + tablename + "...";
+		phase = "Loading " + maxtweets + " into table " + tablename + "...";
 		
-//		status = "loaded";
-//		phase = "Table " + tablename + "created and " + maxtweets + " tweets loaded successfully.";
+		status = "loaded";
+		phase = "Table " + tablename + "created and " + maxtweets + " tweets loaded successfully.";
 		retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
 		
 		return Response.ok(retstr).build();
@@ -79,6 +91,10 @@ public class LoadResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get() {
+		if (searchURL == null || credentials == null) {
+			retstr = "{\"status\":\"error\", \"phase\":\"REST API not configured correctly...\"}";
+			return Response.ok(retstr).build();
+		}
 		String retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\", \"actual\":" + numtweets + ", \"expected\":" + maxtweets + "}";
 		if (status == "error" || status == "loaded") {
 			status="idle";
@@ -124,6 +140,31 @@ public class LoadResource {
 	// VCAP_SERVICES is not a best practice.
 	
 	// see HelloResource.getInformation() for an example
+
+
+	private void retrieveURL() {
+		String envServices = System.getenv("VCAP_SERVICES");
+        if (envServices == null) { return null; }
+        BasicDBObject obj = (BasicDBObject) JSON.parse (envServices);
+        String thekey = null;
+        Set<String> keys = obj.keySet();
+        System.out.println ("Searching through VCAP keys");
+  	  // Look for the VCAP key that holds the SQLDB information
+        for (String eachkey : keys) {
+      	  if (eachkey.contains("twitterinsights")) {
+      		  thekey = eachkey;
+      	  }
+        }
+        if (thekey == null) { return null; }        
+        BasicDBList list = (BasicDBList) obj.get (thekey);
+        obj = (BasicDBObject) list.get ("0");
+        obj = (BasicDBObject) obj.get ("credentials");
+        searchURL = "https://" + (String) obj.get("host") + "/api/v1/messages/search";
+        String creds = (String) obj.get("username");
+        creds += ":" + (String) obj.get("password");
+		credentials = javax.xml.bind.DatatypeConverter.printBase64Binary(credentials.getBytes());
+	}
+
 
 	private String getCreateStatement(String tablename, String columns) {
 		String create="CREATE TABLE \"" + tablename + "\"(";

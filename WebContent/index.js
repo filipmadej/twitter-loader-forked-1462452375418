@@ -180,14 +180,13 @@ function toggleLoadButton(){
 }
 
 
-function loadTweets(){
+function startLoad(){
 	var progressarea = document.getElementById('progress');
 	var phase = progressarea.getElementsByTagName('p')[0];
 	var progress = progressarea.getElementsByTagName('progress')[0];
 	var tableok = document.getElementById('tableok');
 	var columns = document.getElementById('columns');
 	var togglecolumns = document.getElementById('togglecolumns');
-	var finished = false;
 	var formmap = {
 		q: document.getElementById('tweetquery').value,
 		table: document.getElementById('tablename').value,
@@ -212,25 +211,48 @@ function loadTweets(){
 	progress.children[0].innerHTML=0;
 	progress.children[1].innerHTML=1;
 	progressarea.style.display = '';
-	xhrPost(REST_LOAD, formmap, function(loadresult){
+	xhrPost(REST_LOAD, formmap, function(loadstatus){
 
-				console.log(loadresult);
-				finished = true;
+				console.log(loadstatus);
 
 	}, function(err){
 		console.error(err);
-		finished = true;
 	});
-	
-	// waiting for the REST service to finish
-	while (!finished) {}
-	
-	// end of loading
-	phase.innerHTML = 'Load completed successfully...';
-	progress.max = numtweets;
-	progress.value = numtweets;
-	progress.children[0].innerHTML=numtweets;
-	progress.children[1].innerHTML=numtweets;
+	getLoadProgress();
+}
+
+
+function getLoadProgress(){
+	var progressarea = document.getElementById('progress');
+	var phase = progressarea.getElementsByTagName('p')[0];
+	var progress = progressarea.getElementsByTagName('progress')[0];
+	xhrGet(REST_LOAD, function(loadstatus){
+
+				if (loadstatus.status == "running") {
+					phase.innerHTML = loadstatus.phase;
+					progress.max = loadstatus.expected;
+					progress.value = loadstatus.actual;
+					progress.children[0].innerHTML=loadstatus.actual;
+					progress.children[1].innerHTML=loadstatus.expected;
+					setTimeout(getLoadProgress(), 1000);
+				} else if (loadstatus.status == "loaded") {
+					phase.innerHTML = 'ERROR: ' + loadstatus.phase;					
+					setTimeout(stopLoad(), 5000);
+				} else {
+					phase.innerHTML = loadstatus.phase;
+					setTimeout(stopLoad(), 5000);					
+				}
+
+	}, function(err){
+		console.error(err);
+		stopLoad();
+	});
+}
+
+
+function stopLoad(){
+	var progressarea = document.getElementById('progress');
+	var tableok = document.getElementById('tableok');
 	
 	// activate the form for the next load
 	tableok.style.display = '';
@@ -240,7 +262,7 @@ function loadTweets(){
 	document.getElementById('tablelist').disabled = false;
 	document.getElementById('tablename').disabled = false;
 	document.getElementById('loadbutton').disabled = true;
-	togglecolumns.disabled = false;
+	document.getElementById('togglecolumns').disabled = false;
 	refreshTableList();
 }
 
