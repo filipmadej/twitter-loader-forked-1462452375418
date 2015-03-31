@@ -127,7 +127,7 @@ public class LoadResource {
 
 	private String getCreateStatement(String tablename, String columns) {
 		String create="CREATE TABLE \"" + tablename + "\"(";
-		String[] coldefs = columns.split("|");
+		String[] coldefs = columns.split("\\|");
 		for (int i=0; i<coldefs.length; i = i + 3) {
 			create += "\"" + coldefs[i] + "\" " + coldefs[i+1] + ",";
 		}
