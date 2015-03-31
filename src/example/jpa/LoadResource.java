@@ -315,13 +315,13 @@ public class LoadResource {
 	private String getInsertStatement(String tablename, String[] coltypes, String [] colpaths, JSONObject tweet) {
 		String insert="INSERT INTO \"" + tablename + "\" VALUES(";
 		for (int i=0; i<colpaths.length; i++) {
-			Object valobj = getObject(tweet, colpaths[i])
+			Object valobj = getObject(tweet, colpaths[i]);
 			if (valobj == null) {
 				insert = insert + "null,";
-			} else if (coltypes[i].tolower() == 'integer') {
+			} else if (coltypes[i].tolower() == "integer") {
 				insert = insert + (String) valObj + ",";
-			} else if (coltypes[i].tolower() == 'timestamp') {
-				insert = insert + "'" + ((String) valobj).substring(0, 10)) + " " + ((String) valobj).substring(11, 19) + "',";
+			} else if (coltypes[i].tolower() == "timestamp") {
+				insert = insert + "'" + ((String) valobj).substring(0, 10) + " " + ((String) valobj).substring(11, 19) + "',";
 			} else {
 				insert = insert + "'" + valobj.toString().replaceAll("\'", "\'\'") + "',";
 			}
