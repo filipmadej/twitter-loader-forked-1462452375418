@@ -291,8 +291,6 @@ function updateDatabaseInfo(){
 				document.getElementById('envDbName').innerHTML = dbinfo.db;
 				document.getElementById('envDbHost').innerHTML = dbinfo.host;
 				document.getElementById('envDbPort').innerHTML = dbinfo.port;
-				document.getElementById('dbtips').innerHTML = document.getElementById('dbtips').innerHTML
-							+ '<p>Link to dashDB interface: <a href=\'' + dbinfo.httpurl + '\'>' + dbinfo.httpurl + '</a>.</p>';
 
 
 	}, function(err){

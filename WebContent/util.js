@@ -80,7 +80,13 @@ function xhrDelete(url, callback, errback){
 }
 
 function parseJson(str){
-	return window.JSON ? JSON.parse(str) : eval('(' + str + ')');
+	try {
+		return window.JSON ? JSON.parse(str) : eval('(' + str + ')');
+	} catch (err) {
+		console.log(err);
+		console.log(str);
+	}
+	return str;
 }
 
 function objectToQuery(map){
