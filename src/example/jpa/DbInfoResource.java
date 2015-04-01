@@ -38,7 +38,7 @@ public class DbInfoResource {
         System.out.println ("Searching through VCAP keys");
   	  // Look for the VCAP key that holds the SQLDB information
         for (String eachkey : keys) {
-      	  if (eachkey.contains("sqldb")) {
+      	  if (eachkey.contains("dashDB")) {
       		  thekey = eachkey;
       	  }
         }
