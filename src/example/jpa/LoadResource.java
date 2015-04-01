@@ -318,9 +318,9 @@ public class LoadResource {
 			Object valobj = getObject(tweet, colpaths[i]);
 			if (valobj == null) {
 				insert = insert + "null,";
-			} else if (coltypes[i].toLowerCase() == "integer") {
+			} else if (coltypes[i].toLowerCase().equals("integer")) {
 				insert = insert + (String) valobj + ",";
-			} else if (coltypes[i].toLowerCase() == "timestamp") {
+			} else if (coltypes[i].toLowerCase().equals("timestamp")) {
 				insert = insert + "'" + ((String) valobj).substring(0, 10) + " " + ((String) valobj).substring(11, 19) + "',";
 			} else {
 				insert = insert + "'" + valobj.toString().replaceAll("\'", "\'\'") + "',";
