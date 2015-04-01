@@ -76,7 +76,7 @@ public class LoadResource {
 		searchURL = searchURL + "?q=" + URLEncoder.encode(query);
 		
 		// create the table as indicated
-		String createQuery = '';
+		String createQuery = "";
 		try {
 			status = "running";
 			phase = "Creating table " + tablename + "...";
@@ -332,7 +332,7 @@ public class LoadResource {
 	
 	private boolean insertTweets(String tablename, String[] coltypes, String[] colpaths, JSONArray tweets) {
 		Statement stmt;
-		String insertQuery = '';
+		String insertQuery = "";
 		// insert all tweets
 		for (int i = 0; i < tweets.size(); i++) {
 			try {
