@@ -1,4 +1,4 @@
-ich wollte gerade einen package example.jpa;
+package example.jpa;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
