@@ -42,9 +42,7 @@ h1 {
 loadbutton {
 	font-weight: bold;
 	font-size: 2em;
-	padding-left: 10%;
-	padding-right: 10%;
-	width: 80%;
+	width: 200px;
 	text-align: center;
 }
 
