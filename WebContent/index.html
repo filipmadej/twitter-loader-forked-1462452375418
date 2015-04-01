@@ -16,7 +16,7 @@
 		<div class = "center">
 			<header>
 				<div class='title'>
-					Select tweets to be loaded
+					Select tweets
 					<button class='detailBtn' onclick="toggleTwitterInfo()"
 						title='toggle twitter info'>
 						<img src='images/twitter.png' alt='twitter details' />
@@ -159,17 +159,17 @@
 		</div>
 	</div>
 	<div style='width: 100%; align: center;'>
-		<section id='loadarea'>
+		<section id='loadarea' style='width: 100%;'>
 			<p></p>
-			<button id='loadbutton' class='loadbutton' onclick="startLoad()" title='load tweets into table' disabled='true'>
-				&gt;&gt;&gt;&gt;&gt; Load tweets &gt;&gt;&gt;&gt;&gt;
+			<button id='loadbutton' class='loadbutton' onclick="startLoad()" title='insert tweets into table' disabled='true'>
+				&gt;&gt;&gt;&gt;&gt; Insert tweets &gt;&gt;&gt;&gt;&gt;
 			</button>
 		</section>
-		<section id='progress' style='display: none;'>
+		<section id='progress' style='width: 100%; display: none;'>
 			<p>Not loaded...</p>
-			<progress class='loadbutton' max='1.0' value='0.0' style:'width: 100%;'><span>0</span>/<span>0</span></progress>
+			<progress class='loadbutton' max='1.0' value='0.0' style:'width: 100%;'></progress>
 		</section>
-		<section id='log'>
+		<section id='log' style='width: 100%'>
 		</section>
 	</div>
 	

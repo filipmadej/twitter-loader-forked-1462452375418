@@ -182,7 +182,6 @@ function toggleLoadButton(){
 
 function startLoad(){
 	var loadarea = document.getElementById('loadarea');
-	var logarea = document.getElementById('log');
 	var progressarea = document.getElementById('progress');
 	var phase = progressarea.getElementsByTagName('p')[0];
 	var progress = progressarea.getElementsByTagName('progress')[0];
@@ -205,12 +204,10 @@ function startLoad(){
 	loadarea.style.display = 'none';
 	progressarea.style.display = '';
 	
-	// create the table and load the table
-	phase.innerHTML = 'Creating the table...';
+	// create the table and load tweets
+	phase.innerHTML = 'Starting...';
 	progress.max = 1.0;
 	progress.value = 0.0;
-	progress.children[0].innerHTML=0;
-	progress.children[1].innerHTML=1;
 	xhrPost(REST_LOAD, formmap, function(loadstatus){
 
 				console.log(loadstatus);
@@ -235,8 +232,6 @@ function getLoadProgress(){
 					phase.innerHTML = loadstatus.phase;
 					progress.max = loadstatus.expected;
 					progress.value = loadstatus.actual;
-					progress.children[0].innerHTML=loadstatus.actual;
-					progress.children[1].innerHTML=loadstatus.expected;
 					setTimeout(getLoadProgress(), 1000);
 				} else if (loadstatus.status == 'error') {
 					phase.innerHTML = 'ERROR: ' + loadstatus.phase;					
