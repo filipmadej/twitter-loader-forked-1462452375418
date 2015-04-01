@@ -74,7 +74,7 @@
 					Select new table name
 					<button class='detailBtn' onclick="toggleDatabaseInfo()"
 						title='toggle database info'>
-						<img src='images/database.png' alt='database details' />
+						<img src='images/dashdb.png' alt='database details' />
 					</button>
 				</div>
 			</header>
@@ -158,7 +158,7 @@
 			</footer>
 		</div>
 	</div>
-	<div class = "center">
+	<div>
 		<section>
 			<p></p>
 			<button id='loadbutton' class='loadbutton' onclick="startLoad()" title='load tweets into table' disabled='true'>
@@ -168,6 +168,8 @@
 		<section id='progress' style='display: none;'>
 			<p id='phase'>Not loaded...</p>
 			<progress id='progress' class='loadbutton' max='1.0' value='0.0' style:'width: 100%;'><span>0</span>/<span>0</span></progress>
+		</section>
+		<section id="log">
 		</section>
 	</div>
 	

@@ -253,6 +253,12 @@ function getLoadProgress(){
 function stopLoad(){
 	var progressarea = document.getElementById('progress');
 	var tableok = document.getElementById('tableok');
+	var phase = progressarea.getElementsByTagName('p')[0];
+
+	// save the latest phase message to the log
+	var logarea = document.getElementById('log');
+	var curts = Date.now().toLocaleString();
+	logarea.innerHTML = '<p>' + curts + ': ' + phase.innerHTML + '</p>' + logarea.innerHTML;
 	
 	// activate the form for the next load
 	tableok.style.display = '';
