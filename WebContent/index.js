@@ -213,6 +213,7 @@ function startLoad(){
 	xhrPost(REST_LOAD, formmap, function(loadstatus){
 
 				console.log(loadstatus);
+				logarea.innerHTML = '<p>START: ' + loadstatus.status + ":" + loadstatus.phase + '</p>' + logarea.innerHTML;
 
 	}, function(err){
 		console.error(err);
@@ -227,6 +228,7 @@ function getLoadProgress(){
 	var progress = progressarea.getElementsByTagName('progress')[0];
 	xhrGet(REST_LOAD, function(loadstatus){
 
+				logarea.innerHTML = '<p>START: ' + loadstatus.status + ":" + loadstatus.phase + '</p>' + logarea.innerHTML;
 				if (loadstatus.status == "running") {
 					phase.innerHTML = loadstatus.phase;
 					progress.max = loadstatus.expected;
@@ -234,7 +236,7 @@ function getLoadProgress(){
 					progress.children[0].innerHTML=loadstatus.actual;
 					progress.children[1].innerHTML=loadstatus.expected;
 					setTimeout(getLoadProgress(), 1000);
-				} else if (loadstatus.status == "loaded") {
+				} else if (loadstatus.status == "error") {
 					phase.innerHTML = 'ERROR: ' + loadstatus.phase;					
 					setTimeout(stopLoad(), 5000);
 				} else {
