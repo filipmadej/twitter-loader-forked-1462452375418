@@ -57,7 +57,7 @@ public class DbInfoResource {
         String user = (String) obj.get ("username"); 
         String password = (String) obj.get ("password");
         String jdbcurl = (String) obj.get("jdbcurl");
-        
+        String httpurl = (String) obj.get("https_url");
         
         BasicDBObject DBInfoObj = new BasicDBObject();
 
@@ -68,6 +68,7 @@ public class DbInfoResource {
 //        DBInfoObj.put("user", user);
 //        DBInfoObj.put("pwd", password);
         DBInfoObj.put("jdbcurl", jdbcurl);
+        DBInfoObj.put("httpurl", httpurl);
         
         return DBInfoObj.toString();
         

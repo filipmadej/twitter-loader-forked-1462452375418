@@ -58,8 +58,8 @@ function xhrPost(url, data, callback, errback){
 			}
 		}
 	};
-	xhr.timeout = 3000;
-	xhr.ontimeout = errback;
+//	xhr.timeout = 3000;
+//	xhr.ontimeout = errback;
 	xhr.send(objectToQuery(data));
 }
 function xhrDelete(url, callback, errback){
