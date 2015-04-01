@@ -326,7 +326,7 @@ public class LoadResource {
 			if (valobj == null) {
 				insert = insert + "null,";
 			} else if (coltypes[i].toLowerCase().equals("integer")) {
-				insert = insert + (String) valobj + ",";
+				insert = insert + (Long) valobj + ",";
 			} else if (coltypes[i].toLowerCase().equals("timestamp")) {
 				insert = insert + "'" + ((String) valobj).substring(0, 10) + " " + ((String) valobj).substring(11, 19) + "',";
 			} else {
