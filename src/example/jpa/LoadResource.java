@@ -42,17 +42,16 @@ public class LoadResource {
 	private Connection con;
 	private String searchURL;
 	private String credentials;
-	private String status;
-	private String phase;
-	private int numtweets;
-	private int maxtweets;
+	private static String status;
+	private static String phase;
+	private static int numtweets;
+	private static int maxtweets;
 
 	public LoadResource() {
 		status = "idle";
 		phase = "Not started...";
 		numtweets = 0;
 		maxtweets = 0;
-		con = getConnection();
 	}
 
 	@POST
@@ -63,6 +62,7 @@ public class LoadResource {
 		int numtbls = 0;
 		
 		// first check initialization errors
+		con = getConnection();
 		retrieveURL();
 		if (status != "idle") {			
 			retstr = "{\"status\":\"error\", \"phase\":\"REST API already in used...\"}";			
