@@ -1,6 +1,5 @@
 applications:
 - services:
-  - twitter loader-sqldb
   - IBM Insights for Twitter-6k
   - dashDB-p1
   disk_quota: 1024M
