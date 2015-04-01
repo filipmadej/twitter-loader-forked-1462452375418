@@ -88,8 +88,8 @@ public class LoadResource {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			status = "error";
-			phase = "Could not create table " + tablename + "(" + createQuery + "): " + e.toString().replaceAll("\"", "\\\"");
-			retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
+			phase = "Could not create table " + tablename + "(" + createQuery + "): " + e.toString();
+			retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase.replace("\"", "\\\"") + "\"}";
 			return Response.ok(retstr).build();
 		}
 
@@ -124,7 +124,7 @@ public class LoadResource {
 				// do nothing
 			}
 		}
-		retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
+		retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase.replace("\"", "\\\"") + "\"}";
 		
 		return Response.ok(retstr).build();
 	}
@@ -133,7 +133,7 @@ public class LoadResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get() {
 		String retstr = "";
-		retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\", \"actual\":" + numtweets + ", \"expected\":" + maxtweets + "}";
+		retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase.replace("\"", "\\\"") + "\", \"actual\":" + numtweets + ", \"expected\":" + maxtweets + "}";
 		if (status == "error" || status == "loaded") {
 			// last status to be returned: reinitialize for next load.
 			status="idle";
@@ -254,7 +254,7 @@ public class LoadResource {
 					sb.append(buffer, 0, in);
 				}
 				status = "error";
-				phase = sb.toString().replaceAll("\"", "\\\"");
+				phase = sb.toString();
 				return null;
 			}
 			reader = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
@@ -267,7 +267,7 @@ public class LoadResource {
 			retval = JSONObject.parse(sb.toString());
 		} catch (Exception e) {
 			status = "error";
-			phase = e.toString().replaceAll("\"", "\\\"");
+			phase = e.toString();
 		}
 		
 		return retval;
@@ -333,7 +333,7 @@ public class LoadResource {
 			} else if (coltypes[i].toLowerCase().equals("timestamp")) {
 				insert = insert + "'" + ((String) valobj).substring(0, 10) + " " + ((String) valobj).substring(11, 19) + "',";
 			} else {
-				insert = insert + "'" + valobj.toString().replaceAll("\'", "\'\'") + "',";
+				insert = insert + "'" + valobj.toString().replace("'", "''") + "',";
 			}
 		}
 		return insert.substring(0, insert.length()-1) + ")";
@@ -353,7 +353,7 @@ public class LoadResource {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				status = "error";
-				phase = "Could not insert tweet #" + numtweets + "(" + insertQuery.replaceAll("\"", "\\\"") + "): " + e.toString().replaceAll("\"", "\\\"");
+				phase = "Could not insert tweet #" + numtweets + "(" + insertQuery + "): " + e.toString();
 				return false;
 			}
 		}
@@ -364,7 +364,7 @@ public class LoadResource {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			status = "error";
-			phase = "Could not commit after " + numtweets + " INSERTs into table " + tablename + ": " + e.toString().replaceAll("\"", "\\\"");
+			phase = "Could not commit after " + numtweets + " INSERTs into table " + tablename + ": " + e.toString();
 			return false;
 		}
 		return true;

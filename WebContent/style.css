@@ -43,6 +43,7 @@ loadbutton {
 	font-weight: bold;
 	font-size: 2em;
 	text-align: center;
+	margin: 0 auto;
 }
 
 .description {
