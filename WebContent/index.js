@@ -214,7 +214,6 @@ function startLoad(){
 	xhrPost(REST_LOAD, formmap, function(loadstatus){
 
 				console.log(loadstatus);
-				document.getElementById('log').innerHTML = '<p>POST: ' + loadstatus.status + ":" + loadstatus.phase + '</p>' + document.getElementById('log').innerHTML;
 
 	}, function(err){
 		console.error(err);
@@ -229,7 +228,6 @@ function getLoadProgress(){
 				var progressarea = document.getElementById('progress');
 				var phase = progressarea.getElementsByTagName('p')[0];
 				var progress = progressarea.getElementsByTagName('progress')[0];
-				document.getElementById('log').innerHTML = '<p>GET: ' + loadstatus.status + ":" + loadstatus.phase + '</p>' + document.getElementById('log').innerHTML;
 				if (loadstatus.status == 'idle') {
 					phase.innerHTML = loadstatus.phase;
 					setTimeout(getLoadProgress(), 1000);
@@ -262,7 +260,7 @@ function stopLoad(){
 
 	// save the latest phase message to the log
 	var logarea = document.getElementById('log');
-	var currentTime = Date.now();
+	var currentTime = new Date();
 	var month = currentTime.getMonth() + 1;
 	var day = currentTime.getDate();
 	var year = currentTime.getFullYear();

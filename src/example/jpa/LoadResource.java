@@ -94,11 +94,11 @@ public class LoadResource {
 		}
 
 		// load the tweets into the table
-		phase = "Loading " + maxtweets + " into table " + tablename + "...";
 		String[] coltypes = getColumnTypes(columns);
 		String[] colpaths = getJSONPaths(columns);		
 		JSONObject nextTweets = getNextTweets(searchURL);
 		maxtweets = ((Long) getObject(nextTweets, "search.results")).intValue();
+		phase = "Inserting " + maxtweets + " tweets into table " + tablename + "...";
 		while ( nextTweets != null ) {
 			JSONArray tweets = getJSONArray(nextTweets, "tweets");
 			if (tweets == null || tweets.size() == 0) {
