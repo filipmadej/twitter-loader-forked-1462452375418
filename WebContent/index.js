@@ -214,7 +214,7 @@ function startLoad(){
 	xhrPost(REST_LOAD, formmap, function(loadstatus){
 
 				console.log(loadstatus);
-				logarea.innerHTML = '<p>START: ' + loadstatus.status + ":" + loadstatus.phase + '</p>' + logarea.innerHTML;
+				document.getElementById('log').innerHTML = '<p>START: ' + loadstatus.status + ":" + loadstatus.phase + '</p>' + document.getElementById('log').innerHTML;
 
 	}, function(err){
 		console.error(err);
@@ -224,13 +224,12 @@ function startLoad(){
 
 
 function getLoadProgress(){
-	var progressarea = document.getElementById('progress');
-	var phase = progressarea.getElementsByTagName('p')[0];
-	var progress = progressarea.getElementsByTagName('progress')[0];
-	var logarea = document.getElementById('log');
 	xhrGet(REST_LOAD, function(loadstatus){
 
-				logarea.innerHTML = '<p>START: ' + loadstatus.status + ":" + loadstatus.phase + '</p>' + logarea.innerHTML;
+				var progressarea = document.getElementById('progress');
+				var phase = progressarea.getElementsByTagName('p')[0];
+				var progress = progressarea.getElementsByTagName('progress')[0];
+				document.getElementById('log').innerHTML = '<p>START: ' + loadstatus.status + ":" + loadstatus.phase + '</p>' + document.getElementById('log').innerHTML;
 				if (loadstatus.status == "running") {
 					phase.innerHTML = loadstatus.phase;
 					progress.max = loadstatus.expected;
