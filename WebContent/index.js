@@ -181,10 +181,10 @@ function toggleLoadButton(){
 
 
 function startLoad(){
+	var loadarea = document.getElementById('loadarea');
 	var progressarea = document.getElementById('progress');
 	var phase = progressarea.getElementsByTagName('p')[0];
 	var progress = progressarea.getElementsByTagName('progress')[0];
-	var tableok = document.getElementById('tableok');
 	var columns = document.getElementById('columns');
 	var togglecolumns = document.getElementById('togglecolumns');
 	var formmap = {
@@ -198,11 +198,11 @@ function startLoad(){
 	document.getElementById('countbutton').disabled = true;
 	document.getElementById('tablelist').disabled = true;
 	document.getElementById('tablename').disabled = true;
-	document.getElementById('loadbutton').disabled = true;
-	tableok.style.display = 'none';
 	columns.style.display = 'none';
 	togglecolumns.innerHTML = '>';
 	togglecolumns.disabled = true;
+	loadarea.style.display = 'none';
+	progressarea.style.display = '';
 	
 	// create the table and load the table
 	phase.innerHTML = 'Creating the table...';
@@ -210,7 +210,6 @@ function startLoad(){
 	progress.value = 0.0;
 	progress.children[0].innerHTML=0;
 	progress.children[1].innerHTML=1;
-	progressarea.style.display = '';
 	xhrPost(REST_LOAD, formmap, function(loadstatus){
 
 				console.log(loadstatus);
@@ -251,8 +250,8 @@ function getLoadProgress(){
 
 
 function stopLoad(){
+	var loadarea = document.getElementById('loadarea');
 	var progressarea = document.getElementById('progress');
-	var tableok = document.getElementById('tableok');
 	var phase = progressarea.getElementsByTagName('p')[0];
 
 	// save the latest phase message to the log
@@ -261,7 +260,7 @@ function stopLoad(){
 	logarea.innerHTML = '<p>' + curts + ': ' + phase.innerHTML + '</p>' + logarea.innerHTML;
 	
 	// activate the form for the next load
-	tableok.style.display = '';
+	loadarea.style.display = '';
 	progressarea.style.display = 'none';
 	document.getElementById('tweetquery').disabled = false;
 	document.getElementById('countbutton').disabled = false;
