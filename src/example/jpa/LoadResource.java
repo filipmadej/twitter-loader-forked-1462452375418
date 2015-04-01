@@ -114,7 +114,14 @@ public class LoadResource {
 		if (nextTweets != null) {
 			status = "loaded";
 			phase = "Table " + tablename + " created and " + maxtweets + " tweets loaded successfully.";			
-		} // else error already set
+		} else {
+			// error already set: delete the table that didn't work
+			try {
+				stmt.executeUpdate("drop table "+ tablename);
+			} catch (SQLException e) {
+				// do nothing
+			}
+		}
 		retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
 		
 		return Response.ok(retstr).build();
