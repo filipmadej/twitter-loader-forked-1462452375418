@@ -42,16 +42,12 @@ public class LoadResource {
 	private Connection con;
 	private String searchURL;
 	private String credentials;
-	private static String status;
-	private static String phase;
-	private static int numtweets;
-	private static int maxtweets;
+	private static String status = "idle";
+	private static String phase = "Not started...";
+	private static int numtweets = 0;
+	private static int maxtweets = 0;
 
 	public LoadResource() {
-		status = "idle";
-		phase = "Not started...";
-		numtweets = 0;
-		maxtweets = 0;
 	}
 
 	@POST
@@ -75,6 +71,12 @@ public class LoadResource {
 		}
 		searchURL = searchURL + "?q=" + URLEncoder.encode(query);
 		
+		// initialize the status variables
+		status = "idle";
+		phase = "Not started...";
+		numtweets = 0;
+		maxtweets = 0;
+
 		// create the table as indicated
 		String createQuery = "";
 		try {
@@ -133,6 +135,7 @@ public class LoadResource {
 		String retstr = "";
 		retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\", \"actual\":" + numtweets + ", \"expected\":" + maxtweets + "}";
 		if (status == "error" || status == "loaded") {
+			// last status to be returned: reinitialize for next load.
 			status="idle";
 			phase="Not started...";
 			numtweets = 0;
