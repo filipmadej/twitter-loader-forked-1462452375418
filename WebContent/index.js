@@ -214,7 +214,7 @@ function startLoad(){
 	xhrPost(REST_LOAD, formmap, function(loadstatus){
 
 				console.log(loadstatus);
-				document.getElementById('log').innerHTML = '<p>START: ' + loadstatus.status + ":" + loadstatus.phase + '</p>' + document.getElementById('log').innerHTML;
+				document.getElementById('log').innerHTML = '<p>POST: ' + loadstatus.status + ":" + loadstatus.phase + '</p>' + document.getElementById('log').innerHTML;
 
 	}, function(err){
 		console.error(err);
@@ -229,15 +229,18 @@ function getLoadProgress(){
 				var progressarea = document.getElementById('progress');
 				var phase = progressarea.getElementsByTagName('p')[0];
 				var progress = progressarea.getElementsByTagName('progress')[0];
-				document.getElementById('log').innerHTML = '<p>START: ' + loadstatus.status + ":" + loadstatus.phase + '</p>' + document.getElementById('log').innerHTML;
-				if (loadstatus.status == "running") {
+				document.getElementById('log').innerHTML = '<p>GET: ' + loadstatus.status + ":" + loadstatus.phase + '</p>' + document.getElementById('log').innerHTML;
+				if (loadstatus.status == 'idle') {
+					phase.innerHTML = loadstatus.phase;
+					setTimeout(getLoadProgress(), 1000);
+				} else if (loadstatus.status == 'running') {
 					phase.innerHTML = loadstatus.phase;
 					progress.max = loadstatus.expected;
 					progress.value = loadstatus.actual;
 					progress.children[0].innerHTML=loadstatus.actual;
 					progress.children[1].innerHTML=loadstatus.expected;
 					setTimeout(getLoadProgress(), 1000);
-				} else if (loadstatus.status == "error") {
+				} else if (loadstatus.status == 'error') {
 					phase.innerHTML = 'ERROR: ' + loadstatus.phase;					
 					setTimeout(stopLoad(), 5000);
 				} else {
@@ -259,7 +262,19 @@ function stopLoad(){
 
 	// save the latest phase message to the log
 	var logarea = document.getElementById('log');
-	var curts = Date.now().toLocaleString();
+	var currentTime = Date.now();
+	var month = currentTime.getMonth() + 1;
+	var day = currentTime.getDate();
+	var year = currentTime.getFullYear();
+	var hrs = currentTime.getHours();
+	var mins = currentTime.getMinutes();
+	var secs = currentTime.getSeconds();
+	var curts = '' + year + '-'
+					+ ((month < 10) ? '0' : '') + month + '-'
+					+ ((day < 10) ? '0' : '') + day + ' '
+					+ ((hrs < 10) ? '0' : '') + hrs + ':'
+					+ ((mins < 10) ? '0' : '') + mins + ':'
+					+ ((secs < 10) ? '0' : '') + secs;
 	logarea.innerHTML = '<p>' + curts + ': ' + phase.innerHTML + '</p>' + logarea.innerHTML;
 	
 	// activate the form for the next load
