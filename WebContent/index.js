@@ -196,7 +196,7 @@ function startLoad(){
 	// deactivate all clickable form elements
 	document.getElementById('tweetquery').disabled = true;
 	document.getElementById('countbutton').disabled = true;
-	document.getElementById('tablelist').disabled = true;
+	document.getElementById('tables').disabled = true;
 	document.getElementById('tablename').disabled = true;
 	columns.style.display = 'none';
 	togglecolumns.innerHTML = '>';
@@ -275,7 +275,7 @@ function stopLoad(){
 	progressarea.style.display = 'none';
 	document.getElementById('tweetquery').disabled = false;
 	document.getElementById('countbutton').disabled = false;
-	document.getElementById('tablelist').disabled = false;
+	document.getElementById('tables').disabled = false;
 	document.getElementById('tablename').disabled = false;
 	document.getElementById('loadbutton').disabled = true;
 	document.getElementById('togglecolumns').disabled = false;
