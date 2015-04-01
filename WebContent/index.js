@@ -273,7 +273,7 @@ function stopLoad(){
 					+ ((hrs < 10) ? '0' : '') + hrs + ':'
 					+ ((mins < 10) ? '0' : '') + mins + ':'
 					+ ((secs < 10) ? '0' : '') + secs;
-	logarea.innerHTML = '<p>' + curts + ': ' + phase.innerHTML + '</p>' + logarea.innerHTML;
+	logarea.innerHTML = '<p>(' + curts + ') ' + phase.innerHTML + '</p>' + logarea.innerHTML;
 	
 	// activate the form for the next load
 	loadarea.style.display = '';
