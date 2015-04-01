@@ -16,7 +16,7 @@
 		<div class = "center">
 			<header>
 				<div class='title'>
-					Select tweets
+					Select and count tweets
 					<button class='detailBtn' onclick="toggleTwitterInfo()"
 						title='toggle twitter info'>
 						<img src='images/twitter.png' alt='twitter details' />
@@ -114,13 +114,13 @@
 			<section>
 				<table id='columns' width='90%' style='font-size: 75%; border: 1; display: none'>
 					<thead><tr><td width='10%'></td><td width='30%'>column</td><td width='20%'>type</td><td width='40%'>twitter tag</td></tr></thead>
-					<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onkeyup='checkColumns()' value='msgId'></input></td><td>VARCHAR(12)</td><td>message.id</td></tr>
+					<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onkeyup='checkColumns()' value='msgId'></input></td><td>VARCHAR(128)</td><td>message.id</td></tr>
 					<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onkeyup='checkColumns()' value='msgType'></input></td><td>VARCHAR(128)</td><td>message.verb</td></tr>
 					<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onkeyup='checkColumns()' value='msgPostedTime'></input></td><td>TIMESTAMP</td><td>message.postedTime</td></tr>
 					<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onkeyup='checkColumns()' value='msgBody'></input></td><td>VARCHAR(2048)</td><td>message.body</td></tr>
 					<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onkeyup='checkColumns()' value='msgHashtags'></input></td><td>VARCHAR(2048)</td><td>message.twitter_entities.hashtags</td></tr>
 					<tr><td><input type='checkbox' onchange='checkColumns()'></input></td><td><input type='text' style='font-size: 75%' onkeyup='checkColumns()' value='msgCoordType'></input></td><td>VARCHAR(128)</td><td>message.gnip.profileLocations.geo.type</td></tr>
-					<tr><td><input type='checkbox' onchange='checkColumns()'></input></td><td><input type='text' style='font-size: 75%' onkeyup='checkColumns()' value='msgCoordinates'></input></td><td>VARCHAR(204)</td><td>message.gnip.profileLocations.geo.coordinates</td></tr>
+					<tr><td><input type='checkbox' onchange='checkColumns()'></input></td><td><input type='text' style='font-size: 75%' onkeyup='checkColumns()' value='msgCoordinates'></input></td><td>VARCHAR(2048)</td><td>message.gnip.profileLocations.geo.coordinates</td></tr>
 					<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onkeyup='checkColumns()' value='smaAuthorCountry'></input></td><td>VARCHAR(128)</td><td>cde.author.location.country</td></tr>
 					<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onkeyup='checkColumns()' value='smaAuthorState'></input></td><td>VARCHAR(128)</td><td>cde.author.location.state</td></tr>
 					<tr><td><input type='checkbox' onchange='checkColumns()' checked></input></td><td><input type='text' style='font-size: 75%' onkeyup='checkColumns()' value='smaAuthorCity'></input></td><td>VARCHAR(128)</td><td>cde.author.location.city</td></tr>
