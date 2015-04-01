@@ -1,4 +1,4 @@
-package example.jpa;
+ich wollte gerade einen package example.jpa;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -76,15 +76,17 @@ public class LoadResource {
 		searchURL = searchURL + "?q=" + URLEncoder.encode(query);
 		
 		// create the table as indicated
+		String createQuery;
 		try {
 			status = "running";
 			phase = "Creating table " + tablename + "...";
 			stmt = con.createStatement();
-			stmt.executeUpdate(getCreateStatement(tablename, columns));
+			createQuery = getCreateStatement(tablename, columns);
+			stmt.executeUpdate(createQuery);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			status = "error";
-			phase = "Could not create table " + tablename + ": " + e.toString().replaceAll("\"", "\'");
+			phase = "Could not create table " + tablename + "(" + createQuery + "): " + e.toString().replaceAll("\"", "\'");
 			retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
 			return Response.ok(retstr).build();
 		}
@@ -330,16 +332,18 @@ public class LoadResource {
 	
 	private boolean insertTweets(String tablename, String[] coltypes, String[] colpaths, JSONArray tweets) {
 		Statement stmt;
+		String insertQuery;
 		// insert all tweets
 		for (int i = 0; i < tweets.size(); i++) {
 			try {
 				stmt = con.createStatement();
-				stmt.executeUpdate(getInsertStatement(tablename, coltypes, colpaths, (JSONObject) tweets.get(i)));
+				insertQuery = getInsertStatement(tablename, coltypes, colpaths, (JSONObject) tweets.get(i));
+				stmt.executeUpdate(insertQuery);
 				numtweets++;
 			} catch (SQLException e) {
 				e.printStackTrace();
 				status = "error";
-				phase = "Could not insert tweet #" + numtweets + " into table " + tablename + ": " + e.toString().replaceAll("\"", "\'");
+				phase = "Could not insert tweet #" + numtweets + "(" + insertQuery + "): " + e.toString().replaceAll("\"", "\'");
 				return false;
 			}
 		}
