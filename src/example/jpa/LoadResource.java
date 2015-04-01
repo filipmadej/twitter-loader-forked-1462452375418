@@ -88,7 +88,7 @@ public class LoadResource {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			status = "error";
-			phase = "Could not create table " + tablename + "(" + createQuery + "): " + e.toString().replaceAll("\"", "\'");
+			phase = "Could not create table " + tablename + "(" + createQuery + "): " + e.toString().replaceAll("\"", "\\\"");
 			retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
 			return Response.ok(retstr).build();
 		}
@@ -254,7 +254,7 @@ public class LoadResource {
 					sb.append(buffer, 0, in);
 				}
 				status = "error";
-				phase = sb.toString().replaceAll("\"", "\'");
+				phase = sb.toString().replaceAll("\"", "\\\"");
 				return null;
 			}
 			reader = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
@@ -267,7 +267,7 @@ public class LoadResource {
 			retval = JSONObject.parse(sb.toString());
 		} catch (Exception e) {
 			status = "error";
-			phase = e.toString().replaceAll("\"", "\'");
+			phase = e.toString().replaceAll("\"", "\\\"");
 		}
 		
 		return retval;
@@ -353,7 +353,7 @@ public class LoadResource {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				status = "error";
-				phase = "Could not insert tweet #" + numtweets + "(" + insertQuery.replaceAll("\"", "\'") + "): " + e.toString().replaceAll("\"", "\'");
+				phase = "Could not insert tweet #" + numtweets + "(" + insertQuery.replaceAll("\"", "\\\"") + "): " + e.toString().replaceAll("\"", "\\\"");
 				return false;
 			}
 		}
@@ -364,7 +364,7 @@ public class LoadResource {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			status = "error";
-			phase = "Could not commit after " + numtweets + " INSERTs into table " + tablename + ": " + e.toString().replaceAll("\"", "\'");
+			phase = "Could not commit after " + numtweets + " INSERTs into table " + tablename + ": " + e.toString().replaceAll("\"", "\\\"");
 			return false;
 		}
 		return true;
