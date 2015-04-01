@@ -154,16 +154,24 @@
 					</tr>
 				</table>
 			</section>
-			<section id='progress' style='display: none;'>
-				<p id='phase'>Not loaded...</p>
-				<progress id='progress' max='1.0' value='0.0' style:'width: 100%;'><span>0</span>/<span>0</span></progress>
-			</section>
 			<footer>
 				<div class='tips' style='font-size: 75%;'>
 					<p>Specify a non-existing table name... The name is case-sensitive.</p>
 				</div>
 			</footer>
 		</div>
+	</div>
+	<div class = "center">
+		<section>
+			<p></p>
+			<button id='loadbutton' class='loadbutton' onclick="startLoad()" title='load tweets into table' disabled='true'>
+				Load tweets
+			</button>
+		</section>
+		<section id='progress' style='display: none;'>
+			<p id='phase'>Not loaded...</p>
+			<progress id='progress' class='loadbutton' max='1.0' value='0.0' style:'width: 100%;'><span>0</span>/<span>0</span></progress>
+		</section>
 	</div>
 	
 	<script type="text/javascript" src="util.js"></script>

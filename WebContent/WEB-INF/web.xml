@@ -17,11 +17,6 @@
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
 
-  <persistence-context-ref>
-    <persistence-context-ref-name>openjpa-todo/entitymanager</persistence-context-ref-name>
-    <persistence-unit-name>openjpa-todo</persistence-unit-name>
-  </persistence-context-ref>
-
   <resource-ref>
     <!-- The cloudAutowiring-1.0 Liberty feature will resolve this to whatever 
          the database service name is -->

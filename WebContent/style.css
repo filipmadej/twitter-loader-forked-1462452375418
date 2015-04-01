@@ -39,6 +39,15 @@ h1 {
 	text-align: center;
 }
 
+loadbutton {
+	font-weight: bold;
+	font-size: 2em;
+	padding-left: 10%;
+	padding-right: 10%;
+	width: 80%;
+	text-align: center;
+}
+
 .description {
 	padding-left: 50px;
 	padding-right: 50px;
@@ -95,14 +104,14 @@ table {
 	float: left;
 	background-color: #26343f;
 	width: 50%;
-	height: 90%;
+	height: 75%;
 }
 
 .rightHalf {
 	float: right;
 	width: 50%;
 	background-color: #313f4a;
-	height: 90%;
+	height: 75%;
 }
 /* positions */
 header {
