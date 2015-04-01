@@ -353,7 +353,7 @@ public class LoadResource {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				status = "error";
-				phase = "Could not insert tweet #" + numtweets + "(" + insertQuery + "): " + e.toString().replaceAll("\"", "\'");
+				phase = "Could not insert tweet #" + numtweets + "(" + insertQuery.replaceAll("\"", "\'") + "): " + e.toString().replaceAll("\"", "\'");
 				return false;
 			}
 		}
