@@ -59,8 +59,6 @@ loadbutton {
 /* header footer common */
 header,footer {
 	width: 100%;
-	text-align: center;
-	color: #fff;
 }
 
 /* content width */
@@ -113,10 +111,8 @@ table {
 }
 /* positions */
 header {
-	padding-top: 20px;
 	font-weight: bolder;
 	font-size: 1.3em;
-	height: 80%;
 }
 
 footer {
@@ -169,11 +165,9 @@ button {
 
 /* buttons */
 .detailBtn {
-	position: absolute;
-	left: 20px;
-	top: 0px;
-	background: none;
-	border: none;
+	background: none repeat scroll 0% 0% transparent;
+	border: medium none;
+	float: left;
 }
 
 .addBtn {
