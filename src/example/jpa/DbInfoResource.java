@@ -43,7 +43,7 @@ public class DbInfoResource {
       	  }
         }
         if (thekey == null) {
-      	  return("Cannot find any SQLDB service in the VCAP_SERVICES");
+      	  return("Cannot find any dashDB service in the VCAP_SERVICES");
       	  
         }
         
