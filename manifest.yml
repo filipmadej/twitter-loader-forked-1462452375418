@@ -10,7 +10,7 @@ applications:
   - twitter-loader-twitter-service
   - twitter-loader-dashDB
   disk_quota: 1024M
-  host: twitter-loader-${random-word}
+  host: twitterloader
   name: twitter loader
   path: libertyDBApp.war
   domain: mybluemix.net
