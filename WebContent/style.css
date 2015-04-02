@@ -59,11 +59,13 @@ loadbutton {
 /* header footer common */
 header,footer {
 	width: 100%;
+	text-align: center;
+	color: #fff;
 }
 
 /* content width */
 .title,.tips,section,.records {
-	width: 600px;
+	width: 86%;
 }
 
 @media ( max-width : 600px) {
@@ -111,8 +113,10 @@ table {
 }
 /* positions */
 header {
-	font-size: 1.3em;
+	padding-top: 20px;
 	font-weight: bolder;
+	font-size: 1.3em;
+	height: 80%;
 }
 
 footer {
@@ -165,9 +169,11 @@ button {
 
 /* buttons */
 .detailBtn {
-	background: none repeat scroll 0% 0% transparent;
-	border: medium none;
-	float: left;
+	position: absolute;
+	left: 20px;
+	top: 0px;
+	background: none;
+	border: none;
 }
 
 .addBtn {
@@ -218,4 +224,20 @@ button {
 
 .fieldname {
 	text-align: right;
+}
+
+#tweetquery {
+	margin-bottom: 5px;
+	width: 75%;
+	padding: 6px 2px;
+}
+
+#countbutton {
+	font-size: 1.1em;
+	border: 1px solid #33842A;
+	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.75);
+	color: #F3F3F3;
+	cursor: pointer;
+	background: none repeat scroll 0% 0% #35B128;
+	padding: 2px 16px 4px;
 }
