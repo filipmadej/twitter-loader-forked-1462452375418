@@ -1,9 +1,16 @@
+declared-services:
+  twitter-loader-dashDB:
+    label: dashDB
+    plan: Entry
+  twitter-loader-twitter-service:
+    label: twitterinsights
+    plan: Free    
 applications:
 - services:
-  - IBM Insights for Twitter-6k
-  - dashDB-p1
+  - twitter-loader-twitter-service
+  - twitter-loader-dashDB
   disk_quota: 1024M
-  host: twitter-loader
+  host: twitter-loader-${random-word}
   name: twitter loader
   path: libertyDBApp.war
   domain: mybluemix.net
