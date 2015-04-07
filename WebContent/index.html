@@ -43,7 +43,7 @@
 			<section>
 				<p></p>
 				<input id='tweetquery' type='text' size='30' placeholder='Enter your twitter search criteria here...' onkeyup='tweetqueryModified(this)'></input>
-				<button id="countbutton" onclick="countTweets()" title='count number of tweets' disabled='true'>
+				<button class="button" onclick="countTweets()" title='count number of tweets' disabled='true'>
 					Count tweets
 				</button>
 			</section>
@@ -157,18 +157,9 @@
 			</footer>
 		</div>
 	</div>
-	<div style='width: 100%; align: center;'>
-		<section id='loadarea' style='width: 100%;'>
-			<p></p>
-			<button id='loadbutton' class='loadbutton' onclick="startLoad()" title='insert tweets into table' disabled='true'>
-				&gt;&gt;&gt;&gt;&gt; Insert tweets &gt;&gt;&gt;&gt;&gt;
-			</button>
-		</section>
-		<section id='progress' style='width: 100%; display: none;'>
-			<p>Not loaded...</p>
-			<progress class='loadbutton' max='1.0' value='0.0' style:'width: 100%;'></progress>
-		</section>
-		<section id='log' style='width: 100%'>
+	<div class="centerize">
+		<section>
+			<button class='button loadbutton' onclick="startLoad()" title='insert tweets into table'>Insert tweets</button>
 		</section>
 	</div>
 	

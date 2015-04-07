@@ -42,8 +42,8 @@ h1 {
 loadbutton {
 	font-weight: bold;
 	font-size: 2em;
-	text-align: center;
-	margin: 0 auto;
+
+	margin-top: 20px;
 }
 
 .description {
@@ -226,7 +226,7 @@ button {
 	padding: 6px 2px;
 }
 
-#countbutton {
+.cbutton {
 	font-size: 1.1em;
 	border: 1px solid #33842A;
 	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.75);
@@ -234,4 +234,10 @@ button {
 	cursor: pointer;
 	background: none repeat scroll 0% 0% #35B128;
 	padding: 2px 16px 4px;
+}
+
+.centerize {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
 }
