@@ -100,15 +100,16 @@ table {
 	float: left;
 	background-color: #26343f;
 	width: 50%;
-	height: 75%;
+	min-height: 75%;
 }
 
 .rightHalf {
 	float: right;
 	width: 50%;
 	background-color: #313f4a;
-	height: 75%;
+	min-height: 75%;
 }
+
 /* positions */
 header {
 	font-weight: bolder;
@@ -240,4 +241,9 @@ button {
     display: block;
     margin: 0 auto;
     text-align: center;
+}
+
+#progress span {
+	display: block;
+	padding: 5px;
 }

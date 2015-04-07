@@ -157,8 +157,12 @@
 		</footer>
 	</div>
 	<div class="centerize">
-		<section>
+		<section id='loadarea'>
 			<button id='loadbutton' class='button loadbutton' onclick="startLoad()" title='insert tweets into table' disabled='true'>Insert tweets</button>
+		</section>
+		<section id='progress' style='width: 100%; display: none;'>
+			<p>Not loaded...</p>
+			<progress class='loadbutton' max='1.0' value='0.0'></progress>
 		</section>
 	</div>
 	
