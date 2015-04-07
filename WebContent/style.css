@@ -58,6 +58,7 @@ h1 {
 /* header footer common */
 header,footer {
 	width: 100%;
+	padding-top: 5%;
 }
 
 /* content width */
@@ -72,7 +73,7 @@ header,footer {
 }
 
 .center {
-	padding-top: 10%;
+	padding-top: 5%;
 }
 
 /* alignment */
