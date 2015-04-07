@@ -43,7 +43,7 @@
 			<section>
 				<p></p>
 				<input id='tweetquery' type='text' size='30' placeholder='Enter your twitter search criteria here...' onkeyup='tweetqueryModified(this)'></input>
-				<button class="button" onclick="countTweets()" title='count number of tweets' disabled='true'>
+				<button id='countbutton' class="button" onclick="countTweets()" title='count number of tweets' disabled='true'>
 					Count tweets
 				</button>
 			</section>
@@ -158,7 +158,7 @@
 	</div>
 	<div class="centerize">
 		<section>
-			<button class='button loadbutton' onclick="startLoad()" title='insert tweets into table'>Insert tweets</button>
+			<button id='loadbutton' class='button loadbutton' onclick="startLoad()" title='insert tweets into table'>Insert tweets</button>
 		</section>
 	</div>
 	
