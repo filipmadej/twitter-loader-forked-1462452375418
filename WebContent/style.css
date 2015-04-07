@@ -243,7 +243,7 @@ button {
     text-align: center;
 }
 
-#progress span {
+#progress p {
 	display: block;
 	padding: 5px;
 }
