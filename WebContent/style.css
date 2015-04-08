@@ -73,7 +73,6 @@ header,footer {
 }
 
 .center {
-	padding-top: 5%;
 }
 
 /* alignment */
@@ -220,7 +219,7 @@ button {
 
 .fieldname {
 	float: left;
-	width: 20%;
+	width: 50%;
 }
 
 #tweetquery {
