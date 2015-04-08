@@ -218,7 +218,8 @@ button {
 }
 
 .fieldname {
-	text-align: right;
+	float: left;
+	width: 20%;
 }
 
 #tweetquery {
