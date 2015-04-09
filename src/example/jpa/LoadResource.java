@@ -68,7 +68,7 @@ public class LoadResource {
 			phase = "REST API not configured correctly...";
 			retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
 			return Response.ok(retstr).build();
-		}
+		} 
 		searchURL = searchURL + "?q=" + URLEncoder.encode(query);
 		
 		// initialize the status variables
