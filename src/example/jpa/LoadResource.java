@@ -113,8 +113,8 @@ public class LoadResource {
 			}
 			// search next bunch of tweets
 			String cdeURL = (String) getObject(nextTweets, "related.next.href");
-			// the port number returned by the CDE service is wrong: replace first part of the URL with searchURL
-			String nextURL = searchURL + cdeURL.substring(cdeURL.indexOf('?'));
+			// the port number returned by the CDE service is wrong: replace first part of the URL with first part of searchURL
+			String nextURL = searchURL.substring(0, searchURL.indexOf('?')) + cdeURL.substring(cdeURL.indexOf('?'));
 			nextTweets = getNextTweets(nextURL);
 		}
 
