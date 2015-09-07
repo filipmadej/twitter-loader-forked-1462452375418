@@ -113,7 +113,10 @@ public class LoadResource {
 			}
 			// search next bunch of tweets
 			String nextURL = (String) getObject(nextTweets, "related.next.href");
-			nextTweets = getNextTweets(nextURL);
+			//nextTweets = getNextTweets(nextURL);
+			status = "error";
+			phase = "Next URL (" + nextURL.length() + "):" + nextURL;
+			nextTweets = null;
 		}
 
 		if (nextTweets != null) {
