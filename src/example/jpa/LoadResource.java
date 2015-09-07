@@ -112,7 +112,9 @@ public class LoadResource {
 				break;
 			}
 			// search next bunch of tweets
-			String nextURL = (String) getObject(nextTweets, "related.next.href");
+			String cdeURL = (String) getObject(nextTweets, "related.next.href");
+			// the port number returned by the CDE service is wrong: replace first part of the URL with searchURL
+			String nextURL = searchURL + cdeURL.substring(cdeURL.indexOf('?'));
 			nextTweets = getNextTweets(nextURL);
 		}
 
@@ -258,7 +260,7 @@ public class LoadResource {
 					else sb.append('.');
 				}
 				status = "error";
-				phase = "Connection error to " + nexturl + "=" + thisUrl.toString() + ":" + sb.toString();
+				phase = "Connection error to " + nexturl + ":" + sb.toString();
 				return null;
 			}
 			reader = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
