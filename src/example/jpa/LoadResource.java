@@ -69,7 +69,7 @@ public class LoadResource {
 			retstr = "{\"status\":\"" + status + "\", \"phase\":\"" + phase + "\"}";
 			return Response.ok(retstr).build();
 		} 
-		searchURL = searchURL + "?q=" + URLEncoder.encode(query);
+		searchURL = searchURL + "?q=" + URLEncoder.encode(query) + "&from=0&size=100";
 		
 		// initialize the status variables
 		status = "idle";
@@ -255,6 +255,7 @@ public class LoadResource {
 				StringBuilder sb = new StringBuilder();
 				while (0 < (in = reader.read(buffer))) {
 					if (in >= 32) sb.append(buffer, 0, in);
+					else sb.append(".");
 				}
 				status = "error";
 				phase = sb.toString();
@@ -266,6 +267,7 @@ public class LoadResource {
 			StringBuilder sb = new StringBuilder();
 			while (0 < (in = reader.read(buffer))) {
 				if (in >= 32) sb.append(buffer, 0, in);
+				else sb.append(".");
 			}
 			retval = JSONObject.parse(sb.toString());
 		} catch (Exception e) {
