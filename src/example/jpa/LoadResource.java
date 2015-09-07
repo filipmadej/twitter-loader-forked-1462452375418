@@ -108,6 +108,9 @@ public class LoadResource {
 				nextTweets = null;
 				break;
 			}
+			if (numtweets < maxtweets) {
+				break;
+			}
 			// search next bunch of tweets
 			String nextURL = (String) getObject(nextTweets, "related.next.href");
 			nextTweets = getNextTweets(nextURL);
