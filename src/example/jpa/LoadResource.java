@@ -108,7 +108,7 @@ public class LoadResource {
 				nextTweets = null;
 				break;
 			}
-			if (numtweets < maxtweets) {
+			if (numtweets >= maxtweets) {
 				break;
 			}
 			// search next bunch of tweets
@@ -254,7 +254,7 @@ public class LoadResource {
 				int in;
 				StringBuilder sb = new StringBuilder();
 				while (0 < (in = reader.read(buffer))) {
-					sb.append(buffer, 0, in);
+					if (in >= 32) sb.append(buffer, 0, in);
 				}
 				status = "error";
 				phase = sb.toString();
@@ -265,7 +265,7 @@ public class LoadResource {
 			int in;
 			StringBuilder sb = new StringBuilder();
 			while (0 < (in = reader.read(buffer))) {
-				sb.append(buffer, 0, in);
+				if (in >= 32) sb.append(buffer, 0, in);
 			}
 			retval = JSONObject.parse(sb.toString());
 		} catch (Exception e) {
