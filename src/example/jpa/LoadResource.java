@@ -113,10 +113,7 @@ public class LoadResource {
 			}
 			// search next bunch of tweets
 			String nextURL = (String) getObject(nextTweets, "related.next.href");
-			//nextTweets = getNextTweets(nextURL);
-			status = "error";
-			phase = "Next URL (" + nextURL.length() + "):" + nextURL;
-			nextTweets = null;
+			nextTweets = getNextTweets(nextURL);
 		}
 
 		if (nextTweets != null) {
@@ -258,10 +255,10 @@ public class LoadResource {
 				StringBuilder sb = new StringBuilder();
 				while (0 < (in = reader.read(buffer))) {
 					if (in >= 32) sb.append(buffer, 0, in);
-					else sb.append(".");
+					else sb.append('.');
 				}
 				status = "error";
-				phase = sb.toString();
+				phase = "Connection error (" + sb.toString().length() + "):" + sb.toString();
 				return null;
 			}
 			reader = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
@@ -275,7 +272,7 @@ public class LoadResource {
 			retval = JSONObject.parse(sb.toString());
 		} catch (Exception e) {
 			status = "error";
-			phase = e.toString();
+			phase = "CAUGHT error " + e.toString();
 		}
 		
 		return retval;
