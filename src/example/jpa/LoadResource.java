@@ -258,7 +258,7 @@ public class LoadResource {
 					else sb.append('.');
 				}
 				status = "error";
-				phase = "Connection error (" + sb.toString().length() + "):" + sb.toString();
+				phase = "Connection error to " + nexturl + "=" + thisUrl.toString() + ":" + sb.toString();
 				return null;
 			}
 			reader = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
