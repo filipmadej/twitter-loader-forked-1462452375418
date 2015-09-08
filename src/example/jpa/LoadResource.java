@@ -256,8 +256,7 @@ public class LoadResource {
 				int in;
 				StringBuilder sb = new StringBuilder();
 				while (0 < (in = reader.read(buffer))) {
-					if (in >= 32) sb.append(buffer, 0, in);
-					else sb.append('.');
+					sb.append(buffer, 0, in);
 				}
 				status = "error";
 				phase = "Connection error to " + nexturl + ":" + sb.toString();
@@ -268,8 +267,7 @@ public class LoadResource {
 			int in;
 			StringBuilder sb = new StringBuilder();
 			while (0 < (in = reader.read(buffer))) {
-				if (in >= 32) sb.append(buffer, 0, in);
-				else sb.append(".");
+				sb.append(buffer, 0, in);
 			}
 			retval = JSONObject.parse(sb.toString());
 		} catch (Exception e) {
